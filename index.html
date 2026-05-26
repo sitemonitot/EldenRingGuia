@@ -135,6 +135,7 @@
     <!-- ── INICIO ── -->
     <section class="seccion activa" id="seccion-inicio">
       <div class="inicio-hero">
+        <span class="inicio-hero-ornamento">⚔ · ✦ · ⚔</span>
         <h2>Guía Completa de Elden Ring</h2>
         <p>
           Todos los objetivos del juego en español castellano — obligatorios y opcionales.
@@ -305,9 +306,7 @@
         </div>
       </div>
 
-      <div class="items-grid" id="items-grid">
-        <div class="cargando"><div class="spinner"></div> Cargando items...</div>
-      </div>
+      <div class="items-grid" id="items-grid"></div>
     </section>
 
     <!-- ── PERFIL ── -->
@@ -555,6 +554,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const { completados } = await aplicarProgresoUI();
   const statComp = document.getElementById("stat-completados");
   if (statComp) statComp.textContent = completados;
+
+  // Pre-renderizar items para que estén listos al navegar
+  try { renderizarItems("todos"); } catch(e) { console.error("Error renderizando items:", e); }
 
   // Manejar hash URL
   const hash = window.location.hash.replace("#", "");

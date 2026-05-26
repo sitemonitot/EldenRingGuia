@@ -54,8 +54,9 @@ html {
 body {
   background: var(--fondo);
   background-image:
-    radial-gradient(ellipse 80% 60% at 15% 40%, rgba(200,168,75,0.025) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 50% at 85% 70%, rgba(120,60,10,0.03) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 50% at 12% 25%, rgba(200,168,75,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 88% 75%, rgba(140,70,10,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 55% 5%, rgba(200,168,75,0.04) 0%, transparent 50%);
   color: var(--texto);
   font-family: 'Crimson Text', Georgia, serif;
   font-size: 17px;
@@ -95,7 +96,7 @@ a:hover { color: var(--oro-claro); }
 /* ─── Header ─── */
 header {
   grid-column: 1 / -1;
-  background: linear-gradient(180deg, #030303 0%, #0c0800 100%);
+  background: linear-gradient(180deg, #020202 0%, #0e0900 60%, #0c0700 100%);
   border-bottom: 1px solid var(--borde-oro);
   padding: 0 2rem;
   display: flex;
@@ -105,7 +106,11 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 0 rgba(200,168,75,0.3), 0 4px 40px rgba(0,0,0,0.8), 0 0 60px rgba(200,168,75,0.05);
+  box-shadow:
+    0 1px 0 rgba(200,168,75,0.5),
+    0 2px 0 rgba(200,168,75,0.08),
+    0 6px 50px rgba(0,0,0,0.9),
+    0 0 80px rgba(200,168,75,0.06);
 }
 
 .logo {
@@ -299,23 +304,37 @@ main {
 
 /* ─── Encabezado de sección ─── */
 .seccion-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--borde-oro);
+  position: relative;
+}
+
+.seccion-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 120px;
+  height: 1px;
+  background: var(--oro);
+  box-shadow: 0 0 12px rgba(200,168,75,0.5);
 }
 
 .seccion-header h2 {
-  font-size: 1.8rem;
-  background: linear-gradient(135deg, var(--oro-claro), var(--oro));
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--oro-brillante), var(--oro-claro) 50%, var(--oro));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 0.5rem;
+  filter: drop-shadow(0 0 20px rgba(200,168,75,0.15));
 }
 
 .seccion-header p {
   color: var(--texto-suave);
   font-style: italic;
+  font-size: 1.05rem;
 }
 
 /* ─── Cards de Objetivos ─── */
@@ -354,8 +373,8 @@ main {
 
 .objetivo-card:hover {
   border-color: var(--borde-oro-claro);
-  box-shadow: var(--sombra), 0 0 0 1px rgba(200,168,75,0.08), 0 0 30px rgba(200,168,75,0.06);
-  background: #111108;
+  box-shadow: var(--sombra), 0 0 0 1px rgba(200,168,75,0.15), 0 0 35px rgba(200,168,75,0.08);
+  background: #121208;
 }
 
 .objetivo-card.completado {
@@ -1035,35 +1054,58 @@ main {
 /* ─── Página de Inicio ─── */
 .inicio-hero {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 5.5rem 2rem 4.5rem;
   margin-bottom: 3rem;
   background:
-    radial-gradient(ellipse 70% 80% at center top, rgba(200,168,75,0.1) 0%, transparent 65%),
-    linear-gradient(180deg, transparent, rgba(0,0,0,0.3));
+    radial-gradient(ellipse 90% 120% at center top, rgba(200,168,75,0.18) 0%, rgba(200,168,75,0.04) 45%, transparent 65%),
+    radial-gradient(ellipse 60% 60% at center 80%, rgba(0,0,0,0.5) 0%, transparent 70%);
+  border-top: 1px solid rgba(200,168,75,0.35);
   border-bottom: 1px solid var(--borde-oro);
   position: relative;
+  overflow: hidden;
 }
 
 .inicio-hero::before {
-  content: '⚔';
+  content: '';
   position: absolute;
-  top: 1.5rem;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.5rem;
-  opacity: 0.2;
+  width: 280px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--oro), transparent);
+  box-shadow: 0 0 20px rgba(200,168,75,0.5);
+}
+
+.inicio-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(200,168,75,0.03) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(200,168,75,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.inicio-hero-ornamento {
   color: var(--oro);
+  font-size: 1.1rem;
+  letter-spacing: 0.6em;
+  opacity: 0.5;
+  margin-bottom: 1.8rem;
+  display: block;
 }
 
 .inicio-hero h2 {
-  font-size: 2.8rem;
-  background: linear-gradient(135deg, var(--oro-brillante) 0%, var(--oro-claro) 40%, var(--oro) 70%, var(--oro-oscuro) 100%);
+  font-size: 3.8rem;
+  background: linear-gradient(160deg, var(--oro-brillante) 0%, var(--oro-claro) 30%, var(--oro) 60%, #b8912a 85%, var(--oro-oscuro) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 1rem;
-  text-shadow: none;
-  letter-spacing: 0.04em;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  filter: drop-shadow(0 0 40px rgba(200,168,75,0.25));
 }
 
 .inicio-hero p {
@@ -1071,7 +1113,8 @@ main {
   margin: 0 auto 2rem;
   color: var(--texto-suave);
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
 }
 
 .inicio-cards {
@@ -1082,35 +1125,52 @@ main {
 }
 
 .inicio-card {
-  background: linear-gradient(135deg, var(--fondo-card) 0%, #0d0d08 100%);
-  border: 1px solid var(--borde);
+  background: linear-gradient(160deg, #111108 0%, #0c0c07 50%, #0a0a05 100%);
+  border: 1px solid var(--borde-oro);
   border-radius: var(--radio-lg);
-  padding: 1.8rem 1.5rem;
+  padding: 2rem 1.5rem;
   cursor: pointer;
-  transition: var(--transicion);
+  transition: all 0.3s ease;
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+.inicio-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200,168,75,0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .inicio-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(200,168,75,0.04));
+  background: radial-gradient(ellipse 80% 60% at center top, rgba(200,168,75,0.06) 0%, transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
+.inicio-card:hover::before,
 .inicio-card:hover::after {
   opacity: 1;
 }
 
 .inicio-card:hover {
-  border-color: var(--borde-oro-claro);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,168,75,0.1), var(--sombra-oro);
+  border-color: var(--oro);
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(200,168,75,0.25),
+    0 0 40px rgba(200,168,75,0.1);
+  background: linear-gradient(160deg, #161410 0%, #110f08 50%, #0e0c06 100%);
 }
 
 .inicio-card .icono-grande {
