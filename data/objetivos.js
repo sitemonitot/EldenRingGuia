@@ -61,12 +61,22 @@ const OBJETIVOS = {
     },
     {
       id: "MAIN_07",
-      titulo: "Leyndell: Derrotar a Morgott, el Rey Augurio",
-      descripcion: "Asciende al Trono Áldano de Leyndell y derrota a Morgott, el Rey Augurio. Es el guardián de la Capital Real y custodio del Árbol Áldano.",
+      titulo: "Leyndell: Derrotar a Morgott, el Rey Presagio",
+      descripcion: "Asciende al Trono Áldano de Leyndell y derrota a Morgott, el Rey Presagio. Es el guardián de la Capital Real y custodio del Árbol Áldano.",
       recompensa: "Gran Runa de Morgott, Recuerdo de Morgott, Gran Medallón de Rold",
       consejos: "Morgott tiene dos fases. En la segunda invoca armas sagradas. Los espíritus de ceniza son muy útiles aquí.",
       region: "Leyndell, Capital Real",
-      obligatorio: true
+      obligatorio: true,
+      combate: {
+        debilidades: {
+          dano: ["Cortante (+10% de daño extra)"],
+          estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Escarcha"]
+        },
+        resistencias: {
+          dano: ["Sagrado (40%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "MAIN_08",
@@ -84,7 +94,17 @@ const OBJETIVOS = {
       recompensa: "Recuerdo del Gigante de Fuego, acceso a la Fragua",
       consejos: "Ataca su pie izquierdo (donde tiene el ojo) para hacerle mucho daño. A caballo es mucho más fácil. En su segunda fase se arranca la cabeza.",
       region: "Cimas de los Gigantes",
-      obligatorio: true
+      obligatorio: true,
+      combate: {
+        debilidades: {
+          dano: ["Cortante (+10% de daño extra)", "Físico estándar, contundente, perforante", "Magia", "Rayo", "Sagrado"],
+          estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Sueño"]
+        },
+        resistencias: {
+          dano: ["Fuego (50% — muy resistente)", "Sagrado (20%)"],
+          estados: ["Escarcha (muy resistente)", "Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "MAIN_10",
@@ -111,7 +131,17 @@ const OBJETIVOS = {
       recompensa: "Recuerdo de la Hoja Negra, acceso a Leyndell Capital de Cenizas",
       consejos: "La segunda fase es muy agresiva. La Hoja Negra reduce tu barra de salud máxima temporalmente. Mantente activo y agresivo.",
       region: "Fárum Azula en Desmoronamiento",
-      obligatorio: true
+      obligatorio: true,
+      combate: {
+        debilidades: {
+          dano: ["Veneno y Podredumbre Carmesí (umbral bajo ~351)"],
+          estados: ["Veneno", "Podredumbre Carmesí"]
+        },
+        resistencias: {
+          dano: ["Sagrado (80% — MUY resistente)", "Magia (40%)", "Fuego (40%)", "Rayo (40%)", "Físico (35% todos los tipos)"],
+          estados: ["Locura (Inmune)", "Sueño (casi inmune, umbral 2277)"]
+        }
+      }
     },
     {
       id: "MAIN_13",
@@ -129,7 +159,17 @@ const OBJETIVOS = {
       recompensa: "Recuerdo del Primer Señor, acceso al Árbol Áldano",
       consejos: "La segunda fase como Hoarah Loux es extremadamente agresiva con combate cuerpo a cuerpo puro. Los trucos de su primera fase no funcionan igual.",
       region: "Leyndell, Capital de Cenizas",
-      obligatorio: true
+      obligatorio: true,
+      combate: {
+        debilidades: {
+          dano: ["Fase 1: Rayo (sin resistencia), Perforante (sin resistencia)", "Fase 2: Cortante (+10%), todos los tipos físicos y elementales"],
+          estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Escarcha"]
+        },
+        resistencias: {
+          dano: ["Sagrado (40% ambas fases)", "Fase 1: Magia/Fuego (20%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "MAIN_15",
@@ -147,7 +187,17 @@ const OBJETIVOS = {
       recompensa: "Créditos del juego, acceso al final seleccionado",
       consejos: "Radagón es muy agresivo con combos rápidos. La Bestia Áldana lucha en un espacio sagrado. Los ataques de la Bestia pueden absorberse usando ciertos hechizos de Marika. Radagón es débil al daño Relámago.",
       region: "Árbol Áldano",
-      obligatorio: true
+      obligatorio: true,
+      combate: {
+        debilidades: {
+          dano: ["Radagón: Fuego (sin resistencia — muy vulnerable)", "Radagón: Contundente (10% vs 35% del resto)", "Bestia Áldana: Físico (10% resistencia baja)"],
+          estados: ["Radagón: Veneno, Podredumbre Carmesí, Escarcha"]
+        },
+        resistencias: {
+          dano: ["Radagón: Sagrado (80% — casi inmune)", "Bestia Áldana: Sagrado (80%)", "Bestia Áldana: Magia/Fuego/Rayo (40%)"],
+          estados: ["Radagón: Sangrado/Sueño/Locura (Inmune)", "Bestia Áldana: TODOS los estados (Inmune)"]
+        }
+      }
     },
     {
       id: "MAIN_17",
@@ -172,7 +222,17 @@ const OBJETIVOS = {
       consejos: "En su segunda fase se injerta el brazo de un dragón y usa ataques de fuego. Rueda bajo el aliento de fuego. Nellie (NPC invocable) ayuda mucho.",
       region: "Páramo de los Miembros — Castillo Ventisquero",
       obligatorio: false,
-      minimo_requerido: true
+      minimo_requerido: true,
+      combate: {
+        debilidades: {
+          dano: ["Físico (todos los tipos)"],
+          estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Escarcha"]
+        },
+        resistencias: {
+          dano: ["Magia (20%)", "Fuego (20%)", "Rayo (20%)", "Sagrado (40%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "SEMI_02",
@@ -182,7 +242,17 @@ const OBJETIVOS = {
       consejos: "Primera fase: destruye las llamas doradas de los estudiantes que la rodean para hacerla caer. Segunda fase: ataca mientras está recuperándose de sus hechizos. Inmune durante sus invocaciones.",
       region: "Liurnia de los Lagos — Academia de Raya Lúcida",
       obligatorio: false,
-      minimo_requerido: true
+      minimo_requerido: true,
+      combate: {
+        debilidades: {
+          dano: ["Físico (todos los tipos)", "Fuego", "Rayo", "Sagrado"],
+          estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Escarcha"]
+        },
+        resistencias: {
+          dano: ["Magia (80% — MUY resistente)"],
+          estados: ["Sueño (Inmune)", "Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "SEMI_03",
@@ -192,7 +262,17 @@ const OBJETIVOS = {
       consejos: "Usa los estandartes del campo de batalla para reinvocar aliados. A caballo puedes esquivar sus flechas gigantes. En su segunda fase hace una carga desde el cielo.",
       region: "Caélida — Castillo Redmane",
       obligatorio: false,
-      minimo_requerido: true
+      minimo_requerido: true,
+      combate: {
+        debilidades: {
+          dano: ["Perforante (sin resistencia)", "Físico estándar y cortante (10%)"],
+          estados: ["Podredumbre Carmesí (muy susceptible, umbral bajo)"]
+        },
+        resistencias: {
+          dano: ["Magia (20%)", "Fuego (20%)", "Rayo (20%)", "Sagrado (40%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "SEMI_04",
@@ -202,17 +282,37 @@ const OBJETIVOS = {
       consejos: "La Lanza del Dios Serpiente hace el combate mucho más manejable. Sin ella es extremadamente difícil. Mantén distancia del llanto de fuego.",
       region: "Monte Gelmir — Mansión del Volcán",
       obligatorio: false,
-      minimo_requerido: true
+      minimo_requerido: true,
+      combate: {
+        debilidades: {
+          dano: ["Lanza del Dios Serpiente (arma especial en sala del jefe)", "Escarcha (umbral bajo)", "Rayo (20%)"],
+          estados: ["Escarcha"]
+        },
+        resistencias: {
+          dano: ["Fuego (80% — casi inmune)", "Magia (40%)", "Sagrado (40%)", "Contundente (35%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "SEMI_05",
-      titulo: "Derrotar a Morgott, el Rey Augurio (OBLIGATORIO)",
+      titulo: "Derrotar a Morgott, el Rey Presagio (OBLIGATORIO)",
       descripcion: "El guardián de Leyndell. Aparece también como Margit el Presagio Maldito antes de Stormveil. En Leyndell muestra su verdadera identidad como el Oculto de la Nobleza.",
       recompensa: "Gran Runa de Morgott, Recuerdo de Morgott, Gran Medallón de Rold",
       consejos: "Tiene muchos de los mismos ataques que Margit pero más poderosos y más rápidos. Los espíritus de ceniza son esenciales. El Espectro de la Espada de Sangre de Jellyfish ralentiza sus ataques.",
       region: "Leyndell, Capital Real",
       obligatorio: true,
-      minimo_requerido: false
+      minimo_requerido: false,
+      combate: {
+        debilidades: {
+          dano: ["Cortante (+10% de daño extra)", "Físico estándar, contundente, perforante"],
+          estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Escarcha"]
+        },
+        resistencias: {
+          dano: ["Sagrado (40%)", "Magia (sin resistencia)", "Fuego (sin resistencia)", "Rayo (sin resistencia)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "SEMI_06",
@@ -222,7 +322,17 @@ const OBJETIVOS = {
       consejos: "SE CURA con cada golpe que conecta, incluso si bloqueas. Su Floración de la Diosa en la segunda fase infesta la arena de flores. Las invocaciones son esenciales. Aprende a esquivar su Danza de la Espada.",
       region: "Campo Sagrado Nevado — Árbol de Haligtree",
       obligatorio: false,
-      minimo_requerido: false
+      minimo_requerido: false,
+      combate: {
+        debilidades: {
+          dano: ["Fuego (sin resistencia — muy vulnerable)", "Físico (10% resistencia, relativamente bajo)"],
+          estados: ["Sangrado (umbral 421)", "Escarcha (umbral 306)"]
+        },
+        resistencias: {
+          dano: ["Sagrado (40%)", "Magia (20%)", "Rayo (20%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     },
     {
       id: "SEMI_07",
@@ -232,7 +342,17 @@ const OBJETIVOS = {
       consejos: "Tiene una fase de bendición de sangre que puede matarte al inicio de su segunda fase. La Unción Pura de Mohg la anula. Las Flechas Sagradas son muy efectivas contra él.",
       region: "Palacio de Mohgwyn",
       obligatorio: false,
-      minimo_requerido: false
+      minimo_requerido: false,
+      combate: {
+        debilidades: {
+          dano: ["Físico (10% resistencia, relativamente bajo)"],
+          estados: ["Sangrado (umbral bajo 290 — muy susceptible)"]
+        },
+        resistencias: {
+          dano: ["Fuego (80% — casi inmune)", "Magia (40%)", "Rayo (40%)", "Sagrado (40%)"],
+          estados: ["Locura (Inmune)"]
+        }
+      }
     }
   ],
 
@@ -249,7 +369,17 @@ const OBJETIVOS = {
         descripcion: "Derrota al guardián del Castillo Ventisquero en el Paso de la Tempestad. Es el primer gran obstáculo del juego.",
         recompensa: "Piedra Marciana (ítem especial), runas",
         consejos: "Usa las Cadenas de Margit (compradas a Patches o a Altus) para inmovilizarlo brevemente. El bastón que lanza en su segunda fase es muy peligroso.",
-        region: "Páramo de los Miembros"
+        region: "Páramo de los Miembros",
+        combate: {
+          debilidades: {
+            dano: ["Cortante (+10% de daño extra)", "Físico estándar, contundente, perforante", "Magia", "Fuego", "Rayo"],
+            estados: ["Veneno", "Podredumbre Carmesí", "Sangrado", "Escarcha"]
+          },
+          resistencias: {
+            dano: ["Sagrado (40%)"],
+            estados: ["Sueño (Inmune)", "Locura (Inmune)"]
+          }
+        }
       },
       {
         id: "PARAMO_02",
@@ -263,7 +393,7 @@ const OBJETIVOS = {
         id: "PARAMO_03",
         titulo: "Catacumbas de Paso de la Tempestad",
         descripcion: "Explora estas catacumbas al norte del Páramo y derrota al Jinete Necrológico del Caballo de las Tormentas.",
-        recompensa: "Ashes de Espíritu: Jinete Necrológico del Caballo de las Tormentas",
+        recompensa: "Cenizas de espíritu: Jinete Necrológico del Caballo de las Tormentas",
         consejos: "Busca la palanca oculta para abrir el acceso al jefe. El Jinete usa ataques de rayos.",
         region: "Páramo de los Miembros"
       },
@@ -271,7 +401,7 @@ const OBJETIVOS = {
         id: "PARAMO_04",
         titulo: "Catacumbas de la Costa",
         descripcion: "Explora las catacumbas cerca de la costa sur del Páramo y derrota al Jinete Necrológico de la Garra de Dragón.",
-        recompensa: "Ashes de Espíritu: Jinete Necrológico de la Garra de Dragón",
+        recompensa: "Cenizas de espíritu: Jinete Necrológico de la Garra de Dragón",
         consejos: "Hay trampas de flechas. Busca la palanca detrás de una ilusión (golpea la pared).",
         region: "Páramo de los Miembros"
       },
@@ -295,7 +425,7 @@ const OBJETIVOS = {
         id: "PARAMO_07",
         titulo: "Cueva Musgosa de Murkwater",
         descripcion: "Explora esta cueva cerca del río Murkwater y derrota a la Crisálida de Miembros guardada por enemigos.",
-        recompensa: "Ashes de Espíritu: Crisálida de Miembros",
+        recompensa: "Cenizas de espíritu: Crisálida de Miembros",
         consejos: "La ilusión de Margit al final es un truco; no es el jefe real. Busca las paredes falsas.",
         region: "Páramo de los Miembros"
       },
@@ -319,7 +449,7 @@ const OBJETIVOS = {
         id: "PARAMO_10",
         titulo: "Gruta de las Bestias Guía",
         descripcion: "Encuentra y entra en la Gruta de las Bestias Guía al norte del Páramo y derrota al Piloto de las Bestias Guía.",
-        recompensa: "Ashes de Espíritu: Bestia Guía",
+        recompensa: "Cenizas de espíritu: Bestia Guía",
         consejos: "El jefe montado puede derribarte. Usa ataques de salto para interrumpir sus cargas.",
         region: "Páramo de los Miembros"
       },
@@ -327,7 +457,7 @@ const OBJETIVOS = {
         id: "PARAMO_11",
         titulo: "Túmulo del Dragón Sellado",
         descripcion: "Explora el Túmulo del Dragón Sellado al norte del Páramo y derrota al Jinete Necrológico del Jinete del Dragón.",
-        recompensa: "Ashes de Espíritu: Jinete Necrológico del Jinete del Dragón",
+        recompensa: "Cenizas de espíritu: Jinete Necrológico del Jinete del Dragón",
         consejos: "Jefe a distancia con magia. Acércate rápido para interrumpir sus hechizos.",
         region: "Páramo de los Miembros"
       },
@@ -359,7 +489,7 @@ const OBJETIVOS = {
         id: "PARAMO_15",
         titulo: "Catacumbas del Héroe del Páramo",
         descripcion: "Explora las catacumbas y derrota al Doble Jinete Necrológico (dos jinetes simultáneamente).",
-        recompensa: "Ashes de Espíritu: Lobo de Sangre",
+        recompensa: "Cenizas de espíritu: Lobo de Sangre",
         consejos: "Concentra el daño en uno primero para reducir la presión. El espacio es limitado.",
         region: "Páramo de los Miembros"
       }
@@ -379,7 +509,7 @@ const OBJETIVOS = {
         id: "PENIN_02",
         titulo: "Catacumbas de Impwynn",
         descripcion: "Explora estas catacumbas y derrota al jefe Dúo de Jinetes Necrológicos.",
-        recompensa: "Ashes de Espíritu: Momia del Héroe",
+        recompensa: "Cenizas de espíritu: Momia del Héroe",
         consejos: "Combina enfrentarte a uno mientras el otro está lejos. Palanca oculta detrás de un muro falso.",
         region: "Península Llorosa"
       },
@@ -387,7 +517,7 @@ const OBJETIVOS = {
         id: "PENIN_03",
         titulo: "Catacumbas de la Costa Sur",
         descripcion: "Explora y derrota al Aristócrata Enterrado.",
-        recompensa: "Ashes de Espíritu: Esqueleto Noble",
+        recompensa: "Cenizas de espíritu: Esqueleto Noble",
         consejos: "El Aristócrata usa magia. Acércate para interrumpirlo.",
         region: "Península Llorosa"
       },
@@ -455,7 +585,7 @@ const OBJETIVOS = {
         id: "LIURNIA_04",
         titulo: "Catacumbas de la Carretera de Raya Lúcida",
         descripcion: "Explora y derrota al Jinete Necrológico de las Grandes Hachas.",
-        recompensa: "Ashes de Espíritu: Jinete Necrológico de las Grandes Hachas",
+        recompensa: "Cenizas de espíritu: Jinete Necrológico de las Grandes Hachas",
         consejos: "Palanca bien escondida. Jefe usa hachas dobles muy peligrosas.",
         region: "Liurnia de los Lagos"
       },
@@ -463,7 +593,7 @@ const OBJETIVOS = {
         id: "LIURNIA_05",
         titulo: "Catacumbas del Discípulo",
         descripcion: "Explora y derrota al Jefe de la Bestia del Discípulo.",
-        recompensa: "Ashes de Espíritu: Bestia del Discípulo",
+        recompensa: "Cenizas de espíritu: Bestia del Discípulo",
         consejos: "Patrón de movimiento repetitivo; aprende su cadencia.",
         region: "Liurnia de los Lagos"
       },
@@ -555,7 +685,7 @@ const OBJETIVOS = {
         id: "CAELIDA_04",
         titulo: "Catacumbas de los Guerreros de Caélida",
         descripcion: "Explora y derrota al Imitador (Mimicry Tear) en estas catacumbas.",
-        recompensa: "Ashes de Espíritu: Imitador (uno de los mejores espíritus del juego)",
+        recompensa: "Cenizas de espíritu: Imitador (uno de los mejores espíritus del juego)",
         consejos: "El Imitador copia tu personaje exactamente: tu equipo, habilidades y todo. Muy peligroso. Cambia tu equipo antes de entrar.",
         region: "Caélida"
       },
@@ -563,7 +693,7 @@ const OBJETIVOS = {
         id: "CAELIDA_05",
         titulo: "Catacumbas del Acantilado de Caélida",
         descripcion: "Explora y derrota al Cementerio de Guerreros Espectral.",
-        recompensa: "Ashes de Espíritu: Doble Guerrero",
+        recompensa: "Cenizas de espíritu: Doble Guerrero",
         consejos: "Palanca en zona con trampas de suelo. Jefe usa ataques cuerpo a cuerpo básicos.",
         region: "Caélida"
       },
@@ -607,7 +737,7 @@ const OBJETIVOS = {
         id: "ALTUS_02",
         titulo: "Catacumbas del Camino Real de Altus",
         descripcion: "Explora y derrota al Jinete Necrológico del Espada y Escudo.",
-        recompensa: "Ashes de Espíritu: Jinete Necrológico del Espada y Escudo",
+        recompensa: "Cenizas de espíritu: Jinete Necrológico del Espada y Escudo",
         consejos: "Palanca bien escondida tras una pared de ilusión. Jefe usa escudo y espada combinados.",
         region: "Meseta de Altus"
       },
@@ -639,7 +769,7 @@ const OBJETIVOS = {
         id: "ALTUS_06",
         titulo: "Árbol de las Garras (Fosa de los Hermanos de la Mirra)",
         descripcion: "Derrota a los dos Jinetes Necrológicos de los Mirros (dúo de hermanos) en esta fosa especial.",
-        recompensa: "Ashes de Espíritu: Dúo de los Mirros",
+        recompensa: "Cenizas de espíritu: Dúo de los Mirros",
         consejos: "Uno usa arco y otro usa espada. Mantén a ambos en tu campo visual.",
         region: "Meseta de Altus"
       },
@@ -667,7 +797,7 @@ const OBJETIVOS = {
         id: "GELMIR_02",
         titulo: "Catacumbas del Héroe de Gelmir",
         descripcion: "Explora y derrota al Crematorio Real (Crematorio del Suelo).",
-        recompensa: "Ashes de Espíritu: Crematorio del Suelo",
+        recompensa: "Cenizas de espíritu: Crematorio del Suelo",
         consejos: "Los crematorios se encienden y explotan. Atácalos cuando están apagados o desde lejos.",
         region: "Monte Gelmir"
       },
@@ -711,7 +841,7 @@ const OBJETIVOS = {
         id: "LEYNDELL_03",
         titulo: "Catacumbas de las Raíces Leyndellianas",
         descripcion: "Explora las catacumbas de raíces en las profundidades de Leyndell y derrota al Ulcerado Espíritu del Árbol.",
-        recompensa: "Ashes de Espíritu: Espíritu Ulcerado del Árbol, runas",
+        recompensa: "Cenizas de espíritu: Espíritu Ulcerado del Árbol, runas",
         consejos: "El Espíritu Ulcerado tiene alto alcance. Mantén distancia y atácalo cuando termina sus embestidas.",
         region: "Leyndell, Capital Real"
       },
@@ -739,7 +869,7 @@ const OBJETIVOS = {
         id: "GIGANTES_01",
         titulo: "Apóstol del Dragón (Catacumbas de los Gigantes)",
         descripcion: "Explora las Catacumbas de los Gigantes y derrota al Apóstol del Dragón dentro.",
-        recompensa: "Ashes de Espíritu: Apóstol del Dragón",
+        recompensa: "Cenizas de espíritu: Apóstol del Dragón",
         consejos: "Usa ataques de fuego. El apóstol tiene alto alcance con su cola.",
         region: "Cimas de los Gigantes"
       },
@@ -747,7 +877,7 @@ const OBJETIVOS = {
         id: "GIGANTES_02",
         titulo: "Catacumbas de la Cima Sacra",
         descripcion: "Explora y derrota al Jinete Necrológico de la Espada de Gran Tamaño.",
-        recompensa: "Ashes de Espíritu: Jinete Necrológico de la Espada de Gran Tamaño",
+        recompensa: "Cenizas de espíritu: Jinete Necrológico de la Espada de Gran Tamaño",
         consejos: "El jinete carga en línea recta. Rueda a los lados para evitarlo.",
         region: "Cimas de los Gigantes"
       },
