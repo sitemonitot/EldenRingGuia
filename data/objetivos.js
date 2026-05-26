@@ -17,10 +17,10 @@ const OBJETIVOS = {
     {
       id: "MAIN_02",
       titulo: "Despertar en las Tierras Intermedias",
-      descripcion: "Despierta en el Cementerio del Inicio. Sube la escalera y llega a la superficie del Páramo de los Miembros. Explora los alrededores básicos.",
+      descripcion: "Despierta en el Cementerio del Inicio. Sube la escalera y llega a la superficie del Necrolimbo. Explora los alrededores básicos.",
       recompensa: "Acceso a Las Tierras Intermedias",
       consejos: "El Jinete Necrológico del puente cercano está pensado para evitarse al principio.",
-      region: "Páramo de los Miembros",
+      region: "Necrolimbo",
       obligatorio: true
     },
     {
@@ -29,13 +29,13 @@ const OBJETIVOS = {
       descripcion: "Descansa en tres Lugares de Gracia en el exterior para que Melina te visite. Acepta su trato para recibir a Torrente y poder gastar runas en niveles.",
       recompensa: "Torrente (destrero espectral), capacidad de subir de nivel",
       consejos: "Sin este paso no puedes subir de nivel. Busca los Lugares de Gracia de la zona inicial.",
-      region: "Páramo de los Miembros",
+      region: "Necrolimbo",
       obligatorio: true
     },
     {
       id: "MAIN_04",
       titulo: "Obtener al menos dos Grandes Runas",
-      descripcion: "Derrota a dos semidioses portadores de Gran Runa para poder acceder a Leyndell, Capital Real. Los más accesibles al principio son Godrick (Castillo Ventisquero) y Rennala (Academia de Raya Lúcida).",
+      descripcion: "Derrota a dos semidioses portadores de Gran Runa para poder acceder a Leyndell, Capital Real. Los más accesibles al principio son Godrick (Castillo de Velo Tormentoso) y Rennala (Academia de Raya Lúcida).",
       recompensa: "Dos Grandes Runas, acceso a Leyndell",
       consejos: "No es necesario que sean los mismos dos semidioses; cualquier combinación de dos de los siete vale.",
       region: "Varias",
@@ -80,11 +80,11 @@ const OBJETIVOS = {
     },
     {
       id: "MAIN_08",
-      titulo: "Las Cimas de los Gigantes",
-      descripcion: "Usa el Gran Medallón de Rold en el Gran Ascensor de Rold para ascender a las Cimas de los Gigantes. Explora y avanza hacia la Fragua de los Gigantes.",
-      recompensa: "Acceso a las Cimas de los Gigantes",
-      consejos: "La zona es muy fría. Ten cuidado con el Gigante de Hielo del inicio. El Campo Sagrado Nevado está oculto tras el Medallón de Haligtree.",
-      region: "Cimas de los Gigantes",
+      titulo: "Los Picos de los Gigantes",
+      descripcion: "Usa el Gran Medallón de Rold en el Gran Ascensor de Rold para ascender a los Picos de los Gigantes. Explora y avanza hacia la Fragua de los Gigantes.",
+      recompensa: "Acceso a los Picos de los Gigantes",
+      consejos: "La zona es muy fría. Ten cuidado con el Gigante de Hielo del inicio. El Campo Sacroníveo está oculto tras el Medallón de Haligtree.",
+      region: "Picos de los Gigantes",
       obligatorio: true
     },
     {
@@ -93,7 +93,7 @@ const OBJETIVOS = {
       descripcion: "Derrota al enorme Gigante de Fuego que custodia el acceso a la Fragua de los Gigantes.",
       recompensa: "Recuerdo del Gigante de Fuego, acceso a la Fragua",
       consejos: "Ataca su pie izquierdo (donde tiene el ojo) para hacerle mucho daño. A caballo es mucho más fácil. En su segunda fase se arranca la cabeza.",
-      region: "Cimas de los Gigantes",
+      region: "Picos de los Gigantes",
       obligatorio: true,
       combate: {
         debilidades: {
@@ -112,7 +112,7 @@ const OBJETIVOS = {
       descripcion: "Llega a la Fragua de los Gigantes y toma la decisión de quemar el Árbol Áldano. Melina se sacrificará para encender la llama (a menos que hayas obtenido la Señal de los Tres Dedos).",
       recompensa: "Apertura del camino a Fárum Azula. Si elegiste la Llama Frenética, Melina se convierte en enemiga.",
       consejos: "Este es un punto de no retorno. La decisión no afecta al resto del juego hasta el final.",
-      region: "Cimas de los Gigantes",
+      region: "Picos de los Gigantes",
       obligatorio: true
     },
     {
@@ -217,10 +217,10 @@ const OBJETIVOS = {
     {
       id: "SEMI_01",
       titulo: "Derrotar a Godrick el Injertado",
-      descripcion: "Atraviesa el Castillo Ventisquero, derrota a Margit el Presagio Maldito en la entrada, y luego enfrenta a Godrick el Injertado en el patio del castillo. Es el señor de Páramo de los Miembros.",
+      descripcion: "Atraviesa el Castillo de Velo Tormentoso, derrota a Margit el Presagio Maldito en la entrada, y luego enfrenta a Godrick el Injertado en el patio del castillo. Es el señor del Necrolimbo.",
       recompensa: "Gran Runa de Godrick, Recuerdo del Injertado, Runas (20.000)",
       consejos: "En su segunda fase se injerta el brazo de un dragón y usa ataques de fuego. Rueda bajo el aliento de fuego. Nellie (NPC invocable) ayuda mucho.",
-      region: "Páramo de los Miembros — Castillo Ventisquero",
+      region: "Necrolimbo — Castillo de Velo Tormentoso",
       obligatorio: false,
       minimo_requerido: true,
       combate: {
@@ -297,7 +297,7 @@ const OBJETIVOS = {
     {
       id: "SEMI_05",
       titulo: "Derrotar a Morgott, el Rey Presagio (OBLIGATORIO)",
-      descripcion: "El guardián de Leyndell. Aparece también como Margit el Presagio Maldito antes de Stormveil. En Leyndell muestra su verdadera identidad como el Oculto de la Nobleza.",
+      descripcion: "El guardián de Leyndell. Aparece también como Margit el Presagio Maldito antes de Castillo de Velo Tormentoso. En Leyndell muestra su verdadera identidad como el Oculto de la Nobleza.",
       recompensa: "Gran Runa de Morgott, Recuerdo de Morgott, Gran Medallón de Rold",
       consejos: "Tiene muchos de los mismos ataques que Margit pero más poderosos y más rápidos. Los espíritus de ceniza son esenciales. El Espectro de la Espada de Sangre de Jellyfish ralentiza sus ataques.",
       region: "Leyndell, Capital Real",
@@ -317,10 +317,10 @@ const OBJETIVOS = {
     {
       id: "SEMI_06",
       titulo: "Derrotar a Malenia, Cuchilla de Miquella (OPCIONAL)",
-      descripcion: "El jefe más difícil del juego. Encuéntrate con ella en lo profundo del Árbol de Haligtree tras descender por toda la estructura. Requiere el Medallón de Haligtree completo.",
+      descripcion: "El jefe más difícil del juego. Encuéntrate con ella en lo profundo del Árbol Hierático de Miquella tras descender por toda la estructura. Requiere el Medallón de Haligtree completo.",
       recompensa: "Gran Runa de Malenia, Recuerdo de la Diosa de la Podredumbre, Flor de la Podredumbre",
       consejos: "SE CURA con cada golpe que conecta, incluso si bloqueas. Su Floración de la Diosa en la segunda fase infesta la arena de flores. Las invocaciones son esenciales. Aprende a esquivar su Danza de la Espada.",
-      region: "Campo Sagrado Nevado — Árbol de Haligtree",
+      region: "Campo Sacroníveo — Árbol Hierático de Miquella",
       obligatorio: false,
       minimo_requerido: false,
       combate: {
@@ -337,7 +337,7 @@ const OBJETIVOS = {
     {
       id: "SEMI_07",
       titulo: "Derrotar a Mohg, Señor de la Sangre (OPCIONAL)",
-      descripcion: "Encuéntrate con Mohg en su Palacio de Mohgwyn, accesible mediante el portal de Varre o el portal del Campo Sagrado Nevado. Es el señor de la magia de sangre.",
+      descripcion: "Encuéntrate con Mohg en su Palacio de Mohgwyn, accesible mediante el portal de Varre o el portal del Campo Sacroníveo. Es el señor de la magia de sangre.",
       recompensa: "Gran Runa de Mohg, Recuerdo del Señor de la Sangre",
       consejos: "Tiene una fase de bendición de sangre que puede matarte al inicio de su segunda fase. La Unción Pura de Mohg la anula. Las Flechas Sagradas son muy efectivas contra él.",
       region: "Palacio de Mohgwyn",
@@ -366,10 +366,10 @@ const OBJETIVOS = {
       {
         id: "PARAMO_01",
         titulo: "Margit, el Presagio Maldito",
-        descripcion: "Derrota al guardián del Castillo Ventisquero en el Paso de la Tempestad. Es el primer gran obstáculo del juego.",
+        descripcion: "Derrota al guardián del Castillo de Velo Tormentoso en el Paso de la Tempestad. Es el primer gran obstáculo del juego.",
         recompensa: "Piedra Marciana (ítem especial), runas",
         consejos: "Usa las Cadenas de Margit (compradas a Patches o a Altus) para inmovilizarlo brevemente. El bastón que lanza en su segunda fase es muy peligroso.",
-        region: "Páramo de los Miembros",
+        region: "Necrolimbo",
         combate: {
           debilidades: {
             dano: ["Cortante (+10% de daño extra)", "Físico estándar, contundente, perforante", "Magia", "Fuego", "Rayo"],
@@ -384,26 +384,26 @@ const OBJETIVOS = {
       {
         id: "PARAMO_02",
         titulo: "Dragón Agheel (Lago Agheel)",
-        descripcion: "Derrota al dragón que habita en el Lago Agheel al oeste del Páramo de los Miembros.",
+        descripcion: "Derrota al dragón que habita en el Lago Agheel al oeste del Necrolimbo.",
         recompensa: "Corazón de Dragón (para incantaciones de dragón), runas",
         consejos: "Mantente bajo su vientre o junto a su cola para evitar el fuego. A caballo es mucho más fácil. Un buen combate de entrenamiento temprano.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_03",
         titulo: "Catacumbas de Paso de la Tempestad",
-        descripcion: "Explora estas catacumbas al norte del Páramo y derrota al Jinete Necrológico del Caballo de las Tormentas.",
+        descripcion: "Explora estas catacumbas al norte del Necrolimbo y derrota al Jinete Necrológico del Caballo de las Tormentas.",
         recompensa: "Cenizas de espíritu: Jinete Necrológico del Caballo de las Tormentas",
         consejos: "Busca la palanca oculta para abrir el acceso al jefe. El Jinete usa ataques de rayos.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_04",
         titulo: "Catacumbas de la Costa",
-        descripcion: "Explora las catacumbas cerca de la costa sur del Páramo y derrota al Jinete Necrológico de la Garra de Dragón.",
+        descripcion: "Explora las catacumbas cerca de la costa sur del Necrolimbo y derrota al Jinete Necrológico de la Garra de Dragón.",
         recompensa: "Cenizas de espíritu: Jinete Necrológico de la Garra de Dragón",
         consejos: "Hay trampas de flechas. Busca la palanca detrás de una ilusión (golpea la pared).",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_05",
@@ -411,7 +411,7 @@ const OBJETIVOS = {
         descripcion: "Explora la Cueva Costera en la costa occidental. Derrota a las dos Crisálidas Demi-Humanas y regresa a la Capilla de la Anticipación.",
         recompensa: "Acceso de vuelta a la Capilla de la Anticipación, Ropas de Marinero, posibilidad de derrotar al Vástago Injertado",
         consejos: "Al final de la cueva hay un portal que te lleva de vuelta al inicio del juego. Ahora puedes derrotar al Vástago Injertado para conseguir la Joya Espiritual de Miembros.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_06",
@@ -419,7 +419,7 @@ const OBJETIVOS = {
         descripcion: "Encuentra esta cueva y enfrenta una trampa de Patches (Remiendos). Decide si perdonarlo o matarlo para iniciar su misión.",
         recompensa: "Inicio de la Misión de Remiendos, Monedero de los Tacaños",
         consejos: "Recomendado perdonarlo: se convierte en mercader con objetos únicos. Si lo matas, obtienes su equipo pero pierdes su inventario.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_07",
@@ -427,7 +427,7 @@ const OBJETIVOS = {
         descripcion: "Explora esta cueva cerca del río Murkwater y derrota a la Crisálida de Miembros guardada por enemigos.",
         recompensa: "Cenizas de espíritu: Crisálida de Miembros",
         consejos: "La ilusión de Margit al final es un truco; no es el jefe real. Busca las paredes falsas.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_08",
@@ -435,31 +435,31 @@ const OBJETIVOS = {
         descripcion: "Desciende a esta fosa al norte y derrota a la Gran Araña Tierra.",
         recompensa: "Guantes de Suave Algodón, runas",
         consejos: "La araña se ententierra. Observa dónde sale para atacar desde detrás.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_09",
         titulo: "Fosa de Summonwater Village",
-        descripcion: "Desciende a la fosa del pueblo sumergido en la zona este del Páramo y derrota al Antiguo Héroe de Zamor.",
+        descripcion: "Desciende a la fosa del pueblo sumergido en la zona este del Necrolimbo y derrota al Antiguo Héroe de Zamor.",
         recompensa: "Piedra Marciana Brillante [5], runas",
         consejos: "Este jefe congela el suelo y usa técnicas de budo. Ataca desde su espalda.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_10",
         titulo: "Gruta de las Bestias Guía",
-        descripcion: "Encuentra y entra en la Gruta de las Bestias Guía al norte del Páramo y derrota al Piloto de las Bestias Guía.",
+        descripcion: "Encuentra y entra en la Gruta de las Bestias Guía al norte del Necrolimbo y derrota al Piloto de las Bestias Guía.",
         recompensa: "Cenizas de espíritu: Bestia Guía",
         consejos: "El jefe montado puede derribarte. Usa ataques de salto para interrumpir sus cargas.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_11",
         titulo: "Túmulo del Dragón Sellado",
-        descripcion: "Explora el Túmulo del Dragón Sellado al norte del Páramo y derrota al Jinete Necrológico del Jinete del Dragón.",
+        descripcion: "Explora el Túmulo del Dragón Sellado al norte del Necrolimbo y derrota al Jinete Necrológico del Jinete del Dragón.",
         recompensa: "Cenizas de espíritu: Jinete Necrológico del Jinete del Dragón",
         consejos: "Jefe a distancia con magia. Acércate rápido para interrumpir sus hechizos.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_12",
@@ -467,15 +467,15 @@ const OBJETIVOS = {
         descripcion: "Sube a la Ermita en la cima de la Colina de las Tormentas y derrota al Avatar del Árbol Áldano que la custodia.",
         recompensa: "Granos de Ofrenda (para mejorar cántaro de gracia), runas",
         consejos: "El Avatar usa ataques de agua sagrada. Ataca sus pies para hacer daño crítico. Vuelve cuando seas más fuerte si te resulta difícil.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_13",
         titulo: "El Árbol que Habla (Boc el Costurero)",
-        descripcion: "Escucha el árbol que habla en los Bosques del Páramo y golpéalo. Libera a Boc el Costurero, que está atrapado dentro.",
+        descripcion: "Escucha el árbol que habla en los Bosques del Necrolimbo y golpéalo. Libera a Boc el Costurero, que está atrapado dentro.",
         recompensa: "Inicio de la Misión de Boc, Agujas de Costurero x10",
         consejos: "Boc reaparece en la Cueva Costera. Su misión completa te permite modificar equipo especial.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_14",
@@ -483,15 +483,15 @@ const OBJETIVOS = {
         descripcion: "Derrota al intimidante Jinete Necrológico del puente cerca del inicio del juego, que inicialmente aparece de noche.",
         recompensa: "Mandoble de Caballo de Muerte, runas considerables",
         consejos: "Solo aparece de noche. A caballo puedes huir de sus cargas. Intenta derribarlo con ataques pesados.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       },
       {
         id: "PARAMO_15",
-        titulo: "Catacumbas del Héroe del Páramo",
+        titulo: "Catacumbas del Héroe del Necrolimbo",
         descripcion: "Explora las catacumbas y derrota al Doble Jinete Necrológico (dos jinetes simultáneamente).",
         recompensa: "Cenizas de espíritu: Lobo de Sangre",
         consejos: "Concentra el daño en uno primero para reducir la presión. El espacio es limitado.",
-        region: "Páramo de los Miembros"
+        region: "Necrolimbo"
       }
     ],
 
@@ -500,10 +500,10 @@ const OBJETIVOS = {
       {
         id: "PENIN_01",
         titulo: "Castillo Morne: Leonino Aberrante",
-        descripcion: "Explora el Castillo Morne en el extremo sur de la Península Llorosa y derrota al Leonino Aberrante en el patio interior.",
+        descripcion: "Explora el Castillo Morne en el extremo sur de la Península del Llanto y derrota al Leonino Aberrante en el patio interior.",
         recompensa: "Recuerdo de la Aberración Leonina, Runas (7.000)",
         consejos: "Usa la invocación de Miquella (NPC) disponible en la entrada del jefe. El Leonino usa garras y acróbacia.",
-        region: "Península Llorosa"
+        region: "Península del Llanto"
       },
       {
         id: "PENIN_02",
@@ -511,7 +511,7 @@ const OBJETIVOS = {
         descripcion: "Explora estas catacumbas y derrota al jefe Dúo de Jinetes Necrológicos.",
         recompensa: "Cenizas de espíritu: Momia del Héroe",
         consejos: "Combina enfrentarte a uno mientras el otro está lejos. Palanca oculta detrás de un muro falso.",
-        region: "Península Llorosa"
+        region: "Península del Llanto"
       },
       {
         id: "PENIN_03",
@@ -519,7 +519,7 @@ const OBJETIVOS = {
         descripcion: "Explora y derrota al Aristócrata Enterrado.",
         recompensa: "Cenizas de espíritu: Esqueleto Noble",
         consejos: "El Aristócrata usa magia. Acércate para interrumpirlo.",
-        region: "Península Llorosa"
+        region: "Península del Llanto"
       },
       {
         id: "PENIN_04",
@@ -527,15 +527,15 @@ const OBJETIVOS = {
         descripcion: "Encuentra a Irina en el camino y lleva su carta a su padre Edgar en el Castillo Morne. Sigue su trágica historia.",
         recompensa: "Arco de Irina, inicio de una sub-misión de luto",
         consejos: "Esta cadena de eventos tiene un final muy triste. Visita a Edgar después de completar el castillo.",
-        region: "Península Llorosa"
+        region: "Península del Llanto"
       },
       {
         id: "PENIN_05",
         titulo: "Avatar del Árbol Áldano (Puente de la Promesa de Sacrificio)",
         descripcion: "Derrota al enorme Avatar del Árbol Áldano junto al Puente de la Promesa de Sacrificio.",
         recompensa: "Granos de Ofrenda (x3)",
-        consejos: "Mismo esquema que el del Páramo. A caballo y atacando sus pies.",
-        region: "Península Llorosa"
+        consejos: "Mismo esquema que el del Necrolimbo. A caballo y atacando sus pies.",
+        region: "Península del Llanto"
       },
       {
         id: "PENIN_06",
@@ -543,15 +543,15 @@ const OBJETIVOS = {
         descripcion: "Derrota al Espíritu de Grafito en esta fosa al sur de la Península.",
         recompensa: "Ceniza de Grafito, runas",
         consejos: "Jefe pequeño pero ágil. Usa ataques horizontales para alcanzarlo.",
-        region: "Península Llorosa"
+        region: "Península del Llanto"
       },
       {
         id: "PENIN_07",
         titulo: "Ruinas del Pueblo de los Cuatro Cruceros de Caminos",
         descripcion: "Explora estas ruinas infestadas de no-muertos y encuentra el tesoro oculto en el sótano.",
         recompensa: "Llave del Medallón de Haligtree (mitad izquierda)",
-        consejos: "Este ítem es esencial para llegar al Campo Sagrado Nevado y al Árbol de Haligtree más adelante.",
-        region: "Península Llorosa"
+        consejos: "Este ítem es esencial para llegar al Campo Sacroníveo y al Árbol Hierático de Miquella más adelante.",
+        region: "Península del Llanto"
       }
     ],
 
@@ -648,7 +648,7 @@ const OBJETIVOS = {
       {
         id: "LIURNIA_12",
         titulo: "Gran Ascensor Dectus (Medallón Dectus)",
-        descripcion: "Reúne los dos fragmentos del Medallón Dectus (uno en el Fuerte Haight del Páramo, otro en el Fuerte Faroth de Caélida) para activar el Gran Ascensor Dectus.",
+        descripcion: "Reúne los dos fragmentos del Medallón Dectus (uno en el Fuerte Haight del Necrolimbo, otro en el Fuerte Faroth de Caélida) para activar el Gran Ascensor Dectus.",
         recompensa: "Acceso a la Meseta de Altus",
         consejos: "El Fuerte Faroth de Caélida es muy peligroso. Hay dragones. Corre directamente al fuerte.",
         region: "Liurnia de los Lagos"
@@ -710,7 +710,7 @@ const OBJETIVOS = {
         titulo: "General Radahn: Nokron el Eterno",
         descripcion: "Al derrotar a Radahn, una estrella cae al sur de Tierra de Sepultura de los Miembros, abriendo el acceso subterráneo a Nokron, Ciudad Eterna. Esto es esencial para la misión de Ranni.",
         recompensa: "Acceso a Nokron, Ciudad Eterna (zona subterránea)",
-        consejos: "Busca el cráter donde cayó la estrella al sureste del Páramo. Salta por los acantilados.",
+        consejos: "Busca el cráter donde cayó la estrella al sureste del Necrolimbo. Salta por los acantilados.",
         region: "Caélida"
       },
       {
@@ -847,11 +847,11 @@ const OBJETIVOS = {
       },
       {
         id: "LEYNDELL_04",
-        titulo: "Dragón Fortissax (Profundidades de las Raíces)",
-        descripcion: "Completa la misión de Fía para llegar al Sueño de las Profundidades de las Raíces y derrotar al Licosauro Fortissax.",
+        titulo: "Dragón Fortissax (Fondo de Raíz Profunda)",
+        descripcion: "Completa la misión de Fía para llegar al Sueño de las Fondo de Raíz Profunda y derrotar al Licosauro Fortissax.",
         recompensa: "Recuerdo del Licosauro Fortissax (para el final de Fía), runas",
         consejos: "Fortissax usa rayos y ataques de agarre. Su Relámpago de Muerte es devastador. Mantente moviendo.",
-        region: "Profundidades de las Raíces"
+        region: "Fondo de Raíz Profunda"
       },
       {
         id: "LEYNDELL_05",
@@ -871,7 +871,7 @@ const OBJETIVOS = {
         descripcion: "Explora las Catacumbas de los Gigantes y derrota al Apóstol del Dragón dentro.",
         recompensa: "Cenizas de espíritu: Apóstol del Dragón",
         consejos: "Usa ataques de fuego. El apóstol tiene alto alcance con su cola.",
-        region: "Cimas de los Gigantes"
+        region: "Picos de los Gigantes"
       },
       {
         id: "GIGANTES_02",
@@ -879,23 +879,23 @@ const OBJETIVOS = {
         descripcion: "Explora y derrota al Jinete Necrológico de la Espada de Gran Tamaño.",
         recompensa: "Cenizas de espíritu: Jinete Necrológico de la Espada de Gran Tamaño",
         consejos: "El jinete carga en línea recta. Rueda a los lados para evitarlo.",
-        region: "Cimas de los Gigantes"
+        region: "Picos de los Gigantes"
       },
       {
         id: "GIGANTES_03",
-        titulo: "Alexander, Guerrero de Hierro (Cimas de los Gigantes)",
-        descripcion: "Encuentra a Alexander de nuevo en las Cimas de los Gigantes. Habla con él para continuar su misión.",
+        titulo: "Alexander, Guerrero de Hierro (Picos de los Gigantes)",
+        descripcion: "Encuentra a Alexander de nuevo en los Picos de los Gigantes. Habla con él para continuar su misión.",
         recompensa: "Avance en la Misión de Alexander",
         consejos: "Alexander aparece varias veces a lo largo del juego. Su misión finaliza en Fárum Azula.",
-        region: "Cimas de los Gigantes"
+        region: "Picos de los Gigantes"
       },
       {
         id: "GIGANTES_04",
-        titulo: "Misión de Corhyn y Goldmask (Cimas de los Gigantes)",
-        descripcion: "Encuentra a Corhyn y Goldmask meditando en las Cimas de los Gigantes. Habla con ellos y resuelve el enigma del Dios Árdano para avanzar en la misión del Orden Áureo.",
+        titulo: "Misión de Corhyn y Goldmask (Picos de los Gigantes)",
+        descripcion: "Encuentra a Corhyn y Goldmask meditando en los Picos de los Gigantes. Habla con ellos y resuelve el enigma del Dios Árdano para avanzar en la misión del Orden Áureo.",
         recompensa: "Avance en el Final del Orden Áureo",
         consejos: "Goldmask está frente al puente de la Fragua. Corhyn te dará el Hechizo de los Árdanos para resolver el acertijo.",
-        region: "Cimas de los Gigantes"
+        region: "Picos de los Gigantes"
       },
       {
         id: "GIGANTES_05",
@@ -911,35 +911,35 @@ const OBJETIVOS = {
     campo_sagrado_haligtree: [
       {
         id: "CAMPO_01",
-        titulo: "Acceso al Campo Sagrado Nevado",
+        titulo: "Acceso al Campo Sacroníveo",
         descripcion: "Reúne los dos fragmentos del Medallón de Haligtree (uno en Aldea de los Albináuricos en Liurnia, otro en los Corrales al inicio del juego) para activar el ascensor oculto en el Gran Ascensor de Rold.",
-        recompensa: "Acceso al Campo Sagrado Nevado",
+        recompensa: "Acceso al Campo Sacroníveo",
         consejos: "La mitad del aldea de los Albináuricos requiere hacer rodar la parte superior de un hongo gigante para acceder al área.",
-        region: "Campo Sagrado Nevado"
+        region: "Campo Sacroníveo"
       },
       {
         id: "CAMPO_02",
-        titulo: "Misión de Millicent (Campo Sagrado Nevado)",
-        descripcion: "Encuentra a Millicent en el Campo Sagrado Nevado. Sigue ayudándola en su viaje hacia el Árbol de Haligtree.",
+        titulo: "Misión de Millicent (Campo Sacroníveo)",
+        descripcion: "Encuentra a Millicent en el Campo Sacroníveo. Sigue ayudándola en su viaje hacia el Árbol Hierático de Miquella.",
         recompensa: "Avance en la misión de Millicent",
         consejos: "Es importante haber seguido su misión desde Caélida para que aparezca aquí.",
-        region: "Campo Sagrado Nevado"
+        region: "Campo Sacroníveo"
       },
       {
         id: "CAMPO_03",
         titulo: "Portal al Palacio de Mohgwyn",
-        descripcion: "Encuentra el portal escondido en el Campo Sagrado Nevado que da acceso al Palacio de Mohgwyn (donde está Mohg).",
+        descripcion: "Encuentra el portal escondido en el Campo Sacroníveo que da acceso al Palacio de Mohgwyn (donde está Mohg).",
         recompensa: "Acceso alternativo al Palacio de Mohgwyn (sin hacer la misión de Varre)",
         consejos: "El portal está en el extremo oeste del Campo Sagrado, cerca del acantilado.",
-        region: "Campo Sagrado Nevado"
+        region: "Campo Sacroníveo"
       },
       {
         id: "HALI_01",
-        titulo: "Árbol de Haligtree: Loretta, Caballera del Haligtree",
-        descripcion: "Desciende por el Árbol de Haligtree y derrota a Loretta, Caballera del Haligtree (versión mejorada de la Loretta del Castillo de Caria).",
+        titulo: "Árbol Hierático de Miquella: Loretta, Caballera del Haligtree",
+        descripcion: "Desciende por el Árbol Hierático de Miquella y derrota a Loretta, Caballera del Haligtree (versión mejorada de la Loretta del Castillo de Caria).",
         recompensa: "Recuerdo de la Caballera del Haligtree, acceso a la Ciudad de Elphael",
         consejos: "Mucho más poderosa que la versión original. Sus flechas mágicas tienen alcance muy alto. Usa un escudo de alto deflexión mágica.",
-        region: "Árbol de Haligtree"
+        region: "Árbol Hierático de Miquella"
       },
       {
         id: "HALI_02",
@@ -947,7 +947,7 @@ const OBJETIVOS = {
         descripcion: "Desciende por la ciudadela de Elphael, llena de podredumbre escarlata y enemigos avanzados. Llega hasta Malenia en las profundidades.",
         recompensa: "Acceso a Malenia, Cuchilla de Miquella",
         consejos: "Lleva muchos Frascos de Tónico. La podredumbre se acumula rápido en casi todas las zonas de Elphael.",
-        region: "Árbol de Haligtree"
+        region: "Árbol Hierático de Miquella"
       },
       {
         id: "HALI_03",
@@ -955,7 +955,7 @@ const OBJETIVOS = {
         descripcion: "Tras derrotar a Malenia, encuentra a Millicent con los Cuatro Guerreros Hermanos en Elphael. Elige: ayudar a Millicent (matar a los hermanos) o traicionarla (atacar a Millicent).",
         recompensa: "Si la ayudas: Aguijón de Unalloyed Gold (para la Aguja de Miquella). Si la traicionas: Prótesis de Millicent.",
         consejos: "Ayudar a Millicent es el camino canónico y te da el objeto para cancelar el final de la Llama Frenética.",
-        region: "Árbol de Haligtree"
+        region: "Árbol Hierático de Miquella"
       }
     ],
 
@@ -1011,19 +1011,19 @@ const OBJETIVOS = {
       },
       {
         id: "SUBTE_07",
-        titulo: "Profundidades de las Raíces",
-        descripcion: "Accede a las Profundidades de las Raíces bajo Leyndell (desde las catacumbas de las vísceras). Habla con Fía y sigue su misión.",
+        titulo: "Fondo de Raíz Profunda",
+        descripcion: "Accede a las Fondo de Raíz Profunda bajo Leyndell (desde las catacumbas de las vísceras). Habla con Fía y sigue su misión.",
         recompensa: "Avance en la Misión de Fía, acceso al Sueño de las Profundidades",
         consejos: "Las profundidades tienen muchos Hombres de Agua no-muertos. Son resistentes pero lentos.",
-        region: "Profundidades de las Raíces"
+        region: "Fondo de Raíz Profunda"
       },
       {
         id: "SUBTE_08",
         titulo: "Arca de la Noche Eterna (Misión Ranni)",
-        descripcion: "Encuentra el Arca de la Noche Eterna en las Profundidades de las Raíces. Requiere el Punzón de Nokron para abrirla.",
+        descripcion: "Encuentra el Arca de la Noche Eterna en las Fondo de Raíz Profunda. Requiere el Punzón de Nokron para abrirla.",
         recompensa: "Puñal de la Noche de la Espada Negra (esencial para la misión de Ranni)",
         consejos: "El arca está custodiada por un enemigo especial. El Punzón de Nokron la abre.",
-        region: "Profundidades de las Raíces"
+        region: "Fondo de Raíz Profunda"
       }
     ],
 
@@ -1039,7 +1039,7 @@ const OBJETIVOS = {
           "Derrotar a Radahn para que caiga la estrella y abra Nokron",
           "Obtener el Punzón de Siofra en Nokron",
           "Llevar el Punzón a Ranni",
-          "Encontrar el Arca de la Noche Eterna en Profundidades de las Raíces",
+          "Encontrar el Arca de la Noche Eterna en Fondo de Raíz Profunda",
           "Obtener el Puñal de la Noche dentro del Arca",
           "Llevar el Puñal a Ranni en el Río Ainsel",
           "Derrotar a Astel, Nacido del Vacío",
@@ -1060,14 +1060,14 @@ const OBJETIVOS = {
           "Mostrarle el Puñal a Fía",
           "Recibir instrucciones sobre los Cuchillos",
           "Encontrar a D muerto en la Mesa Redonda (Fía lo mató)",
-          "Llegar a las Profundidades de las Raíces",
+          "Llegar a las Fondo de Raíz Profunda",
           "Hablar con Fía en las Profundidades",
           "Completar misión de la hermana de D si quieres",
           "Derrotar a Lichosaurio Fortissax",
           "Recibir el Amanecer Putrefacto de Fía"
         ],
         recompensa: "Amanecer Putrefacto (para el final), Maravilla del Abrazo de Fía",
-        region: "Mesa Redonda → Profundidades de las Raíces"
+        region: "Mesa Redonda → Fondo de Raíz Profunda"
       },
       {
         id: "NPC_03",
@@ -1094,13 +1094,13 @@ const OBJETIVOS = {
           "Encontrar a Goldmask meditando en el Puente del Inquisidor",
           "Hablar con Corhyn sobre Goldmask",
           "Resolver el acertijo: usar el Hechizo de los Árdanos en la estatua correcta en la Capilla del Erdtree",
-          "Seguirlos a las Cimas de los Gigantes",
-          "Encontrarlos en el Fuerte de las Cimas de los Gigantes",
+          "Seguirlos a los Picos de los Gigantes",
+          "Encontrarlos en el Fuerte de los Picos de los Gigantes",
           "Conseguir la Incantación del Orden Perfecto (de Corhyn en las Cimas)",
           "Usar la incantación frente a Goldmask"
         ],
         recompensa: "Incantación del Orden Perfecto, Final del Orden Áureo",
-        region: "Mesa Redonda → Meseta de Altus → Cimas de los Gigantes"
+        region: "Mesa Redonda → Meseta de Altus → Picos de los Gigantes"
       },
       {
         id: "NPC_05",
@@ -1126,8 +1126,8 @@ const OBJETIVOS = {
           "Hablar con Millicent varias veces",
           "Encontrar a Millicent en las Ruinas del Río de las Tormentas (Meseta de Altus)",
           "Ayudarla como summon invitada contra el Jefe del Puente de la Meseta",
-          "Encontrarla en el Campo Sagrado Nevado",
-          "Encontrarla en el Árbol de Haligtree",
+          "Encontrarla en el Campo Sacroníveo",
+          "Encontrarla en el Árbol Hierático de Miquella",
           "Decisión final: ayudarla o traicionarla (matar a sus hermanos o atacarla)"
         ],
         recompensa: "Aguijón de Unalloyed Gold (si la ayudas, para cancelar el final de la Llama Frenética después de Malenia)",
@@ -1137,17 +1137,17 @@ const OBJETIVOS = {
         id: "NPC_07",
         titulo: "Misión de Blaidd",
         pasos: [
-          "Escuchar el aullido en el Páramo de los Miembros y hablar con el aullador",
+          "Escuchar el aullido en el Necrolimbo y hablar con el aullador",
           "Encontrar a Blaidd en la zona del río Murkwater",
           "Hablar con él sobre su misión de buscar a Darriwil",
-          "Derrotar a Farrum Azula Darriwil (jefe de fosa en el Páramo)",
+          "Derrotar a Farrum Azula Darriwil (jefe de fosa en el Necrolimbo)",
           "Hablar con Blaidd de nuevo",
           "Unirse a la misión de Ranni (Blaidd está en su servicio)",
           "Encontrar a Blaidd en Nokron tras derrotar a Radahn",
           "Encontrar su trágico final frente al Castillo de Caria"
         ],
         recompensa: "Armadura de Blaidd, Espada de la Media Noche de Blaidd",
-        region: "Páramo de los Miembros → Nokron → Castillo de Caria"
+        region: "Necrolimbo → Nokron → Castillo de Caria"
       },
       {
         id: "NPC_08",
@@ -1155,7 +1155,7 @@ const OBJETIVOS = {
         pasos: [
           "Encontrar a Patches en la Cueva Pirática de Murkwater (trampa del cofre)",
           "Decidir si perdonarlo (recomendado) o matarlo",
-          "Si lo perdonas: encontrarlo como mercader en los Corrales al norte del Páramo",
+          "Si lo perdonas: encontrarlo como mercader en los Corrales al norte del Necrolimbo",
           "Seguir sus encuentros en Liurnia (Cueva Musgosa)",
           "Encontrarlo en Monte Gelmir",
           "Encontrarlo en Elphael (misión de la Mansión del Volcán)"
@@ -1167,15 +1167,15 @@ const OBJETIVOS = {
         id: "NPC_09",
         titulo: "Misión de Alexander, Guerrero de Hierro",
         pasos: [
-          "Encontrarlo atascado en un hoyo en el norte del Páramo de los Miembros. Ayudarle golpeando su olla.",
+          "Encontrarlo atascado en un hoyo en el norte del Necrolimbo. Ayudarle golpeando su olla.",
           "Reencontrarlo en Liurnia (atascado de nuevo en un pantano)",
           "Encontrarlo en el Festival de Radahn",
-          "Reencontrarlo al norte de las Cimas de los Gigantes (cerca de la fragua)",
+          "Reencontrarlo al norte de los Picos de los Gigantes (cerca de la fragua)",
           "Encontrar su conclusión final en Fárum Azula: reta a un duelo de honor",
           "Decidir: luchar con él o dejar pasar"
         ],
         recompensa: "Esencia del Guerrero de Hierro (si lo derrotas en el duelo final), historia épica",
-        region: "Páramo → Liurnia → Caélida → Cimas de los Gigantes → Fárum Azula"
+        region: "Páramo → Liurnia → Caélida → Picos de los Gigantes → Fárum Azula"
       },
       {
         id: "NPC_10",
@@ -1196,7 +1196,7 @@ const OBJETIVOS = {
         id: "NPC_11",
         titulo: "Misión de Roderika",
         pasos: [
-          "Encontrar a Roderika en los Corrales del Páramo de los Miembros",
+          "Encontrar a Roderika en los Corrales del Necrolimbo",
           "Hablar con ella y encontrar los Fragmentos de Mente Arañosa (en los Corrales)",
           "Llevárselos",
           "Encontrarla en la Mesa Redonda",
@@ -1212,20 +1212,20 @@ const OBJETIVOS = {
         titulo: "Misión de Néfeli Loux",
         pasos: [
           "Encontrarla en la Mesa Redonda (sala lateral)",
-          "Encontrarla como invocada en el Castillo Ventisquero",
+          "Encontrarla como invocada en el Castillo de Velo Tormentoso",
           "Hablar con ella después de derrotar a Godrick",
           "Hablar con el Señor Fraternales en la Mesa Redonda sobre ella",
           "Darle el Ungüento de Dios o el Fragmento de Shabriri (elige bien: uno la beneficia)",
-          "Verla eventualmente como nueva gobernante del Castillo Ventisquero"
+          "Verla eventualmente como nueva gobernante del Castillo de Velo Tormentoso"
         ],
-        recompensa: "Hacha de los Campeones (si le das el objeto correcto), finaliza la historia de Stormveil",
-        region: "Mesa Redonda → Castillo Ventisquero"
+        recompensa: "Hacha de los Campeones (si le das el objeto correcto), finaliza la historia de Castillo de Velo Tormentoso",
+        region: "Mesa Redonda → Castillo de Velo Tormentoso"
       },
       {
         id: "NPC_13",
         titulo: "Misión de Boc el Costurero",
         pasos: [
-          "Liberar a Boc del árbol que habla (Bosques del Páramo)",
+          "Liberar a Boc del árbol que habla (Bosques del Necrolimbo)",
           "Encontrarle en la Cueva Costera",
           "Hablar con él repetidamente mientras avanza el juego",
           "Encontrarle en la Meseta de Altus (junto al gran árbol)",
@@ -1239,7 +1239,7 @@ const OBJETIVOS = {
         id: "NPC_14",
         titulo: "Misión de D, Cazador de los Muertos",
         pasos: [
-          "Encontrar a D en el Camino de la Sepultura (Páramo)",
+          "Encontrar a D en el Camino de la Sepultura (Necrolimbo)",
           "Hablar con él sobre los no-muertos",
           "Obtener la Bestia Guía y dársela",
           "Seguirle hasta la Mesa Redonda",

@@ -33,15 +33,15 @@ function renderizarGuia(filtro = "todos", busqueda = "") {
   // Opcionales por región
   if (filtro === "todos" || filtro === "opcionales") {
     const regionesLabels = {
-      paramo_miembros: "🌾 Páramo de los Miembros",
-      peninsula_llorosa: "🌧 Península Llorosa",
+      paramo_miembros: "🌾 Necrolimbo",
+      peninsula_llorosa: "🌧 Península del Llanto",
       liurnia_lagos: "🌊 Liurnia de los Lagos",
       caelida: "☠ Caélida",
       meseta_altus: "🏔 Meseta de Altus",
       monte_gelmir: "🌋 Monte Gelmir",
       leyndell: "🏛 Leyndell, Capital Real / Profundidades",
-      cimas_gigantes: "❄ Cimas de los Gigantes / Fárum Azula",
-      campo_sagrado_haligtree: "❄ Campo Sagrado Nevado y Árbol de Haligtree",
+      cimas_gigantes: "❄ Picos de los Gigantes / Fárum Azula",
+      campo_sagrado_haligtree: "❄ Campo Sacroníveo y Árbol Hierático de Miquella",
       subterraneas: "🕳 Zonas Subterráneas",
       misiones_npc: "👤 Misiones de Personajes"
     };
