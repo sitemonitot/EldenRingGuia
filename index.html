@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elden Guide — Guía Completa en Español</title>
+  <meta name="description" content="Guía completa de Elden Ring en español castellano. Todos los objetivos, misiones, builds y más. Guarda tu progreso con cuenta de usuario.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="layout" id="app">
+
+  <!-- ══ HEADER ══ -->
+  <header>
+    <div class="logo" onclick="navegarA('inicio')" style="cursor:pointer">
+      <div class="logo-icon">⚔</div>
+      <div class="logo-text">
+        <h1>Elden Guide</h1>
+        <span>Guía Completa en Español</span>
+      </div>
+    </div>
+
+    <nav class="header-nav">
+      <a class="nav-btn" onclick="navegarA('guia')" href="#guia">📜 Guía</a>
+      <a class="nav-btn" onclick="navegarA('builds')" href="#builds">⚔ Builds</a>
+      <a class="nav-btn" onclick="navegarA('perfil')" href="#perfil">👤 Mi Perfil</a>
+      <a class="nav-btn btn-login" id="btn-login" onclick="navegarA('login')" href="#login">Iniciar sesión</a>
+
+      <div class="user-info" id="user-info" style="display:none">
+        <span>⚔</span>
+        <span class="user-nombre"></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="progreso-sidebar">
+      <h4>Tu Progreso</h4>
+      <div class="barra-progreso">
+        <div class="barra-relleno" id="barra-relleno" style="width:0%"></div>
+      </div>
+      <div class="texto-progreso" id="texto-progreso">0 / 0</div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Navegación</div>
+      <div class="sidebar-link" onclick="navegarA('inicio')">
+        <span class="icono">🏠</span> Inicio
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia')">
+        <span class="icono">📜</span> Guía Completa
+      </div>
+      <div class="sidebar-link" onclick="navegarA('builds')">
+        <span class="icono">⚔</span> Guías de Builds
+      </div>
+      <div class="sidebar-link" id="link-perfil" onclick="navegarA('perfil')" style="display:none">
+        <span class="icono">👤</span> Mi Progreso
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Misión Principal</div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('principal')">
+        <span class="icono">⚔</span> Objetivos Obligatorios
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('semidioses')">
+        <span class="icono">👑</span> Semidioses
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('finales')">
+        <span class="icono">🌙</span> Los 6 Finales
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Opcionales</div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('opcionales')">
+        <span class="icono">◆</span> Todos los Opcionales
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('opcionales'); buscarEnGuia('Páramo')">
+        <span class="icono">🌾</span> Páramo de los Miembros
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('opcionales'); buscarEnGuia('Liurnia')">
+        <span class="icono">🌊</span> Liurnia de los Lagos
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('opcionales'); buscarEnGuia('Caélida')">
+        <span class="icono">☠</span> Caélida
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('opcionales'); buscarEnGuia('Haligtree')">
+        <span class="icono">❄</span> Haligtree
+      </div>
+      <div class="sidebar-link" onclick="navegarA('guia'); filtrarObjetivos('opcionales'); buscarEnGuia('NPC')">
+        <span class="icono">👤</span> Misiones de NPC
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Builds</div>
+      <div class="sidebar-link" onclick="navegarA('builds')">
+        <span class="icono">🛡</span> Todas las Builds
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <main>
+
+    <!-- ── INICIO ── -->
+    <section class="seccion activa" id="seccion-inicio">
+      <div class="inicio-hero">
+        <h2>Guía Completa de Elden Ring</h2>
+        <p>
+          Todos los objetivos del juego en español castellano — obligatorios y opcionales.
+          Crea una cuenta para guardar tu progreso y seguir la guía a tu ritmo.
+        </p>
+      </div>
+
+      <div class="inicio-cards">
+        <div class="inicio-card" onclick="navegarA('guia')">
+          <span class="icono-grande">📜</span>
+          <h3>Guía de Objetivos</h3>
+          <p>Todos los objetivos del juego, organizados por región y tipo. Marca los que vayas completando.</p>
+        </div>
+        <div class="inicio-card" onclick="navegarA('guia'); filtrarObjetivos('principal')">
+          <span class="icono-grande">⚔</span>
+          <h3>Misión Principal</h3>
+          <p>La historia principal y los pasos obligatorios para llegar al jefe final.</p>
+        </div>
+        <div class="inicio-card" onclick="navegarA('guia'); filtrarObjetivos('semidioses')">
+          <span class="icono-grande">👑</span>
+          <h3>Los Semidioses</h3>
+          <p>Los 7 portadores de Gran Runa. Derrota al menos 2 para acceder a Leyndell.</p>
+        </div>
+        <div class="inicio-card" onclick="navegarA('guia'); filtrarObjetivos('opcionales')">
+          <span class="icono-grande">🗺</span>
+          <h3>Objetivos Opcionales</h3>
+          <p>Todos los jefes opcionales, mazmorras, catacumbas y misiones de NPC por región.</p>
+        </div>
+        <div class="inicio-card" onclick="navegarA('guia'); filtrarObjetivos('finales')">
+          <span class="icono-grande">🌙</span>
+          <h3>Los 6 Finales</h3>
+          <p>Cómo conseguir cada uno de los seis finales del juego, con todos los requisitos.</p>
+        </div>
+        <div class="inicio-card" onclick="navegarA('builds')">
+          <span class="icono-grande">🛡</span>
+          <h3>Guías de Builds</h3>
+          <p>8 builds completas con stats, armas, armaduras, talismanes y guía de progresión.</p>
+        </div>
+      </div>
+
+      <div class="ornamento">— ◆ · ⚔ · ◆ —</div>
+
+      <!-- Estadísticas rápidas -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;margin-bottom:2rem">
+        <div class="estadistica-card">
+          <div class="estadistica-numero" id="stat-total">0</div>
+          <div class="estadistica-label">Objetivos totales</div>
+        </div>
+        <div class="estadistica-card">
+          <div class="estadistica-numero">7</div>
+          <div class="estadistica-label">Semidioses</div>
+        </div>
+        <div class="estadistica-card">
+          <div class="estadistica-numero">6</div>
+          <div class="estadistica-label">Finales posibles</div>
+        </div>
+        <div class="estadistica-card">
+          <div class="estadistica-numero">8</div>
+          <div class="estadistica-label">Builds disponibles</div>
+        </div>
+        <div class="estadistica-card">
+          <div class="estadistica-numero" id="stat-completados">0</div>
+          <div class="estadistica-label">Completados por ti</div>
+        </div>
+      </div>
+
+      <div id="aviso-supabase" style="display:none;background:rgba(80,60,10,0.3);border:1px solid var(--borde-oro);border-radius:4px;padding:1rem;margin-bottom:1rem;color:var(--texto-suave)">
+        ⚠ Estás jugando sin cuenta. Tu progreso se guarda en este navegador.
+        <a onclick="navegarA('login')" href="#login" style="color:var(--oro)">Crea una cuenta</a> para sincronizarlo entre dispositivos.
+      </div>
+
+    </section>
+
+    <!-- ── GUÍA ── -->
+    <section class="seccion" id="seccion-guia">
+      <div class="seccion-header">
+        <h2>📜 Guía de Todos los Objetivos</h2>
+        <p>Marca los objetivos completados haciendo clic en el cuadro de la izquierda. El progreso se guarda automáticamente.</p>
+      </div>
+
+      <!-- Barra de progreso principal -->
+      <div style="background:var(--fondo-card);border:1px solid var(--borde-oro);border-radius:4px;padding:1rem;margin-bottom:1.5rem">
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem">
+          <span style="font-family:'Cinzel',serif;font-size:0.8rem;color:var(--oro)">Progreso Total</span>
+          <span id="texto-progreso-main" style="font-size:0.85rem;color:var(--texto-suave)">0% completado</span>
+        </div>
+        <div class="barra-progreso" style="height:10px">
+          <div class="barra-relleno" id="barra-relleno-main" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Búsqueda -->
+      <div class="buscador-container">
+        <span class="buscador-icono">🔍</span>
+        <input
+          type="search"
+          class="buscador"
+          id="buscador-guia"
+          placeholder="Buscar objetivo, jefe, región..."
+          oninput="renderizarGuia(filtroActivo, this.value)"
+        >
+      </div>
+
+      <!-- Filtros -->
+      <div class="filtros">
+        <button class="filtro-btn activo" onclick="filtrarObjetivos('todos')" data-filtro="todos">Todos</button>
+        <button class="filtro-btn" onclick="filtrarObjetivos('principal')" data-filtro="principal">Misión Principal</button>
+        <button class="filtro-btn" onclick="filtrarObjetivos('semidioses')" data-filtro="semidioses">Semidioses</button>
+        <button class="filtro-btn" onclick="filtrarObjetivos('opcionales')" data-filtro="opcionales">Opcionales</button>
+        <button class="filtro-btn" onclick="filtrarObjetivos('finales')" data-filtro="finales">Finales</button>
+      </div>
+
+      <!-- Objetivos -->
+      <div id="contenedor-objetivos">
+        <div class="cargando">
+          <div class="spinner"></div>
+          Cargando objetivos...
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BUILDS ── -->
+    <section class="seccion" id="seccion-builds">
+      <div class="seccion-header">
+        <h2>⚔ Guías de Builds</h2>
+        <p>Ocho builds completas con estadísticas, equipo recomendado y guía de progresión paso a paso.</p>
+      </div>
+
+      <div class="builds-grid" id="builds-grid">
+        <div class="cargando"><div class="spinner"></div> Cargando builds...</div>
+      </div>
+    </section>
+
+    <!-- ── PERFIL ── -->
+    <section class="seccion" id="seccion-perfil">
+      <div class="seccion-header">
+        <h2>👤 Mi Perfil y Progreso</h2>
+        <p>Estadísticas de tu avance en Las Tierras Intermedias.</p>
+      </div>
+      <div id="perfil-contenido"></div>
+    </section>
+
+    <!-- ── LOGIN ── -->
+    <section class="seccion" id="seccion-login">
+      <div class="auth-container">
+        <div class="auth-card">
+          <div class="auth-header">
+            <div class="auth-icon">⚔</div>
+            <h2>El Empañado</h2>
+            <p style="color:var(--texto-suave);font-style:italic;margin-top:0.3rem">Accede a tu cuenta para guardar tu progreso</p>
+          </div>
+
+          <div class="auth-tabs">
+            <button class="auth-tab activo" onclick="cambiarTab('login')">Iniciar sesión</button>
+            <button class="auth-tab" onclick="cambiarTab('registro')">Registrarse</button>
+          </div>
+
+          <!-- Login -->
+          <form class="auth-form activo" id="form-login" onsubmit="handleLogin(event)">
+            <div id="mensaje-login" class="auth-mensaje"></div>
+            <div class="form-grupo">
+              <label class="form-label" for="login-email">Correo electrónico</label>
+              <input type="email" id="login-email" class="form-input" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-grupo">
+              <label class="form-label" for="login-password">Contraseña</label>
+              <input type="password" id="login-password" class="form-input" placeholder="••••••••" required minlength="6">
+            </div>
+            <button type="submit" class="btn-submit" id="btn-submit-login">Entrar a Las Tierras Intermedias</button>
+          </form>
+
+          <!-- Registro -->
+          <form class="auth-form" id="form-registro" onsubmit="handleRegistro(event)">
+            <div id="mensaje-registro" class="auth-mensaje"></div>
+            <div class="form-grupo">
+              <label class="form-label" for="reg-nombre">Nombre de Empañado</label>
+              <input type="text" id="reg-nombre" class="form-input" placeholder="Tarnished" required>
+            </div>
+            <div class="form-grupo">
+              <label class="form-label" for="reg-email">Correo electrónico</label>
+              <input type="email" id="reg-email" class="form-input" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-grupo">
+              <label class="form-label" for="reg-password">Contraseña</label>
+              <input type="password" id="reg-password" class="form-input" placeholder="Mínimo 6 caracteres" required minlength="6">
+            </div>
+            <button type="submit" class="btn-submit" id="btn-submit-registro">Comenzar el Viaje</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══ MODAL DE BUILD ══ -->
+<div class="modal-overlay" id="modal-build" onclick="if(event.target===this)cerrarBuild()">
+  <div class="modal" id="modal-build-contenido"></div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toast-global"></div>
+
+<!-- ══ SCRIPTS ══ -->
+<script src="js/config.js"></script>
+<script src="data/objetivos.js"></script>
+<script src="data/builds.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/guia.js"></script>
+<script>
+// ══════════════════════════════════
+// APP PRINCIPAL
+// ══════════════════════════════════
+
+let seccionActual = "inicio";
+let filtroActivo = "todos";
+
+// ─── Navegación ───
+
+function navegarA(seccion) {
+  document.querySelectorAll(".seccion").forEach(s => s.classList.remove("activa"));
+  const el = document.getElementById(`seccion-${seccion}`);
+  if (el) el.classList.add("activa");
+
+  document.querySelectorAll(".sidebar-link").forEach(l => l.classList.remove("activo"));
+
+  seccionActual = seccion;
+
+  if (seccion === "guia") {
+    setTimeout(() => renderizarGuia(filtroActivo), 10);
+  } else if (seccion === "builds") {
+    renderizarBuilds();
+  } else if (seccion === "perfil") {
+    renderizarPerfil();
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function filtrarObjetivos(filtro) {
+  filtroActivo = filtro;
+  document.querySelectorAll(".filtro-btn").forEach(b => {
+    b.classList.toggle("activo", b.dataset.filtro === filtro);
+  });
+  const busqueda = document.getElementById("buscador-guia")?.value || "";
+  renderizarGuia(filtro, busqueda);
+}
+
+function buscarEnGuia(termino) {
+  const buscador = document.getElementById("buscador-guia");
+  if (buscador) {
+    buscador.value = termino;
+    renderizarGuia(filtroActivo, termino);
+  }
+}
+
+// ─── Auth handlers ───
+
+function cambiarTab(tab) {
+  document.querySelectorAll(".auth-tab").forEach((t, i) => {
+    t.classList.toggle("activo", (i === 0 && tab === "login") || (i === 1 && tab === "registro"));
+  });
+  document.getElementById("form-login").classList.toggle("activo", tab === "login");
+  document.getElementById("form-registro").classList.toggle("activo", tab === "registro");
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+  const btn = document.getElementById("btn-submit-login");
+  const msg = document.getElementById("mensaje-login");
+
+  btn.disabled = true;
+  btn.textContent = "Entrando...";
+  msg.className = "auth-mensaje";
+
+  if (!SUPABASE_CONFIGURADO) {
+    msg.textContent = "⚠ Supabase no está configurado todavía. Consulta las instrucciones de despliegue.";
+    msg.className = "auth-mensaje error";
+    btn.disabled = false;
+    btn.textContent = "Entrar a Las Tierras Intermedias";
+    return;
+  }
+
+  const { error } = await iniciarSesion(email, password);
+
+  if (error) {
+    msg.textContent = "Error: " + (error.message === "Invalid login credentials"
+      ? "Correo o contraseña incorrectos."
+      : error.message);
+    msg.className = "auth-mensaje error";
+    btn.disabled = false;
+    btn.textContent = "Entrar a Las Tierras Intermedias";
+  } else {
+    msg.textContent = "¡Bienvenido de vuelta, Empañado!";
+    msg.className = "auth-mensaje exito";
+    setTimeout(() => navegarA("perfil"), 1000);
+  }
+}
+
+async function handleRegistro(e) {
+  e.preventDefault();
+  const nombre = document.getElementById("reg-nombre").value;
+  const email = document.getElementById("reg-email").value;
+  const password = document.getElementById("reg-password").value;
+  const btn = document.getElementById("btn-submit-registro");
+  const msg = document.getElementById("mensaje-registro");
+
+  btn.disabled = true;
+  btn.textContent = "Comenzando viaje...";
+  msg.className = "auth-mensaje";
+
+  if (!SUPABASE_CONFIGURADO) {
+    msg.textContent = "⚠ Supabase no está configurado todavía. Consulta las instrucciones de despliegue.";
+    msg.className = "auth-mensaje error";
+    btn.disabled = false;
+    btn.textContent = "Comenzar el Viaje";
+    return;
+  }
+
+  const { error } = await registrar(email, password, nombre);
+
+  if (error) {
+    msg.textContent = "Error: " + error.message;
+    msg.className = "auth-mensaje error";
+    btn.disabled = false;
+    btn.textContent = "Comenzar el Viaje";
+  } else {
+    msg.textContent = "¡Cuenta creada! Revisa tu correo para confirmar el registro.";
+    msg.className = "auth-mensaje exito";
+    btn.disabled = false;
+    btn.textContent = "Comenzar el Viaje";
+  }
+}
+
+// ─── Inicialización ───
+
+document.addEventListener("DOMContentLoaded", async () => {
+  // Inicializar Supabase
+  inicializarSupabase();
+
+  // Escuchar cambios de auth
+  escucharAuth(async (event, usuario) => {
+    actualizarUIAuth(usuario);
+    if (usuario) {
+      await migrarProgresoLocal();
+    }
+    await aplicarProgresoUI();
+  });
+
+  // Contar objetivos totales
+  let total = 0;
+  total += OBJETIVOS.principales.length;
+  total += OBJETIVOS.semidioses.length;
+  Object.values(OBJETIVOS.opcionales).forEach(arr => {
+    if (Array.isArray(arr)) total += arr.length;
+  });
+  total += OBJETIVOS.finales.length;
+
+  const statTotal = document.getElementById("stat-total");
+  if (statTotal) statTotal.textContent = total;
+
+  // Mostrar aviso de modo sin cuenta si Supabase no está configurado
+  if (!SUPABASE_CONFIGURADO) {
+    const aviso = document.getElementById("aviso-supabase");
+    if (aviso) aviso.style.display = "block";
+  }
+
+  // Aplicar progreso inicial
+  const { completados } = await aplicarProgresoUI();
+  const statComp = document.getElementById("stat-completados");
+  if (statComp) statComp.textContent = completados;
+
+  // Manejar hash URL
+  const hash = window.location.hash.replace("#", "");
+  if (["guia", "builds", "perfil", "login"].includes(hash)) {
+    navegarA(hash);
+  }
+});
+</script>
+
+</body>
+</html>
