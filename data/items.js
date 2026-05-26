@@ -15,7 +15,7 @@ var ITEMS = {
       tipo: "Katana",
       escala: "Des / Int",
       descripcion: "Katana forjada con piedra Glintstone. Su habilidad Luz Transitoria dispara un haz de energía mágica que puede atravesar defensas.",
-      como_obtener: "Derrota al Wyrm de Magma en el Túnel de Gael, en la frontera entre Caélida y el Páramo de los Miembros. El acceso está desde la entrada este de Caélida.",
+      como_obtener: "Derrota al Wyrm de Magma en el Túnel de Gael, en la frontera entre Caélida y el Necrolimbo. El acceso está desde la entrada este de Caélida.",
       requisitos: "Des 18, Int 23",
       notas: "Una de las mejores armas para builds de magia cuerpo a cuerpo (DexInt). Su habilidad puede cancelarse rápidamente y genera mucha presión."
     },
@@ -26,7 +26,7 @@ var ITEMS = {
       tipo: "Katana",
       escala: "Des / Arc",
       descripcion: "Katana de hoja ondulante que inflige podredumbre de sangre de manera devastadora. Habilidad: Destello de Fuego y Sangre.",
-      como_obtener: "El invasor Okina del Dedo Ensangrentado aparece en las Cimas de los Gigantes, al este de la Iglesia de Reyes. Te la suelta al derrotarlo.",
+      como_obtener: "El invasor Okina del Dedo Ensangrentado aparece en los Picos de los Gigantes, al este de la Iglesia de Reyes. Te la suelta al derrotarlo.",
       requisitos: "Des 12, Arc 18",
       notas: "La habilidad dispara tres ataques de sangrado en cadena. Con alta Arcana, el sangrado se acumula extremadamente rápido. Imprescindible para builds de sangrado."
     },
@@ -81,7 +81,7 @@ var ITEMS = {
       tipo: "Gran Espada",
       escala: "Fue",
       descripcion: "Enorme espada forjada con cientos de espadas soldadas juntas. El jefe más difícil del Castillo Morne la porta.",
-      como_obtener: "Derrota al Leonino Aberrante, jefe del Castillo Morne en la Península Llorosa.",
+      como_obtener: "Derrota al Leonino Aberrante, jefe del Castillo Morne en la Península del Llanto.",
       requisitos: "Fue 40, Des 14",
       notas: "La habilidad Promesa Jurada otorga un buff temporal a todos los atributos. Ideal para builds de Fuerza pura."
     },
@@ -147,7 +147,7 @@ var ITEMS = {
       tipo: "Daga",
       escala: "Des",
       descripcion: "Daga de hoja dentada con daño crítico excepcional. El multiplicador de golpes críticos más alto de todas las dagas.",
-      como_obtener: "Se encuentra en un cofre en el Castillo Ventisquero, en la sala de celdas de la mazmorra.",
+      como_obtener: "Se encuentra en un cofre en el Castillo de Velo Tormentoso, en la sala de celdas de la mazmorra.",
       requisitos: "Des 11",
       notas: "Imprescindible para builds de golpes críticos. El multiplicador de crítico de 140 es el mayor de cualquier arma tipo daga."
     },
@@ -390,7 +390,7 @@ var ITEMS = {
       nombre_en: "Millicent's Prosthesis",
       tipo: "Talisman",
       descripcion: "La prótesis de Millicent convertida en talisman. Sube la Destreza en 5 y aumenta el ataque un 4% con cada golpe consecutivo (hasta 5 cargas).",
-      como_obtener: "Recompensa de la misión de Millicent, al completarla en el Árbol de Haligtree ayudándola.",
+      como_obtener: "Recompensa de la misión de Millicent, al completarla en el Árbol Hierático de Miquella ayudándola.",
       notas: "Muy poderoso para builds de Destreza. El bonus de golpes consecutivos puede alcanzar un +20% si se mantienen 5 cargas."
     },
     {
@@ -408,7 +408,7 @@ var ITEMS = {
       nombre_en: "Green Turtle Talisman",
       tipo: "Talisman",
       descripcion: "Aumenta significativamente la velocidad de recuperación de resistencia.",
-      como_obtener: "Se encuentra en las Catacumbas del Corredor (Summonwater Village), en el Páramo de los Miembros. La palanca está escondida.",
+      como_obtener: "Se encuentra en las Catacumbas del Corredor (Summonwater Village), en el Necrolimbo. La palanca está escondida.",
       notas: "Imprescindible para builds que hacen muchos ataques seguidos. La resistencia se recupera mucho más rápido al esquivar y atacar."
     },
     {
@@ -462,7 +462,7 @@ var ITEMS = {
       nombre_en: "Lightning Scorpion Charm",
       tipo: "Talisman",
       descripcion: "Aumenta el daño de rayo en un 12% pero también el daño físico recibido en un 10%.",
-      como_obtener: "Se encuentra en las Catacumbas del Descenso Seco (Páramo), escondido tras una pared falsa.",
+      como_obtener: "Se encuentra en las Catacumbas del Descenso Seco (Necrolimbo), escondido tras una pared falsa.",
       notas: "Ideal para builds de Rayo/Fe usando incantaciones de trueno o armas infundidas con Rayo."
     },
     {
@@ -507,7 +507,7 @@ var ITEMS = {
       nombre_en: "Graven-Mass Talisman",
       tipo: "Talisman",
       descripcion: "Aumenta el poder de los hechizos de sorcería en un 8%.",
-      como_obtener: "Se encuentra en Elphael, Brazo del Árbol de Haligtree (zona final del Árbol de Haligtree).",
+      como_obtener: "Se encuentra en Elphael, Brazo del Árbol Hierático de Miquella (zona final del Árbol Hierático de Miquella).",
       notas: "Mejor que el Talismán de Escolar. Si usas hechizos de forma regular, es una mejora directa del daño."
     },
     {
@@ -525,7 +525,7 @@ var ITEMS = {
       nombre_en: "Dagger Talisman",
       tipo: "Talisman",
       descripcion: "Aumenta el daño de golpe crítico en un 17%.",
-      como_obtener: "Se obtiene de un cofre en el Castillo Ventisquero (zona del primer gran jefe).",
+      como_obtener: "Se obtiene de un cofre en el Castillo de Velo Tormentoso (zona del primer gran jefe).",
       notas: "Fundamental para builds de golpe crítico junto con Misericordia. Los parries se convierten en golpes devastadores."
     }
   ],
@@ -540,7 +540,7 @@ var ITEMS = {
       nombre_en: "Dectus Medallion (Left)",
       tipo: "Objeto clave",
       descripcion: "Una mitad del Medallón Dectus. Junto con la otra mitad, activa el Gran Ascensor Dectus para subir a la Meseta de Altus.",
-      como_obtener: "Se encuentra en el Fuerte Haight, en el extremo este del Páramo de los Miembros. Está en la torre más alta del fuerte.",
+      como_obtener: "Se encuentra en el Fuerte Haight, en el extremo este del Necrolimbo. Está en la torre más alta del fuerte.",
       notas: "Necesitas ambas mitades para activar el ascensor. Sin ellas, debes escalar por el Camino del Arroyo de Raya Lúcida."
     },
     {
@@ -557,9 +557,9 @@ var ITEMS = {
       nombre: "Medallón de Haligtree (Mitad Izquierda)",
       nombre_en: "Haligtree Secret Medallion (Left)",
       tipo: "Objeto clave",
-      descripcion: "Una mitad del medallón secreto que accede al ascensor oculto del Gran Ascensor de Rold, que lleva al Campo Sagrado Nevado.",
-      como_obtener: "Se encuentra en el sótano de las Ruinas del Pueblo de los Cuatro Cruceros de Caminos (Península Llorosa). Baja al sótano con no-muertos.",
-      notas: "Necesaria para acceder a Malenia. La Península Llorosa es una zona opcional del inicio del juego."
+      descripcion: "Una mitad del medallón secreto que accede al ascensor oculto del Gran Ascensor de Rold, que lleva al Campo Sacroníveo.",
+      como_obtener: "Se encuentra en el sótano de las Ruinas del Pueblo de los Cuatro Cruceros de Caminos (Península del Llanto). Baja al sótano con no-muertos.",
+      notas: "Necesaria para acceder a Malenia. La Península del Llanto es una zona opcional del inicio del juego."
     },
     {
       id: "obj_004",
@@ -584,7 +584,7 @@ var ITEMS = {
       nombre: "Gran Medallón de Rold",
       nombre_en: "Great Rune of Rold",
       tipo: "Objeto clave",
-      descripcion: "El medallón que activa el Gran Ascensor de Rold, que sube a las Cimas de los Gigantes.",
+      descripcion: "El medallón que activa el Gran Ascensor de Rold, que sube a los Picos de los Gigantes.",
       como_obtener: "Recompensa obligatoria por derrotar a Morgott, el Rey Presagio en Leyndell.",
       notas: "Sin este medallón no puedes avanzar en la historia principal. Morgott lo entrega automáticamente al morir."
     },
@@ -594,7 +594,7 @@ var ITEMS = {
       nombre_en: "Margit's Shackle",
       tipo: "Objeto consumible",
       descripcion: "Al usarlas cerca de Margit o Morgott, los inmoviliza brevemente en el suelo. Solo funciona antes de que entren en su segunda fase.",
-      como_obtener: "Se compran a Patches en su tienda de la Cueva Pirática de Murkwater (Páramo), o en el Palacio de la Mesa Redonda más tarde. También en comerciantes de Altus.",
+      como_obtener: "Se compran a Patches en su tienda de la Cueva Pirática de Murkwater (Necrolimbo), o en el Palacio de la Mesa Redonda más tarde. También en comerciantes de Altus.",
       notas: "Muy útil para los primeros enfrentamientos con Margit. Úsalas cuando estén en medio de un combo largo."
     },
     {
@@ -621,7 +621,7 @@ var ITEMS = {
       nombre_en: "Unalloyed Gold Needle",
       tipo: "Objeto de misión",
       descripcion: "La aguja que sirve para cancelar la Llama Frenética si has recibido su señal, sin perder el final alternativo.",
-      como_obtener: "Recompensa por derrotar a Malenia en el Árbol de Haligtree y entregar la Flor de la Podredumbre. Se obtiene de forma transformada.",
+      como_obtener: "Recompensa por derrotar a Malenia en el Árbol Hierático de Miquella y entregar la Flor de la Podredumbre. Se obtiene de forma transformada.",
       notas: "Úsala en el Sitio de Gracia de la Llama Frenética ANTES del jefe final para cancelarla si has recibido la señal de los Tres Dedos pero quieres otro final."
     }
   ],
@@ -654,7 +654,7 @@ var ITEMS = {
       nombre_en: "Jellyfish Ashes",
       tipo: "Cenizas de espíritu",
       descripcion: "Una gran medusa fantasma flotante que envenena a los enemigos y tiene mucha vida. Antes de morir, da un grito que potencia tu ataque.",
-      como_obtener: "La entrega Roderika en el Refugio de los Peregrinos (Páramo de los Miembros). Habla con ella antes de que se vaya a la Mesa Redonda.",
+      como_obtener: "La entrega Roderika en el Refugio de los Peregrinos (Necrolimbo). Habla con ella antes de que se vaya a la Mesa Redonda.",
       notas: "Perfecta para principiantes por su facilidad de uso. El buff de ataque al morir es muy valioso en luchas largas."
     },
     {
@@ -663,7 +663,7 @@ var ITEMS = {
       nombre_en: "Skeletal Horseman Ashes",
       tipo: "Cenizas de espíritu",
       descripcion: "Un jinete espectral a caballo que usa ataques de rayos. Tiene una carga de caballería devastadora.",
-      como_obtener: "En las Catacumbas del Paso de la Tempestad (al norte del Páramo). La palanca está oculta en la zona de celdas.",
+      como_obtener: "En las Catacumbas del Paso de la Tempestad (al norte del Necrolimbo). La palanca está oculta en la zona de celdas.",
       notas: "Buena ceniza para distraer jefes grandes que son débiles al rayo. Tiene alcance de carga impresionante."
     },
     {
@@ -672,7 +672,7 @@ var ITEMS = {
       nombre_en: "Bloodhound Knight Floh Ashes",
       tipo: "Cenizas de espíritu",
       descripcion: "Un veloz caballero bestia que ataca con rapidez extrema y aplica sangrado.",
-      como_obtener: "En las Catacumbas del Héroe del Páramo (norte del Páramo de los Miembros). Derrota al jefe Doble Jinete Necrológico.",
+      como_obtener: "En las Catacumbas del Héroe del Necrolimbo (norte del Necrolimbo). Derrota al jefe Doble Jinete Necrológico.",
       notas: "Excelente para aplicar sangrado sobre jefes. La velocidad de ataque es alta y el sangrado se acumula rápido."
     },
     {
@@ -699,7 +699,7 @@ var ITEMS = {
       nombre_en: "Ancestral Follower Ashes",
       tipo: "Cenizas de espíritu",
       descripcion: "Un espíritu arquero ancestral que dispara flechas desde la distancia, manteniendo siempre una posición segura.",
-      como_obtener: "En las Catacumbas del Nómada de Siofra (bajo el Pozo del Siofra, en las zonas subterráneas del Páramo).",
+      como_obtener: "En las Catacumbas del Nómada de Siofra (bajo el Pozo del Siofra, en las zonas subterráneas del Necrolimbo).",
       notas: "Muy bueno para distraer mientras el espíritu hace daño continuo desde atrás. No arriesga mucho."
     },
     {
@@ -708,7 +708,7 @@ var ITEMS = {
       nombre_en: "Dragonkin Soldier Ashes",
       tipo: "Cenizas de espíritu",
       descripcion: "Un soldado draconiano masivo que usa ataques de rayo glacial. Tiene vida altísima y daño considerable.",
-      como_obtener: "En las Catacumbas de los Gigantes (Cimas de los Gigantes). Al final de la mazmorra.",
+      como_obtener: "En las Catacumbas de los Gigantes (Picos de los Gigantes). Al final de la mazmorra.",
       notas: "Uno de los espíritus más grandes y robustos. Excelente para mantener ocupados a jefes físicos grandes."
     },
     {
@@ -802,7 +802,7 @@ var ITEMS = {
       nombre_en: "Comet",
       tipo: "Hechizo (Sorcería)",
       descripcion: "El hechizo de proyectil mágico estándar pero muy potente. Carga para duplicar el daño.",
-      como_obtener: "Se compra a Sellen en la Ruina Cayda (Páramo de los Miembros). Es uno de los primeros hechizos disponibles.",
+      como_obtener: "Se compra a Sellen en la Ruina Cayda (Necrolimbo). Es uno de los primeros hechizos disponibles.",
       requisitos: "Int 36",
       notas: "La versión cargada hace el doble de daño. Buen equilibrio entre coste de FP y daño. Muy versátil."
     }
@@ -818,7 +818,7 @@ var ITEMS = {
       nombre_en: "Flame, Grant Me Strength",
       tipo: "Incantación",
       descripcion: "Aumenta el daño físico y de fuego en un 20% durante 30 segundos. Buff esencial para casi cualquier build.",
-      como_obtener: "Se encuentra en el Fuerte Gael, en el extremo este del Páramo de los Miembros. Está en un cadáver junto a dos perros.",
+      como_obtener: "Se encuentra en el Fuerte Gael, en el extremo este del Necrolimbo. Está en un cadáver junto a dos perros.",
       requisitos: "Fe 15",
       notas: "Uno de los mejores buffs del juego. No necesitas Fe alta para usarlo. Combinado con Voto Dorado, el daño es devastador."
     },
