@@ -217,7 +217,92 @@ function renderizarDetalles(objetivo) {
       </div>`;
   }
 
+  if (objetivo.combate) {
+    html += renderizarCombate(objetivo.combate);
+  }
+
   return html || '<div class="detalle-texto" style="color:var(--texto-suave)">Sin información adicional.</div>';
+}
+
+// ─── Renderizar datos de combate (resistencias/debilidades) ───
+
+const BADGE_MAP = {
+  "Fuego":              "fuego",
+  "Rayo":               "rayo",
+  "Magia":              "magia",
+  "Sagrado":            "sagrado",
+  "Sangrado":           "sangrado",
+  "Escarcha":           "escarcha",
+  "Veneno":             "veneno",
+  "Podredumbre Carmesí":"podredumbre",
+  "Podredumbre":        "podredumbre",
+  "Locura":             "locura",
+  "Sueño":              "inmune",
+  "Cortante":           "fisico",
+  "Contundente":        "fisico",
+  "Perforante":         "fisico",
+  "Físico":             "fisico",
+};
+
+function detectarClaseBadge(texto) {
+  const t = texto.toLowerCase();
+  if (t.includes("inmune")) return "inmune";
+  if (t.includes("fuego")) return "fuego";
+  if (t.includes("rayo") || t.includes("relámpago")) return "rayo";
+  if (t.includes("magia") || t.includes("mágic")) return "magia";
+  if (t.includes("sagrado")) return "sagrado";
+  if (t.includes("sangrado") || t.includes("hemorra")) return "sangrado";
+  if (t.includes("escarcha") || t.includes("hielo") || t.includes("frost")) return "escarcha";
+  if (t.includes("veneno")) return "veneno";
+  if (t.includes("podredumbre") || t.includes("carmesí") || t.includes("scarlet")) return "podredumbre";
+  if (t.includes("locura") || t.includes("madness")) return "locura";
+  if (t.includes("sueño") || t.includes("sleep")) return "inmune";
+  return "fisico";
+}
+
+function renderizarCombate(combate) {
+  const { debilidades, resistencias } = combate;
+
+  const renderBadges = (arr) => arr.map(item => {
+    const cls = detectarClaseBadge(item);
+    return `<span class="badge badge-${cls}">${item}</span>`;
+  }).join("");
+
+  let html = `
+    <div class="detalle-item">
+      <div class="detalle-label">⚔ Resistencias y Debilidades</div>
+      <div class="combate-seccion">`;
+
+  if (debilidades) {
+    const todosDebiles = [
+      ...(debilidades.dano || []),
+      ...(debilidades.estados || [])
+    ];
+    if (todosDebiles.length > 0) {
+      html += `
+        <div class="combate-grupo debilidades">
+          <div class="combate-grupo-titulo">↓ Débil a</div>
+          <div class="badges-row">${renderBadges(todosDebiles)}</div>
+        </div>`;
+    }
+  }
+
+  if (resistencias) {
+    const todosResist = [
+      ...(resistencias.dano || []),
+      ...(resistencias.estados || [])
+    ];
+    if (todosResist.length > 0) {
+      html += `
+        <div class="combate-grupo resistencias">
+          <div class="combate-grupo-titulo">↑ Resistente a</div>
+          <div class="badges-row">${renderBadges(todosResist)}</div>
+        </div>`;
+    }
+  }
+
+  html += `</div></div>`;
+  return html;
 }
 
 // ─── Toggle expandir/colapsar ───
@@ -476,4 +561,116 @@ async function renderizarPerfil() {
       </button>
     </div>
   `;
+}
+
+// ══════════════════════════════════
+// SECCIÓN DE ITEMS
+// ══════════════════════════════════
+
+const ITEMS_META = {
+  armas:       { icono: "⚔", label: "Armas",             css: "cat-armas" },
+  armaduras:   { icono: "🛡", label: "Armaduras",         css: "cat-armaduras" },
+  talismanes:  { icono: "💎", label: "Talismanes",        css: "cat-talismanes" },
+  objetos_clave:{ icono: "🔑", label: "Objeto Clave",     css: "cat-objetos" },
+  cenizas:     { icono: "👻", label: "Cenizas de espíritu", css: "cat-cenizas" },
+  hechizos:    { icono: "✨", label: "Hechizo",           css: "cat-hechizos" },
+  incantaciones:{ icono: "🔱", label: "Incantación",      css: "cat-incantaciones" },
+};
+
+function filtrarItems(cat) {
+  filtroItemsActivo = cat;
+  document.querySelectorAll(".items-cat-btn").forEach(b => {
+    b.classList.toggle("activo", b.dataset.cat === cat);
+  });
+  const busqueda = document.getElementById("buscador-items")?.value || "";
+  renderizarItems(cat, busqueda);
+}
+
+function renderizarItems(cat = "todos", busqueda = "") {
+  const grid = document.getElementById("items-grid");
+  if (!grid) return;
+
+  const termino = busqueda.toLowerCase().trim();
+
+  const categorias = cat === "todos"
+    ? Object.keys(ITEMS_META)
+    : [cat];
+
+  let tarjetas = [];
+
+  categorias.forEach(clave => {
+    const lista = ITEMS[clave];
+    if (!Array.isArray(lista)) return;
+    lista.forEach(item => {
+      if (termino && !(
+        item.nombre?.toLowerCase().includes(termino) ||
+        item.nombre_en?.toLowerCase().includes(termino) ||
+        item.descripcion?.toLowerCase().includes(termino) ||
+        item.como_obtener?.toLowerCase().includes(termino) ||
+        item.tipo?.toLowerCase().includes(termino)
+      )) return;
+      tarjetas.push({ ...item, _cat: clave });
+    });
+  });
+
+  if (tarjetas.length === 0) {
+    grid.innerHTML = `<div class="items-vacio">No se encontraron items para "<em>${busqueda}</em>"</div>`;
+    return;
+  }
+
+  grid.innerHTML = "";
+  tarjetas.forEach(item => {
+    grid.appendChild(crearCardItem(item));
+  });
+}
+
+function crearCardItem(item) {
+  const meta = ITEMS_META[item._cat] || { icono: "📦", label: item._cat, css: "" };
+  const card = document.createElement("div");
+  card.className = `item-card ${meta.css}`;
+
+  card.innerHTML = `
+    <div class="item-cabeza" onclick="toggleItem(this)">
+      <div class="item-icono-cat">${meta.icono}</div>
+      <div class="item-info-head">
+        <div class="item-nombre">${item.nombre}</div>
+        ${item.nombre_en ? `<div class="item-nombre-en">${item.nombre_en}</div>` : ""}
+        <div class="item-badges">
+          <span class="item-tipo-badge">${meta.label}</span>
+          ${item.tipo && item.tipo !== meta.label ? `<span class="item-tipo-badge">${item.tipo}</span>` : ""}
+          ${item.escala ? `<span class="item-tipo-badge" style="color:var(--oro);border-color:var(--borde-oro)">Escala: ${item.escala}</span>` : ""}
+        </div>
+      </div>
+      <div class="item-expandir">▾</div>
+    </div>
+    <div class="item-detalles">
+      ${item.descripcion ? `
+        <div class="item-detalle-row">
+          <div class="item-detalle-label">Descripción</div>
+          <div class="item-detalle-texto">${item.descripcion}</div>
+        </div>` : ""}
+      ${item.como_obtener ? `
+        <div class="item-detalle-row">
+          <div class="item-detalle-label">📍 Cómo obtenerlo</div>
+          <div class="item-obtener-box">${item.como_obtener}</div>
+        </div>` : ""}
+      ${item.requisitos ? `
+        <div class="item-detalle-row">
+          <div class="item-detalle-label">📋 Requisitos</div>
+          <div class="item-detalle-texto" style="color:var(--col-rayo)">${item.requisitos}</div>
+        </div>` : ""}
+      ${item.notas ? `
+        <div class="item-detalle-row">
+          <div class="item-detalle-label">💡 Notas</div>
+          <div class="item-notas-box">${item.notas}</div>
+        </div>` : ""}
+    </div>
+  `;
+
+  return card;
+}
+
+function toggleItem(cabeza) {
+  const card = cabeza.closest(".item-card");
+  card.classList.toggle("expandido");
 }

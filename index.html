@@ -27,6 +27,7 @@
 
     <nav class="header-nav">
       <a class="nav-btn" onclick="navegarA('guia')" href="#guia">📜 Guía</a>
+      <a class="nav-btn" onclick="navegarA('items')" href="#items">🎒 Items</a>
       <a class="nav-btn" onclick="navegarA('builds')" href="#builds">⚔ Builds</a>
       <a class="nav-btn" onclick="navegarA('perfil')" href="#perfil">👤 Mi Perfil</a>
       <a class="nav-btn btn-login" id="btn-login" onclick="navegarA('login')" href="#login">Iniciar sesión</a>
@@ -101,6 +102,25 @@
     </div>
 
     <div class="sidebar-section">
+      <div class="sidebar-title">Items</div>
+      <div class="sidebar-link" onclick="navegarA('items')">
+        <span class="icono">🎒</span> Todos los Items
+      </div>
+      <div class="sidebar-link" onclick="navegarA('items'); filtrarItems('armas')">
+        <span class="icono">⚔</span> Armas
+      </div>
+      <div class="sidebar-link" onclick="navegarA('items'); filtrarItems('talismanes')">
+        <span class="icono">💎</span> Talismanes
+      </div>
+      <div class="sidebar-link" onclick="navegarA('items'); filtrarItems('cenizas')">
+        <span class="icono">👻</span> Cenizas de Espíritu
+      </div>
+      <div class="sidebar-link" onclick="navegarA('items'); filtrarItems('objetos_clave')">
+        <span class="icono">🔑</span> Objetos Clave
+      </div>
+    </div>
+
+    <div class="sidebar-section">
       <div class="sidebar-title">Builds</div>
       <div class="sidebar-link" onclick="navegarA('builds')">
         <span class="icono">🛡</span> Todas las Builds
@@ -147,6 +167,11 @@
           <span class="icono-grande">🌙</span>
           <h3>Los 6 Finales</h3>
           <p>Cómo conseguir cada uno de los seis finales del juego, con todos los requisitos.</p>
+        </div>
+        <div class="inicio-card" onclick="navegarA('items')">
+          <span class="icono-grande">🎒</span>
+          <h3>Base de Items</h3>
+          <p>Armas, armaduras, talismanes, objetos clave y cenizas de espíritu. Dónde encontrar cada uno.</p>
         </div>
         <div class="inicio-card" onclick="navegarA('builds')">
           <span class="icono-grande">🛡</span>
@@ -248,6 +273,43 @@
       </div>
     </section>
 
+    <!-- ── ITEMS ── -->
+    <section class="seccion" id="seccion-items">
+      <div class="seccion-header">
+        <h2>🎒 Items del Juego</h2>
+        <p>Todos los items importantes de Elden Ring: dónde encontrarlos y cómo conseguirlos.</p>
+      </div>
+
+      <div class="items-filtros-wrap">
+        <!-- Buscador -->
+        <div class="buscador-container" style="margin-bottom:0">
+          <span class="buscador-icono">🔍</span>
+          <input
+            type="search"
+            class="buscador"
+            id="buscador-items"
+            placeholder="Buscar item, arma, talisman..."
+            oninput="renderizarItems(filtroItemsActivo, this.value)"
+          >
+        </div>
+        <!-- Categorías -->
+        <div class="items-categorias">
+          <button class="items-cat-btn activo" onclick="filtrarItems('todos')" data-cat="todos">Todos</button>
+          <button class="items-cat-btn" onclick="filtrarItems('armas')" data-cat="armas">⚔ Armas</button>
+          <button class="items-cat-btn" onclick="filtrarItems('armaduras')" data-cat="armaduras">🛡 Armaduras</button>
+          <button class="items-cat-btn" onclick="filtrarItems('talismanes')" data-cat="talismanes">💎 Talismanes</button>
+          <button class="items-cat-btn" onclick="filtrarItems('objetos_clave')" data-cat="objetos_clave">🔑 Objetos Clave</button>
+          <button class="items-cat-btn" onclick="filtrarItems('cenizas')" data-cat="cenizas">👻 Cenizas de Espíritu</button>
+          <button class="items-cat-btn" onclick="filtrarItems('hechizos')" data-cat="hechizos">✨ Hechizos</button>
+          <button class="items-cat-btn" onclick="filtrarItems('incantaciones')" data-cat="incantaciones">🔱 Incantaciones</button>
+        </div>
+      </div>
+
+      <div class="items-grid" id="items-grid">
+        <div class="cargando"><div class="spinner"></div> Cargando items...</div>
+      </div>
+    </section>
+
     <!-- ── PERFIL ── -->
     <section class="seccion" id="seccion-perfil">
       <div class="seccion-header">
@@ -322,6 +384,7 @@
 <script src="js/config.js"></script>
 <script src="data/objetivos.js"></script>
 <script src="data/builds.js"></script>
+<script src="data/items.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/progress.js"></script>
 <script src="js/guia.js"></script>
@@ -332,6 +395,7 @@
 
 let seccionActual = "inicio";
 let filtroActivo = "todos";
+let filtroItemsActivo = "todos";
 
 // ─── Navegación ───
 
@@ -348,6 +412,8 @@ function navegarA(seccion) {
     setTimeout(() => renderizarGuia(filtroActivo), 10);
   } else if (seccion === "builds") {
     renderizarBuilds();
+  } else if (seccion === "items") {
+    renderizarItems(filtroItemsActivo);
   } else if (seccion === "perfil") {
     renderizarPerfil();
   }
@@ -492,7 +558,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Manejar hash URL
   const hash = window.location.hash.replace("#", "");
-  if (["guia", "builds", "perfil", "login"].includes(hash)) {
+  if (["guia", "builds", "items", "perfil", "login"].includes(hash)) {
     navegarA(hash);
   }
 });

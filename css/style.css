@@ -8,20 +8,37 @@
   --oro: #c8a84b;
   --oro-claro: #e8c97a;
   --oro-oscuro: #8a6f2e;
-  --fondo: #0a0a0a;
-  --fondo-card: #111111;
-  --fondo-card2: #181818;
-  --borde: #2a2a2a;
+  --oro-brillante: #f0d880;
+  --fondo: #080808;
+  --fondo-card: #0f0f0f;
+  --fondo-card2: #161616;
+  --fondo-card3: #1c1c14;
+  --borde: #252525;
   --borde-oro: #3a2f10;
+  --borde-oro-claro: #5a4820;
   --texto: #d4c9a8;
   --texto-suave: #8a7f6a;
   --texto-titulo: #e8d5a3;
   --rojo: #8b2020;
   --verde: #2a5c3f;
+  --verde-claro: #3d8a5f;
   --azul: #1a3a5c;
+  /* Tipos de daño */
+  --col-fisico: #c0c0b8;
+  --col-fuego: #e8661a;
+  --col-rayo: #f0c820;
+  --col-magia: #5890f0;
+  --col-sagrado: #d4b870;
+  --col-sangrado: #c83828;
+  --col-escarcha: #68c0e0;
+  --col-veneno: #58b858;
+  --col-podredumbre: #c88828;
+  --col-locura: #9050c0;
   --transicion: all 0.25s ease;
-  --radio: 4px;
-  --sombra: 0 4px 20px rgba(0,0,0,0.6);
+  --radio: 5px;
+  --radio-lg: 8px;
+  --sombra: 0 6px 28px rgba(0,0,0,0.75);
+  --sombra-oro: 0 0 20px rgba(200,168,75,0.15);
 }
 
 * {
@@ -36,6 +53,9 @@ html {
 
 body {
   background: var(--fondo);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 40%, rgba(200,168,75,0.025) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 85% 70%, rgba(120,60,10,0.03) 0%, transparent 60%);
   color: var(--texto);
   font-family: 'Crimson Text', Georgia, serif;
   font-size: 17px;
@@ -75,8 +95,8 @@ a:hover { color: var(--oro-claro); }
 /* ─── Header ─── */
 header {
   grid-column: 1 / -1;
-  background: linear-gradient(180deg, #050505 0%, #0f0a00 100%);
-  border-bottom: 2px solid var(--borde-oro);
+  background: linear-gradient(180deg, #030303 0%, #0c0800 100%);
+  border-bottom: 1px solid var(--borde-oro);
   padding: 0 2rem;
   display: flex;
   align-items: center;
@@ -85,7 +105,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 30px rgba(200, 168, 75, 0.15);
+  box-shadow: 0 1px 0 rgba(200,168,75,0.3), 0 4px 40px rgba(0,0,0,0.8), 0 0 60px rgba(200,168,75,0.05);
 }
 
 .logo {
@@ -304,16 +324,22 @@ main {
 }
 
 .grupo-titulo {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--oro);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--borde);
+  padding: 0.6rem 0;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+}
+
+.grupo-titulo::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--borde-oro), transparent);
 }
 
 .objetivo-card {
@@ -323,11 +349,13 @@ main {
   margin-bottom: 0.75rem;
   transition: var(--transicion);
   overflow: hidden;
+  position: relative;
 }
 
 .objetivo-card:hover {
-  border-color: var(--borde-oro);
-  box-shadow: var(--sombra);
+  border-color: var(--borde-oro-claro);
+  box-shadow: var(--sombra), 0 0 0 1px rgba(200,168,75,0.08), 0 0 30px rgba(200,168,75,0.06);
+  background: #111108;
 }
 
 .objetivo-card.completado {
@@ -565,9 +593,9 @@ main {
 }
 
 .build-card:hover {
-  border-color: var(--borde-oro);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(200, 168, 75, 0.15);
+  border-color: var(--borde-oro-claro);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.7), var(--sombra-oro);
 }
 
 .build-header {
@@ -979,42 +1007,63 @@ main {
 }
 
 .estadistica-card {
-  background: var(--fondo-card);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio);
-  padding: 1.2rem;
+  background: linear-gradient(135deg, var(--fondo-card) 0%, var(--fondo-card3) 100%);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio-lg);
+  padding: 1.4rem;
   text-align: center;
+  box-shadow: inset 0 1px 0 rgba(200,168,75,0.08);
 }
 
 .estadistica-numero {
   font-family: 'Cinzel', serif;
-  font-size: 2rem;
-  color: var(--oro);
-  font-weight: 700;
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, var(--oro-claro), var(--oro));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
 }
 
 .estadistica-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--texto-suave);
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
+  letter-spacing: 0.03em;
 }
 
 /* ─── Página de Inicio ─── */
 .inicio-hero {
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 4rem 2rem;
   margin-bottom: 3rem;
-  background: radial-gradient(ellipse at center top, rgba(200,168,75,0.08) 0%, transparent 70%);
+  background:
+    radial-gradient(ellipse 70% 80% at center top, rgba(200,168,75,0.1) 0%, transparent 65%),
+    linear-gradient(180deg, transparent, rgba(0,0,0,0.3));
   border-bottom: 1px solid var(--borde-oro);
+  position: relative;
+}
+
+.inicio-hero::before {
+  content: '⚔';
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  opacity: 0.2;
+  color: var(--oro);
 }
 
 .inicio-hero h2 {
-  font-size: 2.5rem;
-  background: linear-gradient(135deg, var(--oro-claro), var(--oro), var(--oro-oscuro));
+  font-size: 2.8rem;
+  background: linear-gradient(135deg, var(--oro-brillante) 0%, var(--oro-claro) 40%, var(--oro) 70%, var(--oro-oscuro) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1rem;
+  text-shadow: none;
+  letter-spacing: 0.04em;
 }
 
 .inicio-hero p {
@@ -1033,20 +1082,35 @@ main {
 }
 
 .inicio-card {
-  background: var(--fondo-card);
+  background: linear-gradient(135deg, var(--fondo-card) 0%, #0d0d08 100%);
   border: 1px solid var(--borde);
-  border-radius: var(--radio);
-  padding: 1.5rem;
+  border-radius: var(--radio-lg);
+  padding: 1.8rem 1.5rem;
   cursor: pointer;
   transition: var(--transicion);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.inicio-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(200,168,75,0.04));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.inicio-card:hover::after {
+  opacity: 1;
 }
 
 .inicio-card:hover {
-  border-color: var(--borde-oro);
-  background: var(--fondo-card2);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(200, 168, 75, 0.12);
+  border-color: var(--borde-oro-claro);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,168,75,0.1), var(--sombra-oro);
 }
 
 .inicio-card .icono-grande {
@@ -1216,4 +1280,300 @@ main {
   padding: 3rem;
   color: var(--texto-suave);
   font-style: italic;
+}
+
+/* ═══════════════════════════════════════════
+   BADGES DE TIPOS DE DAÑO Y RESISTENCIAS
+   ═══════════════════════════════════════════ */
+
+.combate-seccion {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.combate-grupo {
+  background: rgba(0,0,0,0.3);
+  border-radius: var(--radio);
+  padding: 0.7rem 0.9rem;
+}
+
+.combate-grupo-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.combate-grupo.debilidades .combate-grupo-titulo {
+  color: #e07070;
+  border-bottom: 1px solid rgba(224,112,112,0.2);
+  padding-bottom: 0.3rem;
+}
+
+.combate-grupo.resistencias .combate-grupo-titulo {
+  color: #70b0e0;
+  border-bottom: 1px solid rgba(112,176,224,0.2);
+  padding-bottom: 0.3rem;
+}
+
+.badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 3px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.badge-fisico    { background: rgba(192,192,184,0.1); color: var(--col-fisico);    border-color: rgba(192,192,184,0.25); }
+.badge-fuego     { background: rgba(232,102,26,0.12); color: var(--col-fuego);     border-color: rgba(232,102,26,0.3);  }
+.badge-rayo      { background: rgba(240,200,32,0.1);  color: var(--col-rayo);      border-color: rgba(240,200,32,0.3);  }
+.badge-magia     { background: rgba(88,144,240,0.1);  color: var(--col-magia);     border-color: rgba(88,144,240,0.3);  }
+.badge-sagrado   { background: rgba(212,184,112,0.1); color: var(--col-sagrado);   border-color: rgba(212,184,112,0.3); }
+.badge-sangrado  { background: rgba(200,56,40,0.12);  color: var(--col-sangrado);  border-color: rgba(200,56,40,0.3);   }
+.badge-escarcha  { background: rgba(104,192,224,0.1); color: var(--col-escarcha);  border-color: rgba(104,192,224,0.3); }
+.badge-veneno    { background: rgba(88,184,88,0.1);   color: var(--col-veneno);    border-color: rgba(88,184,88,0.3);   }
+.badge-podredumbre { background: rgba(200,136,40,0.1); color: var(--col-podredumbre); border-color: rgba(200,136,40,0.3); }
+.badge-locura    { background: rgba(144,80,192,0.1);  color: var(--col-locura);    border-color: rgba(144,80,192,0.3);  }
+.badge-inmune    { background: rgba(100,100,100,0.1); color: #888; border-color: rgba(100,100,100,0.25); }
+
+/* ═══════════════════════════════════════════
+   SECCIÓN DE ITEMS
+   ═══════════════════════════════════════════ */
+
+.items-filtros-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.items-categorias {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.items-cat-btn {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--texto-suave);
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  letter-spacing: 0.05em;
+}
+
+.items-cat-btn:hover {
+  border-color: var(--borde-oro);
+  color: var(--texto-titulo);
+}
+
+.items-cat-btn.activo {
+  background: var(--borde-oro);
+  border-color: var(--oro);
+  color: var(--oro-claro);
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.item-card {
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transicion);
+  position: relative;
+}
+
+.item-card:hover {
+  border-color: var(--borde-oro-claro);
+  box-shadow: var(--sombra), var(--sombra-oro);
+}
+
+.item-card.expandido {
+  border-color: var(--borde-oro);
+}
+
+.item-cabeza {
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.item-icono-cat {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.cat-armas     .item-icono-cat { background: rgba(200,56,40,0.15);   border: 1px solid rgba(200,56,40,0.3);   }
+.cat-armaduras .item-icono-cat { background: rgba(88,144,240,0.12);  border: 1px solid rgba(88,144,240,0.25); }
+.cat-talismanes .item-icono-cat { background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.3); }
+.cat-objetos   .item-icono-cat { background: rgba(88,184,88,0.12);   border: 1px solid rgba(88,184,88,0.25);  }
+.cat-cenizas   .item-icono-cat { background: rgba(144,80,192,0.12);  border: 1px solid rgba(144,80,192,0.25); }
+.cat-hechizos  .item-icono-cat { background: rgba(88,144,240,0.12);  border: 1px solid rgba(88,144,240,0.25); }
+.cat-incantaciones .item-icono-cat { background: rgba(212,184,112,0.12); border: 1px solid rgba(212,184,112,0.25); }
+
+.item-info-head {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-nombre {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--texto-titulo);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.item-nombre-en {
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  font-style: italic;
+}
+
+.item-badges {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+}
+
+.item-tipo-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.45rem;
+  border-radius: 2px;
+  background: var(--fondo-card2);
+  border: 1px solid var(--borde);
+  color: var(--texto-suave);
+}
+
+.item-expandir {
+  font-size: 1rem;
+  color: var(--texto-suave);
+  transition: var(--transicion);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.item-card.expandido .item-expandir {
+  transform: rotate(180deg);
+  color: var(--oro);
+}
+
+.item-detalles {
+  display: none;
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--borde);
+  animation: fadeIn 0.2s ease;
+}
+
+.item-card.expandido .item-detalles {
+  display: block;
+}
+
+.item-detalle-row {
+  margin-top: 0.7rem;
+}
+
+.item-detalle-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  color: var(--oro);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+
+.item-detalle-texto {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.item-obtener-box {
+  background: rgba(88,184,88,0.05);
+  border: 1px solid rgba(88,184,88,0.2);
+  border-left: 3px solid rgba(88,184,88,0.5);
+  border-radius: 0 var(--radio) var(--radio) 0;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.item-notas-box {
+  background: rgba(200,168,75,0.04);
+  border: 1px solid var(--borde-oro);
+  border-left: 3px solid var(--oro-oscuro);
+  border-radius: 0 var(--radio) var(--radio) 0;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--texto-suave);
+}
+
+.items-vacio {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem;
+  color: var(--texto-suave);
+  font-style: italic;
+}
+
+/* ─── Separador ornamental mejorado ─── */
+.ornamento {
+  text-align: center;
+  color: var(--oro);
+  font-size: 0.85rem;
+  letter-spacing: 0.5em;
+  margin: 2.5rem 0;
+  opacity: 0.35;
+  font-family: 'Cinzel', serif;
+}
+
+/* ─── Sidebar mejorado ─── */
+.sidebar {
+  background: linear-gradient(180deg, #0a0a07 0%, #080807 100%);
+  border-right: 1px solid var(--borde-oro);
+  padding: 1.5rem 0;
+  height: calc(100vh - 64px);
+  position: sticky;
+  top: 64px;
+  overflow-y: auto;
 }
