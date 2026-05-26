@@ -568,13 +568,14 @@ async function renderizarPerfil() {
 // ══════════════════════════════════
 
 const ITEMS_META = {
-  armas:       { icono: "⚔", label: "Armas",             css: "cat-armas" },
-  armaduras:   { icono: "🛡", label: "Armaduras",         css: "cat-armaduras" },
-  talismanes:  { icono: "💎", label: "Talismanes",        css: "cat-talismanes" },
-  objetos_clave:{ icono: "🔑", label: "Objeto Clave",     css: "cat-objetos" },
-  cenizas:     { icono: "👻", label: "Cenizas de espíritu", css: "cat-cenizas" },
-  hechizos:    { icono: "✨", label: "Hechizo",           css: "cat-hechizos" },
-  incantaciones:{ icono: "🔱", label: "Incantación",      css: "cat-incantaciones" },
+  armas:        { icono: "⚔",  label: "Armas",               css: "cat-armas" },
+  armaduras:    { icono: "🛡",  label: "Armaduras",            css: "cat-armaduras" },
+  talismanes:   { icono: "💎",  label: "Talismanes",           css: "cat-talismanes" },
+  objetos_clave:{ icono: "🔑",  label: "Objeto Clave",         css: "cat-objetos" },
+  cenizas:      { icono: "👻",  label: "Cenizas de espíritu",  css: "cat-cenizas" },
+  hechizos:     { icono: "✨",  label: "Hechizo",              css: "cat-hechizos" },
+  incantaciones:{ icono: "🔱",  label: "Incantación",          css: "cat-incantaciones" },
+  consumibles:  { icono: "🧪",  label: "Consumible",           css: "cat-consumibles" },
 };
 
 function filtrarItems(cat) {
@@ -642,7 +643,7 @@ function crearCardItem(item) {
   card.innerHTML = `
     <div class="item-cabeza" onclick="toggleItem(this)">
       ${item.imagen
-        ? `<img src="${item.imagen}" alt="${item.nombre}" class="item-img-icon" loading="lazy">`
+        ? `<img src="${item.imagen}" alt="${item.nombre}" class="item-img-icon" loading="lazy" onerror="this.outerHTML='<div class=\\'item-icono-cat\\'>${meta.icono}</div>'">`
         : `<div class="item-icono-cat">${meta.icono}</div>`}
       <div class="item-info-head">
         <div class="item-nombre">${item.nombre}</div>

@@ -121,12 +121,13 @@ header {
 }
 
 .logo-img {
-  height: 52px;
+  height: 34px;
   width: auto;
-  border-radius: 6px;
+  max-width: 90px;
+  border-radius: 5px;
   border: 1px solid var(--borde-oro);
-  box-shadow: 0 0 16px rgba(200,168,75,0.3);
-  object-fit: cover;
+  box-shadow: 0 0 12px rgba(200,168,75,0.25);
+  object-fit: contain;
 }
 
 /* ─── Login gate: elementos visibles solo con sesión ─── */
@@ -1551,6 +1552,7 @@ main {
 .cat-cenizas   .item-icono-cat { background: rgba(144,80,192,0.12);  border: 1px solid rgba(144,80,192,0.25); }
 .cat-hechizos  .item-icono-cat { background: rgba(88,144,240,0.12);  border: 1px solid rgba(88,144,240,0.25); }
 .cat-incantaciones .item-icono-cat { background: rgba(212,184,112,0.12); border: 1px solid rgba(212,184,112,0.25); }
+.cat-consumibles .item-icono-cat  { background: rgba(80,200,120,0.12);  border: 1px solid rgba(80,200,120,0.25);  }
 
 .item-info-head {
   flex: 1;
