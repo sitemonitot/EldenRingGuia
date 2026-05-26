@@ -2138,3 +2138,312 @@ main {
   font-family: 'Cinzel', serif;
   text-align: center;
 }
+
+/* ══════════════════════════════════
+   PERFIL — PESTAÑAS
+══════════════════════════════════ */
+
+.perfil-tabs-wrap {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--borde-oro);
+}
+
+.perfil-tab {
+  padding: 0.6rem 1.3rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--texto-suave);
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+
+.perfil-tab:hover { color: var(--texto); }
+
+.perfil-tab.activo {
+  color: var(--oro-claro);
+  border-bottom-color: var(--oro);
+}
+
+/* ══════════════════════════════════
+   SISTEMA SOCIAL
+══════════════════════════════════ */
+
+.social-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.social-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--oro);
+  margin: 0 0 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.social-form-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.social-input {
+  flex: 1;
+  min-width: 160px;
+  padding: 0.5rem 0.8rem;
+  background: var(--fondo-card2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  color: var(--texto);
+  font-size: 0.9rem;
+  font-family: 'Crimson Text', serif;
+}
+
+.social-input:focus {
+  outline: none;
+  border-color: var(--oro);
+}
+
+.btn-social {
+  padding: 0.5rem 1rem;
+  background: var(--fondo-card3);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio);
+  color: var(--oro-claro);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  white-space: nowrap;
+}
+
+.btn-social:hover { background: var(--oro-oscuro); }
+
+.btn-social.btn-verde {
+  border-color: rgba(80,180,80,0.5);
+  color: #88c088;
+}
+
+.btn-social.btn-verde:hover { background: rgba(80,180,80,0.15); }
+
+.btn-social.btn-rojo {
+  border-color: rgba(180,60,40,0.5);
+  color: #e07060;
+}
+
+.btn-social.btn-rojo:hover { background: rgba(180,60,40,0.15); }
+
+.btn-social.btn-sm {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.7rem;
+}
+
+.social-feedback {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  min-height: 1.2em;
+}
+
+.social-feedback.exito { color: #88c088; }
+.social-feedback.error { color: #e07060; }
+
+.social-grupo-bloque {
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  padding: 1rem 1.2rem;
+}
+
+.social-grupo-acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .social-grupo-acciones { grid-template-columns: 1fr; }
+}
+
+.social-accion-bloque {
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  padding: 1rem 1.2rem;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radio);
+  background: var(--fondo-card2);
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.social-card.solicitud-card { border-left: 3px solid var(--borde-oro); }
+.social-card.social-yo { border-left: 3px solid var(--oro); }
+
+.social-acciones { display: flex; gap: 0.4rem; margin-left: auto; }
+
+.social-amigo-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 100px;
+}
+
+.social-username {
+  font-size: 0.9rem;
+  color: var(--texto-titulo);
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+}
+
+.social-titulo-small {
+  font-size: 0.72rem;
+  color: var(--oro);
+  font-style: italic;
+}
+
+.social-progreso-mini {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 80px;
+}
+
+.social-barra-bg {
+  flex: 1;
+  height: 5px;
+  background: var(--fondo-card2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.social-barra-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--oro-oscuro), var(--oro));
+  border-radius: 3px;
+}
+
+.social-pct {
+  font-size: 0.8rem;
+  color: var(--oro);
+  font-family: 'Cinzel', serif;
+  min-width: 32px;
+  text-align: right;
+}
+
+.social-vacio {
+  color: var(--texto-suave);
+  font-style: italic;
+  font-size: 0.88rem;
+  padding: 0.5rem 0;
+}
+
+.social-setup-msg {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--fondo-card);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio-lg);
+}
+
+.social-setup-msg h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--oro);
+  margin-bottom: 0.8rem;
+}
+
+.social-setup-msg p {
+  color: var(--texto-suave);
+  margin-bottom: 1rem;
+}
+
+/* ── Grupos ── */
+
+.grupo-card {
+  background: var(--fondo-card);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+
+.grupo-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  background: var(--fondo-card2);
+  border-bottom: 1px solid var(--borde);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.grupo-nombre {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  color: var(--oro-claro);
+}
+
+.grupo-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.grupo-codigo-label { font-size: 0.78rem; color: var(--texto-suave); }
+
+.grupo-codigo {
+  background: var(--fondo-card3);
+  border: 1px solid var(--borde-oro);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.82rem;
+  color: var(--oro);
+  letter-spacing: 0.05em;
+}
+
+.btn-copiar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.1rem 0.2rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.btn-copiar:hover { opacity: 1; }
+
+.grupo-miembros-lista { padding: 0.5rem 0.8rem 0.8rem; }
+
+/* ── SQL modal ── */
+
+.sql-block {
+  background: #0d0d0d;
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio);
+  padding: 1rem;
+  font-size: 0.72rem;
+  color: #c8a84b;
+  overflow-x: auto;
+  max-height: 40vh;
+  overflow-y: auto;
+  white-space: pre;
+  line-height: 1.5;
+  font-family: 'Courier New', monospace;
+}
