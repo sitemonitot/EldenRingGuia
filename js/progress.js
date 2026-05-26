@@ -200,16 +200,22 @@ function calcularTitulo(completados, total) {
   return "Empañado";
 }
 
-// ─── Foto de perfil (localStorage) ───
+// ─── Foto de perfil (localStorage, clave por usuario) ───
 
-const CLAVE_FOTO = "eldenguide_foto_perfil";
+function claveFoto() {
+  return usuarioActual ? `eldenguide_foto_${usuarioActual.id}` : null;
+}
 
 function guardarFotoLocal(dataUrl) {
-  try { localStorage.setItem(CLAVE_FOTO, dataUrl); } catch(e) { console.warn("No se pudo guardar la foto:", e); }
+  const clave = claveFoto();
+  if (!clave) return;
+  try { localStorage.setItem(clave, dataUrl); } catch(e) { console.warn("No se pudo guardar la foto:", e); }
 }
 
 function obtenerFotoLocal() {
-  try { return localStorage.getItem(CLAVE_FOTO); } catch { return null; }
+  const clave = claveFoto();
+  if (!clave) return null;
+  try { return localStorage.getItem(clave); } catch { return null; }
 }
 
 // ─── Reiniciar todo el progreso ───

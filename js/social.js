@@ -109,8 +109,12 @@ async function tablasSocialesExisten() {
   if (!supabaseClient) return false;
   try {
     const { error } = await supabaseClient.from("perfiles_usuario").select("user_id").limit(1);
-    // 42P01 = tabla no existe; PGRST116 es "no rows" (OK)
-    if (error && (error.code === "42P01" || error.message?.includes("does not exist"))) return false;
+    if (!error) return true;
+    // PGRST116 = 0 filas (tabla existe pero está vacía) → OK
+    if (error.code === "PGRST116") return true;
+    // 42P01 = tabla no existe
+    if (error.code === "42P01" || error.message?.includes("does not exist")) return false;
+    // Cualquier otro error (RLS, auth) → la tabla existe pero hay restricción
     return true;
   } catch (_) {
     return false;
