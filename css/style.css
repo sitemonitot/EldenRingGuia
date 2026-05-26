@@ -117,19 +117,56 @@ header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.6rem 0;
 }
 
-.logo-icon {
-  width: 48px;
-  height: 48px;
-  background: radial-gradient(circle, var(--oro) 0%, var(--oro-oscuro) 60%, transparent 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: 0 0 20px rgba(200, 168, 75, 0.4);
+.logo-img {
+  height: 52px;
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid var(--borde-oro);
+  box-shadow: 0 0 16px rgba(200,168,75,0.3);
+  object-fit: cover;
+}
+
+/* ─── Login gate: elementos visibles solo con sesión ─── */
+.nav-protegido { display: none; }
+.sesion-activa .nav-protegido { display: inline-flex; }
+.sesion-activa #btn-login { display: none !important; }
+
+/* ─── Pantalla de bienvenida (sin sesión) ─── */
+.login-gate {
+  display: none;
+  text-align: center;
+  padding: 5rem 2rem;
+}
+.login-gate.visible { display: block; }
+.login-gate h2 {
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, var(--oro-brillante), var(--oro));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+.login-gate p { color: var(--texto-suave); font-size: 1.1rem; margin-bottom: 2rem; font-style: italic; }
+.btn-acceder {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  background: linear-gradient(135deg, var(--oro-oscuro), #5a4010);
+  border: 1px solid var(--oro);
+  border-radius: var(--radio);
+  color: var(--oro-claro);
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  letter-spacing: 0.05em;
+}
+.btn-acceder:hover {
+  background: linear-gradient(135deg, var(--oro), var(--oro-oscuro));
+  color: #000;
+  box-shadow: 0 0 25px rgba(200,168,75,0.3);
 }
 
 .logo-text h1 {
@@ -1457,6 +1494,17 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
+}
+
+.item-img-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--borde-oro);
+  flex-shrink: 0;
+  padding: 2px;
 }
 
 .item-card {

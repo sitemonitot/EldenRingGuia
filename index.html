@@ -18,18 +18,18 @@
   <!-- ══ HEADER ══ -->
   <header>
     <div class="logo" onclick="navegarA('inicio')" style="cursor:pointer">
-      <div class="logo-icon">⚔</div>
+      <img src="img/logo.jpeg" alt="Elden Ring" class="logo-img">
       <div class="logo-text">
         <h1>Elden Guide</h1>
         <span>Guía Completa en Español</span>
       </div>
     </div>
 
-    <nav class="header-nav">
-      <a class="nav-btn" onclick="navegarA('guia')" href="#guia">📜 Guía</a>
-      <a class="nav-btn" onclick="navegarA('items')" href="#items">🎒 Items</a>
-      <a class="nav-btn" onclick="navegarA('builds')" href="#builds">⚔ Builds</a>
-      <a class="nav-btn" onclick="navegarA('perfil')" href="#perfil">👤 Mi Perfil</a>
+    <nav class="header-nav" id="nav-principal">
+      <a class="nav-btn nav-protegido" onclick="navegarA('guia')" href="#guia">📜 Guía</a>
+      <a class="nav-btn nav-protegido" onclick="navegarA('items')" href="#items">🎒 Items</a>
+      <a class="nav-btn nav-protegido" onclick="navegarA('builds')" href="#builds">⚔ Builds</a>
+      <a class="nav-btn nav-protegido" onclick="navegarA('perfil')" href="#perfil">👤 Mi Perfil</a>
       <a class="nav-btn btn-login" id="btn-login" onclick="navegarA('login')" href="#login">Iniciar sesión</a>
 
       <div class="user-info" id="user-info" style="display:none">
@@ -131,6 +131,14 @@
 
   <!-- ══ MAIN ══ -->
   <main>
+
+    <!-- ── LOGIN GATE (sin sesión) ── -->
+    <div class="login-gate" id="login-gate">
+      <img src="img/logo.jpeg" alt="Elden Ring" style="height:120px;width:auto;border-radius:10px;border:2px solid var(--borde-oro);box-shadow:0 0 40px rgba(200,168,75,0.3);margin-bottom:2rem;">
+      <h2>Las Tierras Intermedias te esperan</h2>
+      <p>Inicia sesión para acceder a la guía completa, los items,<br>las builds y guardar tu progreso.</p>
+      <button class="btn-acceder" onclick="navegarA('login')">⚔ Iniciar sesión / Registrarse</button>
+    </div>
 
     <!-- ── INICIO ── -->
     <section class="seccion activa" id="seccion-inicio">
@@ -384,6 +392,7 @@
 <script src="data/objetivos.js"></script>
 <script src="data/builds.js"></script>
 <script src="data/items.js"></script>
+<script src="data/items_extra.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/progress.js"></script>
 <script src="js/guia.js"></script>
@@ -398,7 +407,14 @@ let filtroItemsActivo = "todos";
 
 // ─── Navegación ───
 
+const SECCIONES_PROTEGIDAS = ["guia", "items", "builds", "perfil"];
+
 function navegarA(seccion) {
+  // Bloquear secciones protegidas si no hay sesión
+  if (SECCIONES_PROTEGIDAS.includes(seccion) && !usuarioActual) {
+    navegarA("login");
+    return;
+  }
   document.querySelectorAll(".seccion").forEach(s => s.classList.remove("activa"));
   const el = document.getElementById(`seccion-${seccion}`);
   if (el) el.classList.add("activa");
