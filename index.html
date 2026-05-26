@@ -498,7 +498,13 @@ function navegarA(seccion) {
 
   seccionActual = seccion;
 
-  if (seccion === "pasos") {
+  if (seccion === "login") {
+    // Limpiar estado previo del formulario de login
+    const msgLogin = document.getElementById("mensaje-login");
+    const btnSubmit = document.getElementById("btn-submit-login");
+    if (msgLogin) { msgLogin.textContent = ""; msgLogin.className = "auth-mensaje"; }
+    if (btnSubmit) { btnSubmit.disabled = false; btnSubmit.textContent = "Entrar a Las Tierras Intermedias"; }
+  } else if (seccion === "pasos") {
     setTimeout(() => renderizarPasos("todos"), 10);
   } else if (seccion === "guia") {
     setTimeout(() => renderizarGuia(filtroActivo), 10);
@@ -583,6 +589,7 @@ async function handleLogin(e) {
     }
     msg.textContent = "¡Bienvenido de vuelta!";
     msg.className = "auth-mensaje exito";
+    btn.disabled = false;
     btn.textContent = "Entrar a Las Tierras Intermedias";
     setTimeout(() => navegarA("perfil"), 700);
   }
