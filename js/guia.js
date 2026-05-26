@@ -517,6 +517,15 @@ function nombreStat(stat) {
 // RENDERIZADO DEL PERFIL
 // ══════════════════════════════════
 
+function cambiarTabPerfil(tab) {
+  document.querySelectorAll(".perfil-tab").forEach(t => {
+    t.classList.toggle("activo", t.dataset.tab === tab);
+  });
+  if (tab === "progreso") renderizarPerfil();
+  else if (tab === "amigos")  renderizarAmigos();
+  else if (tab === "grupos")  renderizarGrupos();
+}
+
 async function renderizarPerfil() {
   const perfil = document.getElementById("seccion-perfil");
   if (!perfil) return;

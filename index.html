@@ -345,7 +345,12 @@
     <section class="seccion" id="seccion-perfil">
       <div class="seccion-header">
         <h2>👤 Mi Perfil y Progreso</h2>
-        <p>Estadísticas de tu avance en Las Tierras Intermedias.</p>
+        <p>Estadísticas, amigos y grupos — todo tu mundo en Las Tierras Intermedias.</p>
+      </div>
+      <div class="perfil-tabs-wrap">
+        <button class="perfil-tab activo" data-tab="progreso" onclick="cambiarTabPerfil('progreso')">⚔ Mi Progreso</button>
+        <button class="perfil-tab" data-tab="amigos" onclick="cambiarTabPerfil('amigos')">👥 Amigos</button>
+        <button class="perfil-tab" data-tab="grupos" onclick="cambiarTabPerfil('grupos')">🏰 Grupos</button>
       </div>
       <div id="perfil-contenido"></div>
     </section>
@@ -408,6 +413,23 @@
   <div class="modal" id="modal-build-contenido"></div>
 </div>
 
+<!-- ══ MODAL SQL SETUP ══ -->
+<div class="modal-overlay" id="modal-sql-setup" onclick="if(event.target===this)cerrarModalSQL()">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-header">
+      <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--oro)">⚙ SQL de configuración — Amigos y Grupos</div>
+      <button class="modal-close" onclick="cerrarModalSQL()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--texto-suave);margin-bottom:1rem;font-size:0.9rem">
+        Entra en <strong style="color:var(--texto)">supabase.com → SQL Editor → New query</strong>, pega el siguiente SQL y ejecútalo:
+      </p>
+      <pre class="sql-block" id="sql-block-content"></pre>
+      <button onclick="copiarSQL()" class="btn-submit" style="max-width:200px;margin-top:1rem">📋 Copiar SQL</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ MODAL DE RESET ══ -->
 <div class="modal-overlay" id="modal-reset" onclick="if(event.target===this)cerrarModalReset()">
   <div class="modal modal-reset-contenido">
@@ -449,6 +471,7 @@
 <script src="js/auth.js"></script>
 <script src="js/progress.js"></script>
 <script src="js/guia.js"></script>
+<script src="js/social.js"></script>
 <script>
 // ══════════════════════════════════
 // APP PRINCIPAL
@@ -484,6 +507,10 @@ function navegarA(seccion) {
   } else if (seccion === "items") {
     renderizarItems(filtroItemsActivo);
   } else if (seccion === "perfil") {
+    // Resetear a pestaña "progreso" al navegar al perfil
+    document.querySelectorAll(".perfil-tab").forEach(t => {
+      t.classList.toggle("activo", t.dataset.tab === "progreso");
+    });
     renderizarPerfil();
   }
 
@@ -529,14 +556,14 @@ async function handleLogin(e) {
   msg.className = "auth-mensaje";
 
   if (!SUPABASE_CONFIGURADO) {
-    msg.textContent = "⚠ Supabase no está configurado todavía. Consulta las instrucciones de despliegue.";
+    msg.textContent = "⚠ Supabase no está configurado todavía.";
     msg.className = "auth-mensaje error";
     btn.disabled = false;
     btn.textContent = "Entrar a Las Tierras Intermedias";
     return;
   }
 
-  const { error } = await iniciarSesion(email, password);
+  const { data, error } = await iniciarSesion(email, password);
 
   if (error) {
     msg.textContent = "Error: " + (error.message === "Invalid login credentials"
@@ -546,9 +573,18 @@ async function handleLogin(e) {
     btn.disabled = false;
     btn.textContent = "Entrar a Las Tierras Intermedias";
   } else {
-    msg.textContent = "¡Bienvenido de vuelta, Empañado!";
+    // Aplicar sesión inmediatamente sin esperar el evento SIGNED_IN asíncrono
+    if (data?.session?.user) {
+      usuarioActual = data.session.user;
+      actualizarUIAuth(usuarioActual);
+      sincronizarPerfil();
+      await migrarProgresoLocal();
+      await aplicarProgresoUI();
+    }
+    msg.textContent = "¡Bienvenido de vuelta!";
     msg.className = "auth-mensaje exito";
-    setTimeout(() => navegarA("perfil"), 1000);
+    btn.textContent = "Entrar a Las Tierras Intermedias";
+    setTimeout(() => navegarA("perfil"), 700);
   }
 }
 
@@ -590,19 +626,30 @@ async function handleRegistro(e) {
 // ─── Inicialización ───
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Inicializar Supabase
-  inicializarSupabase();
+  // 1. Inicializar Supabase y restaurar sesión guardada ANTES de pintar UI
+  await inicializarSupabase();
 
-  // Escuchar cambios de auth
+  // 2. Aplicar UI inmediatamente con la sesión restaurada (sin parpadeo de login)
+  actualizarUIAuth(usuarioActual);
+  if (usuarioActual) sincronizarPerfil();
+
+  // 3. Escuchar SOLO cambios posteriores (login, logout, refresh de token)
   escucharAuth(async (event, usuario) => {
+    if (event === "INITIAL_SESSION") return; // ya manejado en paso 2
     actualizarUIAuth(usuario);
-    if (usuario) {
+    if (event === "SIGNED_IN") {
       await migrarProgresoLocal();
+      sincronizarPerfil();
     }
     await aplicarProgresoUI();
   });
 
-  // Contar objetivos totales
+  // 4. Cargar progreso inicial
+  const { completados } = await aplicarProgresoUI();
+  const statComp = document.getElementById("stat-completados");
+  if (statComp) statComp.textContent = completados;
+
+  // 5. Contar objetivos totales
   let total = 0;
   total += OBJETIVOS.principales.length;
   total += OBJETIVOS.semidioses.length;
@@ -610,32 +657,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (Array.isArray(arr)) total += arr.length;
   });
   total += OBJETIVOS.finales.length;
-
   const statTotal = document.getElementById("stat-total");
   if (statTotal) statTotal.textContent = total;
-
   const statBuilds = document.getElementById("stat-builds");
   if (statBuilds && typeof BUILDS !== "undefined") statBuilds.textContent = BUILDS.length;
 
-  // Mostrar aviso de modo sin cuenta si Supabase no está configurado
+  // 6. Aviso sin cuenta
   if (!SUPABASE_CONFIGURADO) {
     const aviso = document.getElementById("aviso-supabase");
     if (aviso) aviso.style.display = "block";
   }
 
-  // Aplicar progreso inicial
-  const { completados } = await aplicarProgresoUI();
-  const statComp = document.getElementById("stat-completados");
-  if (statComp) statComp.textContent = completados;
+  // 7. Pre-renderizar items
+  try { renderizarItems("todos"); } catch(e) { console.error("renderizarItems:", e); }
 
-  // Pre-renderizar items para que estén listos al navegar
-  try { renderizarItems("todos"); } catch(e) { console.error("Error renderizando items:", e); }
-
-  // Manejar hash URL
+  // 8. Manejar hash URL
   const hash = window.location.hash.replace("#", "");
-  if (["guia", "builds", "items", "perfil", "login"].includes(hash)) {
+  if (["guia", "builds", "items", "perfil", "login", "pasos"].includes(hash)) {
     navegarA(hash);
   }
+
+  // 9. Rellenar bloque SQL del modal
+  const sqlBlock = document.getElementById("sql-block-content");
+  if (sqlBlock && typeof SQL_SETUP !== "undefined") sqlBlock.textContent = SQL_SETUP;
 });
 </script>
 
