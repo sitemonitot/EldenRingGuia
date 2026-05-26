@@ -727,7 +727,7 @@ const OBJETIVOS = {
     meseta_altus: [
       {
         id: "ALTUS_01",
-        titulo: "Castillo de la Tormenta de Lava (Volcano Manor acceso)",
+        titulo: "Castillo de la Tormenta Roja (acceso a Mansión del Volcán)",
         descripcion: "Explora el Castillo de la Tormenta Roja en la Meseta de Altus y obtén el acceso a Monte Gelmir.",
         recompensa: "Acceso a Monte Gelmir y a la Mansión del Volcán",
         consejos: "Hay varias rutas hacia Monte Gelmir. La más directa pasa por este castillo.",
@@ -1041,14 +1041,14 @@ const OBJETIVOS = {
           "Llevar el Punzón a Ranni",
           "Encontrar el Arca de la Noche Eterna en Profundidades de las Raíces",
           "Obtener el Puñal de la Noche dentro del Arca",
-          "Llevar el Puñal a Ranni en Ainsel River",
+          "Llevar el Puñal a Ranni en el Río Ainsel",
           "Derrotar a Astel, Nacido del Vacío",
           "Subir al Gran Ascensor Cario y llegar a la Catedral de Manus Celes",
           "Colocar el Puñal de la Noche en el dedo de Ranni",
           "Obtener el Fragmento de Luna Fría para el final"
         ],
         recompensa: "Fragmento de Luna Fría, Final de la Era de las Estrellas, Ring de Ranni",
-        region: "Múltiples (Liurnia → Nokron → Profundidades → Ainsel → Catedral Manus Celes)"
+        region: "Múltiples (Liurnia → Nokron → Profundidades → Río Ainsel → Catedral Manus Celes)"
       },
       {
         id: "NPC_02",

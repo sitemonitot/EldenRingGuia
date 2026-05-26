@@ -2,7 +2,7 @@
 // ITEMS DE ELDEN RING — Guía completa
 // ══════════════════════════════════════════
 
-const ITEMS = {
+var ITEMS = {
 
   // ═══════════════════════════════════════════
   // ARMAS
@@ -37,7 +37,7 @@ const ITEMS = {
       tipo: "Gran Espada",
       escala: "Des / Int",
       descripcion: "La espada legendaria de Ranni, imbuida con la luna oscura. Cargada de magia de hielo. Habilidad: Espada Lunar.",
-      como_obtener: "Recompensa final de la Misión de Ranni la Bruja. Después de colocar el Puñal de la Noche en el dedo de Ranni, su espectro la entrega en Ainsel River Main.",
+      como_obtener: "Recompensa final de la Misión de Ranni la Bruja. Después de colocar el Puñal de la Noche en el dedo de Ranni, su espectro la entrega en Río Ainsel Main.",
       requisitos: "Fue 16, Des 11, Int 38",
       notas: "Requiere completar toda la misión de Ranni. Una de las mejores armas del juego para builds de Inteligencia. Su infusión de hielo se activa con la habilidad."
     },
@@ -498,7 +498,7 @@ const ITEMS = {
       nombre_en: "Kindred of Rot's Exultation",
       tipo: "Talisman",
       descripcion: "Aumenta el ataque un 20% cuando se activa podredumbre escarlata o veneno en las cercanías.",
-      como_obtener: "Se encuentra en las Catacumbas de Ainsel River (zona subterránea), en las profundidades de Ainsel.",
+      como_obtener: "Se encuentra en las Catacumbas de Río Ainsel (zona subterránea), en las profundidades de Ainsel.",
       notas: "Versión del Señor de la Sangre pero para podredumbre. Combina muy bien con armas que infligen podredumbre."
     },
     {

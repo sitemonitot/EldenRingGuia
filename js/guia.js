@@ -590,38 +590,48 @@ function renderizarItems(cat = "todos", busqueda = "") {
   const grid = document.getElementById("items-grid");
   if (!grid) return;
 
-  const termino = busqueda.toLowerCase().trim();
-
-  const categorias = cat === "todos"
-    ? Object.keys(ITEMS_META)
-    : [cat];
-
-  let tarjetas = [];
-
-  categorias.forEach(clave => {
-    const lista = ITEMS[clave];
-    if (!Array.isArray(lista)) return;
-    lista.forEach(item => {
-      if (termino && !(
-        item.nombre?.toLowerCase().includes(termino) ||
-        item.nombre_en?.toLowerCase().includes(termino) ||
-        item.descripcion?.toLowerCase().includes(termino) ||
-        item.como_obtener?.toLowerCase().includes(termino) ||
-        item.tipo?.toLowerCase().includes(termino)
-      )) return;
-      tarjetas.push({ ...item, _cat: clave });
-    });
-  });
-
-  if (tarjetas.length === 0) {
-    grid.innerHTML = `<div class="items-vacio">No se encontraron items para "<em>${busqueda}</em>"</div>`;
+  if (typeof ITEMS === "undefined") {
+    grid.innerHTML = `<div class="items-vacio">Error cargando items. Recarga la página.</div>`;
     return;
   }
 
-  grid.innerHTML = "";
-  tarjetas.forEach(item => {
-    grid.appendChild(crearCardItem(item));
-  });
+  try {
+    const termino = busqueda.toLowerCase().trim();
+
+    const categorias = cat === "todos"
+      ? Object.keys(ITEMS_META)
+      : [cat];
+
+    let tarjetas = [];
+
+    categorias.forEach(clave => {
+      const lista = ITEMS[clave];
+      if (!Array.isArray(lista)) return;
+      lista.forEach(item => {
+        if (termino && !(
+          item.nombre?.toLowerCase().includes(termino) ||
+          item.nombre_en?.toLowerCase().includes(termino) ||
+          item.descripcion?.toLowerCase().includes(termino) ||
+          item.como_obtener?.toLowerCase().includes(termino) ||
+          item.tipo?.toLowerCase().includes(termino)
+        )) return;
+        tarjetas.push({ ...item, _cat: clave });
+      });
+    });
+
+    if (tarjetas.length === 0) {
+      grid.innerHTML = `<div class="items-vacio">No se encontraron items${busqueda ? ` para "<em>${busqueda}</em>"` : ""}.</div>`;
+      return;
+    }
+
+    grid.innerHTML = "";
+    tarjetas.forEach(item => {
+      grid.appendChild(crearCardItem(item));
+    });
+  } catch (e) {
+    console.error("renderizarItems error:", e);
+    grid.innerHTML = `<div class="items-vacio">Error mostrando items: ${e.message}</div>`;
+  }
 }
 
 function crearCardItem(item) {
