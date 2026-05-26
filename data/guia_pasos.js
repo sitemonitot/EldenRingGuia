@@ -1,783 +1,1605 @@
-// ══════════════════════════════════════════════════════════
-// GUÍA PASO A PASO — De principio a fin, todo el contenido
-// ══════════════════════════════════════════════════════════
+// ══════════════════════════════════════
+// GUÍA PASO A PASO — De principio a fin
+// ══════════════════════════════════════
 var GUIA_PASOS = [
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 1 — NECROLIMBO
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_01", numero:1, fase:"Necrolimbo",
-    titulo:"Tutorial: Capilla de la Anticipación",
-    area:"Capilla de la Anticipación",
-    descripcion:"Primer contacto con el mundo. Se recomienda morir al Vástago Injertado para avanzar al Cementerio del Inicio.",
-    detalle:[
-      "Al despertar, explora la capilla y coge el Escudo de Cuero del cadáver cercano.",
-      "Sube las escaleras y sal al exterior por la puerta dorada.",
-      "Encuentra al Vástago Injertado — es un jefe opcional muy difícil para el nivel 1. Puedes intentarlo o simplemente morir para avanzar.",
-      "Si mueres, reapareces en el Cementerio del Inicio. Si ganas, obtienes la Joya Espiritual de Miembros.",
-      "Puedes volver aquí más adelante cuando seas más fuerte para recoger los objetos del área."
-    ],
-    jefe:"Vástago Injertado (opcional, muy difícil al inicio)",
-    recompensa:"Joya Espiritual de Miembros (si derrotas al jefe). Inicio del juego.",
-    es_opcional:false,
-    siguiente:"Despertar en el Cementerio del Inicio"
-  },
-  {
-    id:"paso_02", numero:2, fase:"Necrolimbo",
-    titulo:"Primer amanecer en Las Tierras Intermedias",
-    area:"Cementerio del Inicio — Necrolimbo",
-    descripcion:"Explora los alrededores del Cementerio del Inicio y llega a la Iglesia de la Elleh para encontrar al comerciante Kale.",
-    detalle:[
-      "Sube la escalera del cementerio hasta la superficie de Necrolimbo.",
-      "Descansa en el Lugar de Gracia del exterior para activar el mapa.",
-      "Dirígete al norte siguiendo el camino dorado de la Gracia.",
-      "Llega a la Iglesia de la Elleh — hay un Lugar de Gracia y el comerciante Kale.",
-      "Compra OBLIGATORIAMENTE el Kit de Elaboración (para craftear) y el Libro de Cocina del Camino [1] a Kale. Son muy baratos y esenciales.",
-      "Habla con Kale repetidamente para conocer el mundo y obtener pistas.",
-      "Coge el mapa de Necrolimbo del pilar de piedra junto al camino principal."
-    ],
-    jefe:null,
-    recompensa:"Kit de Elaboración, acceso al crafting, Mapa de Necrolimbo",
-    es_opcional:false,
-    siguiente:"Descansar en 3 Lugares de Gracia para conocer a Melina"
-  },
-  {
-    id:"paso_03", numero:3, fase:"Necrolimbo",
-    titulo:"Conocer a Melina — Obtener a Torrente",
-    area:"Necrolimbo — Lugares de Gracia",
-    descripcion:"Descansa en tres Lugares de Gracia distintos en el exterior para que Melina te visite y acepte darte a Torrente, tu destrero espectral.",
-    detalle:[
-      "Descansa en el Lugar de Gracia de la Capilla de Gracia del Inicio, en la Iglesia de la Elleh y en las Ruinas de la Puerta Fronteriza.",
-      "Tras el tercer descanso, Melina aparecerá. Acepta su trato para recibir a Torrente.",
-      "Torrente te permite moverse mucho más rápido y escalar salientes.",
-      "A partir de ahora, cuando descanses en un Lugar de Gracia podrás gastar runas para subir de nivel.",
-      "IMPORTANTE: sin el trato de Melina no puedes subir de nivel. Si rechazas su trato, puedes aceptarlo más adelante en los Lugares de Gracia."
-    ],
-    jefe:null,
-    recompensa:"Torrente (destrero espectral), capacidad de subir de nivel con runas",
-    es_opcional:false,
-    siguiente:"Explorar Necrolimbo — Ruinas de la Puerta Fronteriza"
-  },
-  {
-    id:"paso_04", numero:4, fase:"Necrolimbo",
-    titulo:"Ruinas de la Puerta Fronteriza — Aspid del Árbol",
-    area:"Ruinas de la Puerta Fronteriza — Necrolimbo",
-    descripcion:"Las Ruinas de la Puerta Fronteriza son el primer gran obstáculo narrativo. El Aspid del Árbol Áldano custodia la entrada al Castillo de Velo Tormentoso.",
-    detalle:[
-      "Sigue el camino principal al norte desde la Iglesia de la Elleh.",
-      "Llega a las Ruinas de la Puerta Fronteriza. Aquí encuentras guardias y el camino al castillo.",
-      "El Aspid del Árbol Áldano (jefe de campo) bloquea el puente principal. Rodéalo usando Torrente o el camino lateral.",
-      "Explora las ruinas para encontrar objetos y cofres con equipo temprano.",
-      "Opcional: en la parte posterior de las ruinas hay un soldado de fuego con buenas runas.",
-      "Desde aquí, el camino al norte lleva al Castillo de Velo Tormentoso (guárdate para más adelante)."
-    ],
-    jefe:"Aspid del Árbol Áldano (jefe de campo, esquivable con Torrente)",
-    recompensa:"Acceso al camino al Castillo, atajos por los laterales",
-    es_opcional:false,
-    siguiente:"Explorar Necrolimbo — mazmorras opcionales antes del Castillo"
-  },
-  {
-    id:"paso_05", numero:5, fase:"Necrolimbo",
-    titulo:"Cueva de Murkwater — Patches el Traicionero",
-    area:"Cueva de Murkwater — Necrolimbo",
-    descripcion:"Cueva junto al río al norte del lago Agheel. Aquí vive Patches, un PNJ que te tenderá una trampa y luego se convertirá en comerciante.",
-    detalle:[
-      "La cueva está al norte del lago Agheel, junto al río. Entra con cuidado.",
-      "Al fondo hay un cofre trampa. Si lo abres, Patches cierra la reja.",
-      "Cuando Patches te habla desde arriba, responde como quieras — al salir te perdonará.",
-      "Perdónale (no ataques) para que se convierta en comerciante. Tiene items únicos.",
-      "Sus objetos de venta incluyen el Bolsillo de Ladrón (Stonesword Key) y otros consumibles útiles.",
-      "Si le matas pierde el acceso permanente a su tienda."
-    ],
-    jefe:"Jefe del Calamar Fantasma (al entrar, antes de llegar a Patches)",
-    recompensa:"Acceso a la tienda de Patches con objetos únicos",
-    es_opcional:true,
-    siguiente:"Catacumbas de Tormenta o Mina de Limgrave"
-  },
-  {
-    id:"paso_06", numero:6, fase:"Necrolimbo",
-    titulo:"Mina de Limgrave — Primeras piedras de forja",
-    area:"Mina de Limgrave — Necrolimbo",
-    descripcion:"Mina al este del lago Agheel repleta de mineros. Excelente fuente de piedras de forja tempranas para mejorar tus armas.",
-    detalle:[
-      "La mina está al este del lago Agheel, en el acantilado.",
-      "Los mineros dejan caer Piedras de Forja [1] y [2]. Fármealas aquí.",
-      "El jefe al final es el Troll de Piedra — fácil si puedes rodear sus ataques.",
-      "Derrótalo para las Cenizas Espirituales del Troll y muchas runas.",
-      "Consejo: mejora tu arma principal a +3 antes de intentar el Castillo de Velo Tormentoso."
-    ],
-    jefe:"Troll de Piedra",
-    recompensa:"Piedras de Forja [1-2], Cenizas del Troll, runas",
-    es_opcional:true,
-    siguiente:"Catacumbas de la Piedra de Tormenta para más Cenizas de Espíritu"
-  },
-  {
-    id:"paso_07", numero:7, fase:"Necrolimbo",
-    titulo:"Catacumbas de la Piedra de Tormenta",
-    area:"Acantilado norte — Necrolimbo",
-    descripcion:"Primera catacumba del juego. Repleta de trampas y esqueletos. Contiene las Cenizas Espirituales del Pámpano.",
-    detalle:[
-      "En los acantilados al norte del camino principal, cerca del área de tormenta.",
-      "Hay muchas trampas de flechas — avanza despacio y observa el suelo.",
-      "Los esqueletos se levantan a menos que los golpees mientras brillan o uses daño sagrado.",
-      "El jefe Impulsador de Fantasmas es débil al fuego y al daño físico.",
-      "Las Cenizas del Pámpano (invocación) son útiles para distraer a los jefes."
-    ],
-    jefe:"Impulsador de Fantasmas",
-    recompensa:"Cenizas Espirituales del Pámpano",
-    es_opcional:true,
-    siguiente:"Explorar el lago Agheel y Stormhill antes del Castillo"
-  },
-  {
-    id:"paso_08", numero:8, fase:"Necrolimbo",
-    titulo:"Dragon Agheel — Lago de Agheel",
-    area:"Lago de Agheel — Necrolimbo",
-    descripcion:"El dragón Agheel habita el lago principal de Necrolimbo. Opcional pero da el primer Corazón de Dragón para la Comunión.",
-    detalle:[
-      "Entra al lago en Torrente para que Agheel aparezca y aterrice.",
-      "Sus ataques de fuego son devastadores. Mantente en Torrente para la movilidad.",
-      "Apunta a la cabeza para máximo daño. El fuego le hace poco daño — usa físico o relámpago.",
-      "Al derrotarlo obtienes un Corazón de Dragón. Llévalo a la Iglesia de la Comunión de Dragones en Caelid.",
-      "NIVEL RECOMENDADO: 20-30 para este jefe."
-    ],
-    jefe:"Flying Dragon Agheel",
-    recompensa:"Corazón de Dragón (para incantaciones de dragón)",
-    es_opcional:true,
-    siguiente:"Evergaol de Stormhill o Cueva Costera"
-  },
-  {
-    id:"paso_09", numero:9, fase:"Necrolimbo",
-    titulo:"Cueva Costera — El Collar de Rya",
-    area:"Acantilados de Stormhill — Necrolimbo",
-    descripcion:"Cueva en los acantilados de Stormhill. Tiene dos jefes y un collar que pertenece a Rya, la dama del Volcán Manor.",
-    detalle:[
-      "La cueva está en los acantilados del lado occidental de Stormhill, accesible con Torrente.",
-      "Los dos jefes (Jefes Semihumanos) son difíciles juntos — usa Cenizas de Espíritu.",
-      "Al derrotarlos, en el cofre final está el Collar de Rya.",
-      "Lleva el collar a Rya, que está en una de las ruinas cercanas al noroeste de Necrolimbo.",
-      "Esto inicia la cadena de misiones de Rya que lleva eventualmente al Volcán Manor."
-    ],
-    jefe:"Dúo de Jefes Semihumanos",
-    recompensa:"Collar de Rya (inicio de su misión), posible acceso al atajo de Liurnia",
-    es_opcional:true,
-    siguiente:"Prepararse para el Castillo de Velo Tormentoso"
-  },
-  {
-    id:"paso_10", numero:10, fase:"Necrolimbo",
-    titulo:"Evergaol de Stormhill — Caballero del Crisol",
-    area:"Stormhill — Necrolimbo",
-    descripcion:"Prisión eterna en lo alto de Stormhill con un Caballero del Crisol encerrado. Difícil pero da una buena Ceniza de Guerra.",
-    detalle:[
-      "El Evergaol está en la colina al norte del camino hacia el Castillo de Velo Tormentoso.",
-      "Activa la prisión para luchar contra el Caballero del Crisol solo (sin invocaciones de Ceniza).",
-      "El Caballero tiene ataques de cola y colas de dragón en la segunda fase.",
-      "Usa el espacio del Evergaol para esquivar en círculo.",
-      "Recompensa: Ceniza de Guerra del Crisol o incantación única."
-    ],
-    jefe:"Crucible Knight",
-    recompensa:"Ceniza de Guerra: Aplastamiento del Crisol",
-    es_opcional:true,
-    siguiente:"Castillo de Velo Tormentoso — Margit y Godrick"
-  },
-  {
-    id:"paso_11", numero:11, fase:"Necrolimbo",
-    titulo:"Castillo de Velo Tormentoso — Margit el Presagio",
-    area:"Castillo de Velo Tormentoso — Necrolimbo",
-    descripcion:"El primer gran jefe obligatorio del juego. Margit el Presagio guarda la entrada al castillo. NIVEL RECOMENDADO: 25-35.",
-    detalle:[
-      "Para alcanzar el castillo, pasa el puente al norte del camino principal.",
-      "Antes de Margit, explora el campamento y habla con Roderika (lado oeste) para obtener las Cenizas de Espíritu del Crisantemo.",
-      "Margit tiene ataques con martillo de luz sagrada — difíciles de predecir. Aprende sus animaciones.",
-      "Puedes comprar el Ungüento Restrictivo del Harapo de Magrite (NPC junto al Lugar de Gracia antes del boss) para infligirle debilidad.",
-      "Las Cenizas del Lobo son excelentes para distraerle en esta pelea.",
-      "En la segunda fase aparece un martillo grande de luz. Sigue siendo manejable con paciencia.",
-      "Al derrotarlo, el castillo se abre. Explora TODOS los rincones — hay mucho botín dentro."
-    ],
-    jefe:"Margit, el Presagio Funesto",
-    recompensa:"Cenizas Espirituales del Crisantemo, acceso al Castillo de Velo Tormentoso",
-    es_opcional:false,
-    siguiente:"Explorar el interior del Castillo de Velo Tormentoso"
-  },
-  {
-    id:"paso_12", numero:12, fase:"Necrolimbo",
-    titulo:"Castillo de Velo Tormentoso — Interior y Godrick",
-    area:"Castillo de Velo Tormentoso — Necrolimbo",
-    descripcion:"Explora el castillo por completo antes de enfrentar a Godrick. Hay objetos, NPCs y atajos valiosos.",
-    detalle:[
-      "Explora los tejados y torres del castillo — contienen cofres con armaduras y armas únicas.",
-      "Encuentra a Nepheli Loux (guerrera del norte) que puede ayudarte como aliada en la pelea de Godrick.",
-      "Busca a Rogier el hechicero herido — en una sala inferior del castillo. Da pistas sobre el misterio de las raíces.",
-      "El atajos por los elevadores y puertas ahorra mucho tiempo en los respawns.",
-      "Godrick el Injerto es el primer semidiós. Primera fase con hacha, segunda fase injerta un brazo de dragón.",
-      "En la segunda fase cuidado con el aliento de fuego del brazo.",
-      "Al derrotarlo obtienes la Gran Runa de Godrick y su Remembranza."
-    ],
-    jefe:"Godrick el Injerto",
-    recompensa:"Gran Runa de Godrick, Remembranza del Injerto (intercambia por arma o sello en la Mesa Fragmentada)",
-    es_opcional:false,
-    siguiente:"Ir a la Mesa Redonda y luego a Liurnia de los Lagos"
-  },
-  {
-    id:"paso_13", numero:13, fase:"Necrolimbo",
-    titulo:"Península del Llanto — Contenido opcional completo",
-    area:"Península del Llanto",
-    descripcion:"La Península del Llanto al sur de Necrolimbo es zona opcional con jefes únicos, un castillo y misiones de NPC importantes.",
-    detalle:[
-      "Cruza el puente al sur de Necrolimbo hacia la Península del Llanto.",
-      "Visita el Puente del Cuarto de la Bruja para encontrar a Irina — ella pide que rescates a su padre Edgar en Castillo Morne.",
-      "Castillo Morne está al sur. Jefe: Misbegotten Leónico. Libera a Edgar en la parte superior.",
-      "Derrota al Leónico para obtener la Gran Runa de Morne (necesaria para el Gran Ascensor sur de Liurnia).",
-      "Hay una Cueva del Conocimiento con tutorial completo de mecánicas — útil para principiantes.",
-      "Al norte, el Caballero de la Noche aparece solo de noche en el puente — buen botín de runas.",
-      "NIVEL RECOMENDADO: 20-30 para el Castillo Morne."
-    ],
-    jefe:"Misbegotten Leonino (Castillo Morne)",
-    recompensa:"Gran Runa de Morne, inicio misión Edgar/Irina, exploración completa",
-    es_opcional:true,
-    siguiente:"Mesa Redonda y luego a Liurnia de los Lagos"
-  },
+// ══════════════════════════════════════
+// FASE 1 — NECROLIMBO (Pasos 1-20)
+// ══════════════════════════════════════
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 2 — LIURNIA DE LOS LAGOS
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_14", numero:14, fase:"Liurnia de los Lagos",
-    titulo:"Llegada a Liurnia — Exploración inicial",
-    area:"Liurnia de los Lagos",
-    descripcion:"Liurnia es una enorme zona inundada con la Academia de Raya Lúcida flotando al norte. Explora el área suroeste primero.",
-    detalle:[
-      "Sal del Castillo de Velo Tormentoso por la puerta trasera o rodea por el oeste.",
-      "Baja a Liurnia desde el norte del castillo. Hay una bajada oculta entre los acantilados.",
-      "Activa el Lugar de Gracia al llegar a la orilla del lago.",
-      "Ve hacia el este para encontrar el mapa de Liurnia en un pilar de piedra.",
-      "El Comerciante de las Orillas del Lago tiene objetos útiles — visítalo.",
-      "Explora las ruinas del lago con Torrente — hay objetos en las ruinas sumergidas.",
-      "Nivel recomendado para Liurnia: 35-50."
-    ],
-    jefe:null,
-    recompensa:"Mapa de Liurnia, acceso a la zona, nuevos comerciantes",
-    es_opcional:false,
-    siguiente:"Misión de Ranni — Castillo de Caria"
-  },
-  {
-    id:"paso_15", numero:15, fase:"Liurnia de los Lagos",
-    titulo:"Castillo de Caria — Loretta y misión de Ranni",
-    area:"Castillo de Caria — noroeste de Liurnia",
-    descripcion:"El Castillo de Caria está al noroeste. La Caballera Loretta lo guarda. Al derrotarla, accedes a las tres torres de Ranni.",
-    detalle:[
-      "El castillo está en el extremo noroeste de Liurnia — sigue el camino por el borde del mapa.",
-      "Los Dedos Mágicos en el patio del castillo son peligrosos. Usa Torrente para esquivarlos.",
-      "La jefa Loretta es una caballera mágica a caballo. Esquiva sus flechas y golpéala de cerca.",
-      "Al derrotarla, el camino a las tres torres se abre.",
-      "Visita la Torre de Ranni al noroeste y habla con ella — es fundamental para el final de las Estrellas.",
-      "Acepta servirla para desbloquear la misión de Ranni (una de las mejores del juego).",
-      "Blaidd el Medio Lobo y otros NPCs también están en esta zona."
-    ],
-    jefe:"Royal Knight Loretta",
-    recompensa:"Cenizas de los Arbustos, hechizo Gran Arco de Loretta, inicio misión de Ranni",
-    es_opcional:true,
-    siguiente:"Continuar la misión de Ranni o ir a la Academia de Raya Lúcida"
-  },
-  {
-    id:"paso_16", numero:16, fase:"Liurnia de los Lagos",
-    titulo:"Misión de Ranni — Camino a las Estrellas",
-    area:"Múltiples (Liurnia → Nokron → Río Ainsel → Lago de Rot)",
-    descripcion:"La misión más larga y épica del juego. Siguiéndola obtienes el final de la Edad de las Estrellas y el arma más poderosa del juego.",
-    detalle:[
-      "Tras hablar con Ranni, ve al Pozo de Siofra (bajo Necrolimbo) para encontrar a Blaidd.",
-      "Derrota a Radahn en el Festival de Radahn (zona de Caelid) — esto abre Nokron.",
-      "Entra a Nokron, Ciudad Eterna (bajo las ruinas al sur de Necrolimbo) tras Radahn.",
-      "En Nokron encuentra la Hoja Decapitadora en las Catacumbas de la Ciudad.",
-      "Navega hasta el Pozo de Ainsel mediante la Cofra del Ataúd en Nokron.",
-      "Activa la Miniatura de Ranni en el Río Ainsel y completa Nokstella.",
-      "Derrota a Astel en el Lago de la Podredumbre.",
-      "Obtén el Anillo de la Luna Oscura y activa el ritual final."
-    ],
-    jefe:"Astel, Nacido de la Nada (Lago de Rot) + varios intermedios",
-    recompensa:"Gran Espada de la Luna Oscura, final de la Edad de las Estrellas (el más complejo del juego)",
-    es_opcional:true,
-    siguiente:"Academia de Raya Lúcida — Rennala"
-  },
-  {
-    id:"paso_17", numero:17, fase:"Liurnia de los Lagos",
-    titulo:"Mazmorras de Liurnia — Catacumbas y cuevas",
-    area:"Liurnia de los Lagos",
-    descripcion:"Liurnia tiene varias mazmorras opcionales con Cenizas de Espíritu valiosas y equipo.",
-    detalle:[
-      "Catacumbas de Summonwater: al este del lago. Jefe: Ancestro Espíritu. Sus Cenizas son excelentes — las mejores para nivel medio.",
-      "Catacombas de Cristal: al norte. Jefe: Colosal Mago Cristal.",
-      "Túnel de Cristal de Raya Lúcida: mina al este de la Academia. Jefe: Troll de Cristal. Muchas Piedras Sombrías.",
-      "Evergaol de la Colina de los Hechiceros: al norte. Jefe: Hechicero Ancestral con hechizo único.",
-      "Iglesia de los Votos: Miriel la tortuga pastora vende hechizos únicos de Rennala y de la Fe.",
-      "Cuatro Campanarios: torres con portales — uno te lleva a Farum Azula preview, otro a una zona nocturna."
-    ],
-    jefe:"Ancestro Espíritu (Catacumbas de Summonwater)",
-    recompensa:"Cenizas del Ancestro Espíritu, Piedras Sombrías, hechizos únicos",
-    es_opcional:true,
-    siguiente:"Academia de Raya Lúcida — Rennala"
-  },
-  {
-    id:"paso_18", numero:18, fase:"Liurnia de los Lagos",
-    titulo:"Academia de Raya Lúcida — Rennala",
-    area:"Academia de Raya Lúcida — Liurnia central",
-    descripcion:"La Academia flota al norte de Liurnia. Rennala, Reina de la Luna Llena, es el segundo semidiós y una de las peleas más espectaculares del juego.",
-    detalle:[
-      "Para entrar a la Academia necesitas una Glintstone Key — hay una en la Tierra de los Dragones (mapa de Liurnia) o Thops te da pistas.",
-      "Dentro de la Academia hay muchos magos peligrosos. Usa el escudo y las Cenizas de Espíritu.",
-      "Antes de la primera fase de Rennala, destruye los estudiantes con libros dorados que forman el escudo.",
-      "Segunda fase: Rennala invoca criaturas gigantes. Aprende el patrón de sus invocaciones.",
-      "Al derrotarla NO muere — solo queda inerte. Puedes hablar con ella para redistribuir tus niveles usando Lágrimas Larvales.",
-      "Obtén la Remembranza de Rennala para el bastón o el hechizo de la Luna Llena en la Mesa Fragmentada."
-    ],
-    jefe:"Rennala, Reina de la Luna Llena",
-    recompensa:"Gran Runa de Rennala, Remembranza de Rennala, acceso a redistribuir niveles",
-    es_opcional:false,
-    siguiente:"Meseta de Altus (necesitas 2 Gran Runas) o explorar Caelid primero"
-  },
+{
+  id: "paso_01",
+  numero: 1,
+  fase: "Necrolimbo",
+  titulo: "Tutorial — Capilla de la Anticipación",
+  area: "Capilla de la Anticipación",
+  descripcion: "Despierta como Sin Muerte en la Capilla de la Anticipación. Este breve tutorial te enseña los controles básicos de combate antes de llegar a las Tierras Intermedias.",
+  detalle: [
+    "Al iniciar, recoge los objetos del suelo: Daga de Destello y vendas curativas.",
+    "Aprende los controles básicos: ataque ligero (R1/RB), ataque cargado (R2/RT), esquiva (Círculo/B) y bloqueo (L1/LB).",
+    "Avanza por la capilla hasta encontrar la escalera que sube a la zona exterior.",
+    "Enfréntate al Vástago Injertado (jefe del tutorial) — si mueres, es intencional y avanzas a las Tierras Intermedias.",
+    "Si logras sobrevivir, la puerta al fondo te lleva a una vista del Árbol Áldano y luego caerás de todas formas.",
+    "No hay recompensa real por vencer aquí; el objetivo es aprender los controles.",
+  ],
+  jefe: "Vástago Injertado (tutorial)",
+  recompensa: "Aprendizaje de controles básicos",
+  es_opcional: false,
+  siguiente: "Despertarás en el Cementerio del Inicio en Necrolimbo."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 3 — CAÉLIDA
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_19", numero:19, fase:"Caélida",
-    titulo:"Llegada a Caélida — La tierra de la podredumbre",
-    area:"Caélida — zona occidental",
-    descripcion:"Caélida es una zona de dificultad alta con enemigos muy agresivos. Ir antes de nivel 50 es arriesgado. NIVEL RECOMENDADO: 45-60.",
-    detalle:[
-      "Entra a Caelid por el este de Necrolimbo o por el portal en la zona de las Ruinas Selladas por Arena (cuidado — te teletransporta directamente al interior de Caelid).",
-      "Los enemigos de Caelid infligen Podredumbre Escarlata — ten siempre medicina del estado.",
-      "La Calle de la Arena tiene el mejor bastón temprano del juego: Bastón de Meteorito (en un cadáver en el sur).",
-      "La Sorcerer Sellen está encadenada en una celda en la Calle de la Arena — inicia su misión.",
-      "El Gran Dragón Ancestral Greoll puede matarse atacando su cola repetidamente desde Torrente para 250.000 runas.",
-      "Gurranq en las Catacumbas de la Bestia da incantaciones únicas a cambio de Huesos de Muerte."
-    ],
-    jefe:"Múltiples opcionales",
-    recompensa:"Bastón de Meteorito, incantaciones bestiales, corazones de dragón",
-    es_opcional:true,
-    siguiente:"Festival de Radahn — Castillo Redmane"
-  },
-  {
-    id:"paso_20", numero:20, fase:"Caélida",
-    titulo:"Festival de Radahn — La Batalla de Starscourge",
-    area:"Castillo Redmane — Caélida",
-    descripcion:"El Festival de Radahn es un evento masivo de PvE donde varios NPCs te ayudan a derrotar a Radahn. Necesario para abrir Nokron.",
-    detalle:[
-      "Llega al Castillo Redmane en el sur de Caelid y habla con el heraldo para activar el festival.",
-      "En el festival puedes invocar a múltiples NPCs: Alexander el Jarro, Blaidd, Millicent, Patches y otros.",
-      "Radahn es un combate de arena abierta. Invoca TODOS los aliados disponibles usando los estandartes en el campo.",
-      "En la segunda fase Radahn cae del cielo como un meteorito — corre en círculo para evitar el impacto.",
-      "Al derrotarlo se abre Nokron bajo Necrolimbo — un estrella cae creando un cráter.",
-      "Visita a los NPCs supervivientes después: Alexander está justo al norte con daño de hombro."
-    ],
-    jefe:"Radahn, Azote de las Estrellas",
-    recompensa:"Gran Runa de Radahn, Remembranza del Azote, apertura de Nokron Ciudad Eterna",
-    es_opcional:true,
-    siguiente:"Nokron Ciudad Eterna (bajo Necrolimbo) para la misión de Ranni"
-  },
-  {
-    id:"paso_21", numero:21, fase:"Caélida",
-    titulo:"Mazmorras de Caélida",
-    area:"Caélida",
-    descripcion:"Caelid tiene mazmorras únicas con objetos imposibles de conseguir en otro lugar.",
-    detalle:[
-      "Cueva de los Camelios: al centro. Al fondo hay la Hoja de Mineral Meteórico (katana mágica-gravitacional, excelente).",
-      "Cueva de Sellia: jefe Araña Progenitora. Da el Talismán de la Exaltación del Descendiente de la Podredumbre.",
-      "Sellia, Ciudad de Hechicería: enciende las 3 antorchas de las torres para abrir cofres sellados con hechizos únicos: Cometa de Noche.",
-      "Mina de Gael: muchas Piedras Sombrías [1-4] para mejorar armas especiales.",
-      "Evergaol de la Oscuridad: armadura del Caballero de Seda.",
-      "Las Catacumbas Bestiales de Farum: drogas con incantaciones de dragón y acceso a portal a Farum Azula."
-    ],
-    jefe:"Araña Progenitora (Cueva Sellia)",
-    recompensa:"Hoja Meteórica, Cometa de Noche, Talismán Kindred of Rot",
-    es_opcional:true,
-    siguiente:"Meseta de Altus — Gran Ascensor Dectus"
-  },
+{
+  id: "paso_02",
+  numero: 2,
+  fase: "Necrolimbo",
+  titulo: "Primer Lugar de Gracia — Cementerio del Inicio",
+  area: "Cementerio del Inicio",
+  descripcion: "Llegas a las Tierras Intermedias en el Cementerio del Inicio. Activa el primer Lugar de Gracia para anclar tu progreso y explora los alrededores para conseguir equipo inicial.",
+  detalle: [
+    "Activa el Lugar de Gracia brillante dorado en el suelo — siempre actívalos al encontrarlos.",
+    "Recoge los objetos del cementerio: fragmentos de hueso y flechas de hueso entre las lápidas.",
+    "Habla con el espíritu de Varre (el NPC de máscara blanca al norte) — él te orienta hacia el Castillo de Velo Tormentoso.",
+    "Explora el cementerio con cuidado; los esqueletos pueden reanimarse, dales un segundo golpe al caer.",
+    "Sube la colina hacia el norte para encontrar el siguiente Lugar de Gracia: Orilla del Lago.",
+    "Recoge la Espada Larga y el Escudo Reforzado de Madera de los cuerpos en el camino si no empezaste con ellos.",
+  ],
+  jefe: null,
+  recompensa: "Orientación inicial, primeros objetos de consumibles",
+  es_opcional: false,
+  siguiente: "Activa el Lugar de Gracia Orilla del Lago y espera a Melina."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 4 — MESETA DE ALTUS Y MONTE GELMIR
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_22", numero:22, fase:"Meseta de Altus",
-    titulo:"Subir a la Meseta de Altus",
-    area:"Gran Ascensor Dectus o Ruta del Arroyo",
-    descripcion:"Para entrar a Altus necesitas los dos fragmentos del Medallón Dectus o subir por el Camino del Arroyo de Raya Lúcida.",
-    detalle:[
-      "OPCIÓN A: Medallón Dectus — mitad superior en Fuerte Haight (Necrolimbo), mitad inferior en Fuerte Faroth (Caelid). Con ambos usa el Gran Ascensor Dectus.",
-      "OPCIÓN B: Camino del Arroyo — al este de Liurnia. Una serie de cuevas y el jefe Magma Wyrm Makar al final. Más difícil pero no requiere el medallón.",
-      "Al llegar a Altus, activa los Lugares de Gracia y obtén el mapa.",
-      "El vendedor de la primera área tiene items útiles para la segunda mitad del juego.",
-      "Nivel recomendado para Altus: 60-80."
-    ],
-    jefe:"Magma Wyrm Makar (si subes por el arroyo)",
-    recompensa:"Acceso a la Meseta de Altus y Leyndell",
-    es_opcional:false,
-    siguiente:"Explorar Altus — Volcán Manor — Leyndell"
-  },
-  {
-    id:"paso_23", numero:23, fase:"Meseta de Altus",
-    titulo:"Volcán Manor — Rykard y misiones",
-    area:"Monte Gelmir — Volcán Manor",
-    descripcion:"El Volcán Manor en Monte Gelmir contiene a Rykard, Señor de la Blasfemia. Las misiones de Tanith y Rya llevan aquí.",
-    detalle:[
-      "Llega al Volcán Manor por el noroeste de Altus — sigue la ruta de los muertos.",
-      "Habla con Tanith (la señora) para iniciar las misiones de asesinato: tres cartas que llevan a matar a invasores del mundo.",
-      "Completa al menos las dos primeras cartas para conseguir el Set del Lobo Enfurecido.",
-      "Para la misión de Rya: devuelve su collar (de la Cueva Costera de Necrolimbo) y luego habla con ella repetidamente en el Manor.",
-      "El acceso a Rykard está al final del Manor, por la sala del altar — necesitas el ascensor secreto.",
-      "OBLIGATORIO para matar a Rykard: usar la Lanza de Caza de Serpientes que está justo antes del boss.",
-      "La Lanza hace que la pelea sea manejable. Sin ella es casi imposible."
-    ],
-    jefe:"Rykard, Señor de la Blasfemia",
-    recompensa:"Gran Runa de Rykard, Remembranza de Rykard, Set del Lobo Enfurecido",
-    es_opcional:true,
-    siguiente:"Leyndell, Capital Real — Godfrey Espectral"
-  },
-  {
-    id:"paso_24", numero:24, fase:"Meseta de Altus",
-    titulo:"Mazmorras de Altus — Lo que no te puedes perder",
-    area:"Meseta de Altus",
-    descripcion:"Altus tiene mazmorras con algunos de los mejores talismanes y armas del juego.",
-    detalle:[
-      "Catacumbas del Crisol: jefe dúo de Caballeros del Crisol — muy difíciles pero dan Cenizas únicas.",
-      "Cueva del Tigre de la Llama: jefe Magma Wyrm. Da el Talismán del Escorpión de Llamas.",
-      "Castillo de la Media Noche Sol: jefe Marica. Da el Shotel del Eclipse y el Amuleto de Mediana Noche.",
-      "Evergaol de la Conspiración: armadura y cenizas únicas.",
-      "Gran Talismán: busca la Cresta Filigranada de Caria (comprada a War Counselor Iji en Liurnia) — reduce el FP de los AoW.",
-      "Mina de Altus: buenas Piedras Sombrías [3-6] para mejorar tus armas especiales al máximo."
-    ],
-    jefe:"Varios opcionales",
-    recompensa:"Talismán Escorpión de Llamas, Cenizas dúo Crisol, Shotel del Eclipse",
-    es_opcional:true,
-    siguiente:"Leyndell — la Capital Real"
-  },
+{
+  id: "paso_03",
+  numero: 3,
+  fase: "Necrolimbo",
+  titulo: "Conocer a Melina — Obtener a Torrente",
+  area: "Orilla del Lago / Cualquier Lugar de Gracia",
+  descripcion: "Tras activar tres o más Lugares de Gracia, Melina aparece mientras descansas. Ella te ofrece su 'dedo como prenda' y te entrega a Torrente, tu montura espectral.",
+  detalle: [
+    "Activa al menos los Lugares de Gracia: Cementerio del Inicio, Orilla del Lago y el de la Iglesia de la Elleh.",
+    "Descansa en cualquier Lugar de Gracia; Melina aparecerá automáticamente en una cinemática.",
+    "Acepta su propuesta — ella actuará como tu dedo de invocación y te permitirá subir de nivel.",
+    "Recibes el Silbato de Torrente (Cítara) — úsalo para invocar a tu caballo espectral en exteriores.",
+    "Torrente te permite moverte muy rápido, hacer saltos dobles y es esencial para explorar el mapa abierto.",
+    "Desde ahora puedes subir de nivel descansando en cualquier Lugar de Gracia.",
+  ],
+  jefe: null,
+  recompensa: "Torrente (montura espectral), capacidad de subir de nivel",
+  es_opcional: false,
+  siguiente: "Visita la Iglesia de la Elleh de noche para conocer a Renna."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 5 — LEYNDELL, CAPITAL REAL
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_25", numero:25, fase:"Leyndell, Capital Real",
-    titulo:"Entrar en Leyndell — La Capital Real",
-    area:"Leyndell, Capital Real",
-    descripcion:"Leyndell requiere haber obtenido al menos dos Gran Runas. La capital es enorme con muchos secretos y atajos.",
-    detalle:[
-      "Con dos Gran Runas, el Gran Ascensor de Rold está bloqueado — necesitas el Gran Medallón de Rold (obtenido de Morgott más adelante... o accede por las Catacumbas de las Alcantarillas).",
-      "Entra por la puerta oeste o por las catacumbas subterráneas.",
-      "Activa todos los Lugares de Gracia — hay muchos y están estratégicamente colocados.",
-      "Godfrey el Espectro Áureo guarda el Gran Vestíbulo. Es la versión espectral (forma áurea) — más fácil que la final.",
-      "Explora los tejados de la capital para encontrar atajos y cofres con buenas armas.",
-      "Las Catacumbas de las Alcantarillas tienen el acceso a Deeproot Depths (misión de Fia).",
-      "Nivel recomendado: 80-100."
-    ],
-    jefe:"Godfrey, Primer Señor Áldano (forma espectral)",
-    recompensa:"Fragmento de Gran Runa, acceso al trono interior",
-    es_opcional:false,
-    siguiente:"Morgott, el Rey Presagio"
-  },
-  {
-    id:"paso_26", numero:26, fase:"Leyndell, Capital Real",
-    titulo:"Morgott, el Rey Presagio — El Guardián del Árbol",
-    area:"Trono Áldano — Leyndell",
-    descripcion:"Morgott es el jefe obligatorio de Leyndell y el guardián del Árbol Áldano. Una de las peleas más épicas del juego.",
-    detalle:[
-      "Para llegar al trono, sube desde el Gran Vestíbulo por las escaleras doradas.",
-      "Morgott tiene dos fases: la primera con espada y jabalinas sagradas; la segunda con un martillo y armas sagradas adicionales.",
-      "Es débil al Sangrado, Veneno y Podredumbre — los estados le afectan bien.",
-      "En la segunda fase invoca armas sagradas de luz — muy rápidas. Aprende las animaciones.",
-      "Al derrotarlo, obtén el Gran Medallón de Rold y ve al Gran Ascensor de Rold.",
-      "Habla con Melina aquí — ella te dará el próximo objetivo: quemar el Árbol Áldano en las Montañas de los Gigantes.",
-      "Antes de subir, explora los subterráneos de Leyndell para la misión de Fia."
-    ],
-    jefe:"Morgott, el Rey Presagio",
-    recompensa:"Gran Runa de Morgott, Remembranza de Morgott, Gran Medallón de Rold",
-    es_opcional:false,
-    siguiente:"Zonas subterráneas y/o Montañas de los Gigantes"
-  },
+{
+  id: "paso_04",
+  numero: 4,
+  fase: "Necrolimbo",
+  titulo: "Iglesia de la Elleh — Comerciante Kale y Renna",
+  area: "Iglesia de la Elleh",
+  descripcion: "La Iglesia de la Elleh contiene al comerciante Kale y, de noche, a la bruja Renna que te da las Campanas de Espíritu para invocar espectrales.",
+  detalle: [
+    "La Iglesia de la Elleh está al norte del Cementerio del Inicio, pasando el campamento de los soldados.",
+    "Habla con Kale (el comerciante con sombrero de piel) — vende flechas, antorchas, el libro de Artes de Ceniza y el cuchillo de artesano.",
+    "Compra el libro de Artes de Ceniza a Kale (3.000 runas) para poder comprar y aplicar cenizas de guerra.",
+    "Visita la iglesia DE NOCHE (descansa en el Lugar de Gracia y avanza el tiempo) para que aparezca Renna en el techo.",
+    "Habla con Renna; si ya tienes a Torrente, ella te dará la Campana de Espíritu y la Ceniza de Espíritu de los Lobos Sepultureros.",
+    "La Campana de Espíritu es crucial — permite invocar aliados espectrales en combates contra jefes (dentro de zonas con arco dorado en el suelo).",
+  ],
+  jefe: null,
+  recompensa: "Campana de Espíritu, Ceniza de los Lobos Sepultureros, acceso a comerciante",
+  es_opcional: false,
+  siguiente: "Sube de nivel varias veces y dirígete al norte, hacia las Ruinas de la Puerta Fronteriza."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 6 — ZONAS SUBTERRÁNEAS
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_27", numero:27, fase:"Zonas Subterráneas",
-    titulo:"Nokron, Ciudad Eterna — Tras la caída de Radahn",
-    area:"Nokron, Ciudad Eterna",
-    descripcion:"Nokron es una ciudad subterránea que se abre tras derrotar a Radahn. Necesario para la misión de Ranni.",
-    detalle:[
-      "El cráter donde cayó Radahn está al sur de Necrolimbo. Desciende por los salientes dentro del cráter.",
-      "Nokron es una ciudad plateada bajo tierra con una Gracia especial y enemigos plateados.",
-      "El Ancestro Espíritu aquí da Cenizas mejoradas (versión completa, mucho más poderosa).",
-      "Los Gargoyles Gemelos cuidan la Cofra del Ataúd — derrótales para la misión de Fia.",
-      "Dentro de la ciudad está el Tesoro de los Mimic: la Hoja Decapitadora para la misión de Ranni.",
-      "Explora las ruinas plateadas — hay objetos únicos y una zona que se conecta con el Río Siofra."
-    ],
-    jefe:"Ancestro Espíritu + Gargoyles Gemelos (para misión de Fia)",
-    recompensa:"Hoja Decapitadora (misión Ranni), Cenizas del Ancestro Espíritu mejoradas",
-    es_opcional:true,
-    siguiente:"Deeproot Depths (misión Fia) o Palacio de Mohgwyn"
-  },
-  {
-    id:"paso_28", numero:28, fase:"Zonas Subterráneas",
-    titulo:"Fondo de Raíz Profunda — Misión de Fia",
-    area:"Fondo de Raíz Profunda",
-    descripcion:"Bajo Leyndell, en las raíces del Árbol Áldano. El final de la misión de Fia lleva al dragón Lich Fortissax y a un final alternativo.",
-    detalle:[
-      "Accede por la Cofra del Ataúd en Nokron tras derrotar a los Gargoyles.",
-      "Fia está aquí en su forma final. Si tienes el Medallón de la Muerte, puedes hablar con ella.",
-      "El jefe Fortissax está en sueños — acepta yacer con Fia y lucha con el dragón en el mundo de los sueños.",
-      "Al derrotarlo, Fia completa su misión y obtienes el objeto para el Final de Fia.",
-      "Explora los árboles de raíces gigantes — hay escalada hasta el jefe del Árbol Áldano.",
-      "El Avatar del Árbol Áldano aquí da una Lágrima de Cristal única."
-    ],
-    jefe:"Lichdragon Fortissax",
-    recompensa:"Incantación de Fortissax, objeto para el Final de Fia",
-    es_opcional:true,
-    siguiente:"Palacio de Mohgwyn (opcional) o Montañas de los Gigantes"
-  },
-  {
-    id:"paso_29", numero:29, fase:"Zonas Subterráneas",
-    titulo:"Palacio de Mohgwyn — Mohg Señor de la Sangre",
-    area:"Palacio de Mohgwyn",
-    descripcion:"Zona de sangre oculta bajo el mundo. Accesible por el portal de Varre o por las Montañas de los Gigantes. Necesario para el Final de Mohg.",
-    detalle:[
-      "ACCESO FÁCIL: completa la misión de Varre hasta el final — él te da el portal directo.",
-      "ACCESO ALTERNATIVO: portal en las Montañas de los Gigantes (zona más avanzada).",
-      "El palacio está bañado en sangre. Los enemigos son vampíricos y regeneran HP si les dejas.",
-      "Mohg, Señor de la Sangre tiene dos fases. En la segunda invoca una maldición de tres fases de Nihil.",
-      "Para eliminar la maldición Nihil, usa la Purissage — obtenida del comerciante de Mohg.",
-      "Al derrotarlo, el capullo de Miquella está detrás. Interactúa para contexto del lore.",
-      "El DLC Shadow of the Erdtree empieza aquí."
-    ],
-    jefe:"Mohg, Señor de la Sangre",
-    recompensa:"Gran Runa de Mohg, Remembranza de Mohg, acceso al DLC",
-    es_opcional:true,
-    siguiente:"Montañas de los Gigantes"
-  },
+{
+  id: "paso_05",
+  numero: 5,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Cueva de los Groveside",
+  area: "Cueva de los Groveside",
+  descripcion: "Cueva con lobos y un minijefe accesible muy pronto. Buen lugar para runas iniciales y conseguir una ceniza de espíritu de lobo mejorada.",
+  detalle: [
+    "La entrada está en el acantilado al este de la Iglesia de la Elleh, busca una apertura en la roca cerca de un árbol.",
+    "Lleva antorcha o el hechizo Luz — la cueva está muy oscura.",
+    "Los enemigos son lobos, que atacan en grupo; usa golpes cargados o esquiva hacia los lados.",
+    "El jefe es el Lobo de las Nieves Cementerio — tiene mucha vida pero es lento.",
+    "La recompensa es la Ceniza de Espíritu del Lobo Noble, una buena invocación de apoyo.",
+  ],
+  jefe: "Lobo de las Nieves Cementerio",
+  recompensa: "Ceniza del Lobo Noble, runas",
+  es_opcional: true,
+  siguiente: "Regresa a la exploración de Necrolimbo."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 7 — MONTAÑAS DE LOS GIGANTES Y HALIGTREE
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_30", numero:30, fase:"Picos de los Gigantes",
-    titulo:"Montañas de los Gigantes — El Camino al Norte",
-    area:"Picos de los Gigantes",
-    descripcion:"Usa el Gran Medallón de Rold para subir al Gran Ascensor de Rold. Las Montañas de los Gigantes son la zona más fría del juego.",
-    detalle:[
-      "Usa el Gran Medallón de Rold en el Gran Ascensor de Rold (al este de Leyndell).",
-      "Al llegar, activa los Lugares de Gracia y obtén el mapa de las Montañas.",
-      "El Castillo Sol al norte tiene el Comandante Niall — derrótalo para el fragmento derecho del Medallón del Haligtree.",
-      "El Dragón Borealis vive en el lago congelado — da el Corazón del Dragón de Hielo.",
-      "Las catacumbas de la zona dan incantaciones de muerte únicas.",
-      "Al norte, la Forja de los Gigantes es donde debes tomar la decisión de quemar el Árbol.",
-      "Nivel recomendado: 100-120."
-    ],
-    jefe:"Commander Niall (Castillo Sol) + Borealis (dragón)",
-    recompensa:"Fragmento del Medallón de Haligtree (derecho), Corazón de Borealis",
-    es_opcional:false,
-    siguiente:"Árbol Hierático de Miquella (opcional) o Quemar el Árbol"
-  },
-  {
-    id:"paso_31", numero:31, fase:"Picos de los Gigantes",
-    titulo:"Campo Sacroníveo y Árbol Hierático de Miquella",
-    area:"Campo Sacroníveo — Árbol Hierático de Miquella",
-    descripcion:"El Árbol Hierático de Miquella es la zona más difícil del juego base. Malenia aquí es el jefe más duro del juego.",
-    detalle:[
-      "Con los DOS fragmentos del Medallón del Haligtree, usa el Gran Ascensor Oculto (en el norte de las Montañas).",
-      "El Campo Sacroníveo es una zona nevada con enemigos de hielo y bandidos albinauricos.",
-      "En el Campo Sacroníveo entrega a Latenna a los albinauricos — te da el fragmento izquierdo del medallón.",
-      "Loretta del Árbol Hierático guarda la entrada — versión mejorada de la Loretta de Caria.",
-      "Elphael, el Regazo del Árbol, está dentro. Navega por las zonas con árbol putrefacto.",
-      "Malenia está al fondo de Elphael. Su mecánica más peligrosa: SE CURA con cada golpe que conecta, incluso bloqueados.",
-      "Para derrotarla: aprende a esquivar (no bloquear), ataca agresivo entre sus combos."
-    ],
-    jefe:"Malenia, Semidiosa + Malenia, Diosa del Rotten (2 fases)",
-    recompensa:"Gran Runa de Malenia, Mano de Malenia (arma), Remembranza de Malenia",
-    es_opcional:true,
-    siguiente:"Quemar el Árbol Áldano"
-  },
-  {
-    id:"paso_32", numero:32, fase:"Picos de los Gigantes",
-    titulo:"La Forja de los Gigantes — Quemar el Árbol",
-    area:"Forja de los Gigantes — Picos de los Gigantes",
-    descripcion:"La decisión más importante del juego. En la Forja de los Gigantes, el fuego de los Gigantes quemará el Árbol Áldano.",
-    detalle:[
-      "Sube a la Forja de los Gigantes al norte de las Montañas siguiendo el camino principal.",
-      "Hay un combate contra el Giant Ancestral antes de la forja — usa relámpago o físico.",
-      "Melina te pedirá que enciendas la forja para quemar el Árbol. Acepta.",
-      "ALTERNATIVA: si tienes la Llama del Frénesis (los Tres Dedos en el subsuelo de Leyndell), puedes usar esa llama en lugar de sacrificar a Melina.",
-      "Tras quemar el Árbol, el juego avanza automáticamente a Farum Azula.",
-      "Esta decisión es IRREVERSIBLE — guarda primero.",
-      "Melina puede morir aquí si eliges quemar el árbol con su sacrificio."
-    ],
-    jefe:"Fire Giant (jefe de la zona antes de la forja)",
-    recompensa:"Avance a Farum Azula, posible supervivencia de Melina (si usas los Tres Dedos)",
-    es_opcional:false,
-    siguiente:"Farum Azula en Desmoronamiento"
-  },
+{
+  id: "paso_06",
+  numero: 6,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Catacumbas de la Piedra de Tormenta",
+  area: "Catacumbas de la Piedra de Tormenta",
+  descripcion: "Catacumbas en la ladera este de la Colina de la Tormenta. Contienen un jefe y buena recompensa para invocaciones.",
+  detalle: [
+    "Localiza la entrada en la ladera este de la Colina de la Tormenta, al norte de Necrolimbo.",
+    "Hay trampas de dardos en los pasillos — avanza con cuidado y activa las palancas para abrir puertas.",
+    "Los enemigos son esqueletos; recuerda golpearlos una segunda vez al caer para evitar que se reanimen.",
+    "El jefe es el Campeón del Cementerio — usa el pilar central para cubrirte de sus ataques en área.",
+    "La recompensa es la Ceniza de Espíritu del Jinete Sepulturero, muy útil para distraer jefes.",
+  ],
+  jefe: "Campeón del Cementerio",
+  recompensa: "Ceniza del Jinete Sepulturero",
+  es_opcional: true,
+  siguiente: "Continúa explorando Necrolimbo."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 8 — FARUM AZULA EN DESMORONAMIENTO
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_33", numero:33, fase:"Farum Azula en Desmoronamiento",
-    titulo:"Llegada a Farum Azula",
-    area:"Farum Azula en Desmoronamiento",
-    descripcion:"Farum Azula es una ciudad flotante en el tiempo que se desmorona eternamente. Zona final del juego antes del Árbol Áldano.",
-    detalle:[
-      "Tras quemar el Árbol, apareces directamente en Farum Azula.",
-      "La zona tiene tormentas de relámpago constantes y plataformas que se derrumban.",
-      "Los Dracónidos son los principales enemigos — resistentes y con daño de relámpago.",
-      "El dragón Placidusax está aquí (opcional) — uno de los dragones más épicos del juego.",
-      "La Bestia Ancestral (versión final de Gurranq) aparece aquí si completaste su misión.",
-      "Activa todos los Lugares de Gracia — hay varios caminos alternativos.",
-      "Nivel recomendado: 120-150."
-    ],
-    jefe:"Varios Dracónidos + Dragón Placidusax (opcional)",
-    recompensa:"Remembranza de Placidusax (arma o incantación únicos)",
-    es_opcional:false,
-    siguiente:"Maliketh, la Bestia de la Noche"
-  },
-  {
-    id:"paso_34", numero:34, fase:"Farum Azula en Desmoronamiento",
-    titulo:"Maliketh, la Bestia de la Noche",
-    area:"Farum Azula en Desmoronamiento",
-    descripcion:"Maliketh es el penúltimo jefe de Farum Azula. Dos fases radicalmente diferentes: primero como Bestia Encadenada, luego como Maliketh.",
-    detalle:[
-      "Accede al coliseo de Farum Azula — hay varios pasillos antes del boss.",
-      "Primera fase: Bestia Encadenada. Ágil y con ataques rápidos. Aprende el patrón y ataca en sus pausas.",
-      "Segunda fase: se transforma en Maliketh con la Hoja Negra. Ataques de muerte que reducen el HP máximo.",
-      "La Hoja Negra drena permanentemente el HP máximo — mata a Maliketh rápido antes de que te reduzca demasiado.",
-      "Usa Cenizas de Espíritu para distraerle durante los ataques más peligrosos.",
-      "Al derrotarlo, el juego corta a Leyndell convertida en Capital de Cenizas."
-    ],
-    jefe:"Maliketh, la Bestia de la Noche",
-    recompensa:"Remembranza de la Bestia de la Noche",
-    es_opcional:false,
-    siguiente:"Leyndell, Capital de Cenizas"
-  },
+{
+  id: "paso_07",
+  numero: 7,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Cueva de Murkwater y Patches",
+  area: "Cueva de Murkwater",
+  descripcion: "En el río Murkwater al norte de Necrolimbo encontrarás esta cueva con un tesoro trampa y el NPC Patches, un vendedor recurrente de la saga.",
+  detalle: [
+    "Sigue el río al norte de la Iglesia de la Elleh hasta llegar a la cueva entre acantilados.",
+    "Derrota a los bandidos en la entrada y activa el Lugar de Gracia interior.",
+    "Abre el cofre trampa del fondo — aparece Patches y te pone en un aprieto.",
+    "Cuando Patches pida misericordia, PERDÓNALO (no lo mates) para que se convierta en comerciante.",
+    "Patches vende objetos únicos y tiene su propia misión que continúa en otras zonas del juego.",
+    "Si lo matas, pierdes acceso a su inventario y su línea de misión.",
+  ],
+  jefe: "Patches (NPC hostil temporal)",
+  recompensa: "Acceso a Patches como comerciante, objetos únicos",
+  es_opcional: true,
+  siguiente: "Patches puede reaparecer en Liurnia y otras zonas si lo perdonas."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // FASE 9 — LEYNDELL CAPITAL DE CENIZAS Y FINAL
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_35", numero:35, fase:"Leyndell, Capital de Cenizas",
-    titulo:"Leyndell en Ruinas — La Capital de Cenizas",
-    area:"Leyndell, Capital de Cenizas",
-    descripcion:"Después de Maliketh, Leyndell ha sido quemada y cubierta de cenizas. El final se acerca.",
-    detalle:[
-      "Leyndell transformada — los mismos lugares pero con cenizas y enemigos muertos vivientes.",
-      "Sir Gideon Ofnir el Omnisciente está en el Gran Vestíbulo — él es un jefe.",
-      "Gideon usa todos los hechizos del juego. Es fuerte pero manejable si presionas.",
-      "Godfrey, el Primer Señor Áldano (su forma REAL) está en el Trono — mucho más difícil que la forma espectral.",
-      "Godfrey real tiene dos fases — la segunda con mazo de tierra es devastadora.",
-      "Tras Godfrey, el camino al Árbol Áldano quemado está abierto.",
-      "Nivel recomendado: 130-150."
-    ],
-    jefe:"Gideon Ofnir + Godfrey, Primer Señor Áldano (real)",
-    recompensa:"Acceso al Árbol Áldano final y al jefe final",
-    es_opcional:false,
-    siguiente:"Radagon y la Bestia Áurea — El Jefe Final"
-  },
-  {
-    id:"paso_36", numero:36, fase:"El Final",
-    titulo:"Radagon de la Luna Dorada y la Bestia Áurea",
-    area:"Árbol Áldano — Cima del Mundo",
-    descripcion:"El jefe final del juego son dos peleas consecutivas sin descanso: Radagon, el marido de Marika, y luego la Bestia Áurea, el Orden Áldano encarnado.",
-    detalle:[
-      "Radagon es el alter ego de Marika. Lucha con martillo de oro y runas sagradas.",
-      "Es vulnerable a daño físico y magia. El Rayo le hace moderado daño.",
-      "Segunda fase sin transición: Radagon desemboca en la Bestia Áurea.",
-      "La Bestia Áurea tiene múltiples ataques de área sagrada y un rayo dorado devastador.",
-      "Usa la Espada de la Reliquia Sagrada (AoW: Ola de Gracia) para infligir gran daño en sus patas.",
-      "Al derrotarla, el juego llega a su clímax y debes elegir el FINAL.",
-      "Guarda la partida ANTES del jefe final para poder volver y elegir otro final."
-    ],
-    jefe:"Radagon de la Luna Dorada + Bestia Áurea (Elden Beast)",
-    recompensa:"Fin del juego — uno de los seis finales se activa según tus elecciones previas",
-    es_opcional:false,
-    siguiente:"Elige tu final — ver sección de Finales"
-  },
+{
+  id: "paso_08",
+  numero: 8,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Lago de Agheel y el Dragón",
+  area: "Lago de Agheel",
+  descripcion: "En el centro de Necrolimbo hay un gran lago donde vive el Dragón Agheel, una batalla espectacular con buenas recompensas.",
+  detalle: [
+    "El lago está en el centro de la zona; es fácil de ver desde Torrente.",
+    "El Dragón Agheel aparece cuando te acercas al centro del lago — prepárate antes de entrar.",
+    "Monta a Torrente para movilidad y ataca las patas traseras o la cola desde el caballo.",
+    "Cuando se agacha para escupir fuego, retira a Torrente hacia los lados.",
+    "Al morir suelta el Corazón del Dragón (necesario para el altar de dragones) y escalas de Agheel.",
+    "Cerca del lago hay las Ruinas de Agheel con runas y objetos adicionales.",
+  ],
+  jefe: "Dragón Agheel",
+  recompensa: "Corazón del Dragón, Escalas del Dragón, runas",
+  es_opcional: true,
+  siguiente: "Lleva el Corazón del Dragón al Altar de los Dragones al sur de Necrolimbo para aprender el Aliento de Dragón."
+},
 
-  // ═══════════════════════════════════════════════════════
-  // MISIONES NPC CLAVE
-  // ═══════════════════════════════════════════════════════
-  {
-    id:"paso_37", numero:37, fase:"Misiones NPC",
-    titulo:"Misión de Ranni — La Bruja de la Luna Azul",
-    area:"Múltiples zonas",
-    descripcion:"La misión de Ranni es la más compleja y recompensante del juego. Desbloquea el mejor final alternativo.",
-    detalle:[
-      "Paso 1: Ve al Castillo de Caria (noroeste de Liurnia) y derrota a Loretta.",
-      "Paso 2: En la Torre de Ranni, acéptala como tu señora.",
-      "Paso 3: Encuentra a Blaidd en el Pozo de Siofra (bajo Necrolimbo) y habla con él.",
-      "Paso 4: Derrota a Radahn para abrir Nokron.",
-      "Paso 5: En Nokron, consigue la Hoja Decapitadora.",
-      "Paso 6: Dala a Ranni en su torre. Ella desaparece.",
-      "Paso 7: En el Río Ainsel, activa la Miniatura de Ranni.",
-      "Paso 8: Completa Nokstella → derrota a Astel en el Lago de Rot → obtén el Anillo de la Luna Oscura.",
-      "Paso 9: Úsalo en la Gran Biblioteca de la Academia para el ritual final con Ranni."
-    ],
-    jefe:"Loretta + Radahn + Gargoyles + Astel",
-    recompensa:"Gran Espada de la Luna Oscura (mejor arma del juego para Int), Final de la Edad de las Estrellas",
-    es_opcional:true,
-    siguiente:"Completa el juego para activar el final de Ranni"
-  },
-  {
-    id:"paso_38", numero:38, fase:"Misiones NPC",
-    titulo:"Misión de Millicent — Hija de Malenia",
-    area:"Caelid → Altus → Haligtree",
-    descripcion:"Millicent es hija de Malenia y tiene la Podredumbre Escarlata. Su misión recorre el mundo y da el mejor talismán del juego para builds de múltiple golpe.",
-    detalle:[
-      "Paso 1: Habla con Gowry en Caelid. Te pide la Flor de Gracia de Sellia.",
-      "Paso 2: Consigue la flor en Sellia, Ciudad de Hechicería. Dásela a Gowry.",
-      "Paso 3: Gowry crea una cura. Llévala a Millicent en la Iglesia de la Plaga, Caelid.",
-      "Paso 4: Habla con Millicent varias veces hasta que se vaya. La encuentras después en Altus.",
-      "Paso 5: Visítala en las Ruinas del Árbol de Altus, luego en las Montañas de los Gigantes, luego en el Haligtree.",
-      "Paso 6: En el Haligtree, antes del boss final, hay un evento: elige AYUDARLA contra las hermanas.",
-      "Paso 7: Al ayudarla y volver, ella ha avanzado hacia Malenia. Vuelve al sitio y activa el objeto brillante.",
-      "RECOMPENSA: Talismán Prótesis de Millicent (excelente) + Cenizas del Aguijón de la Espada Alada Podrida."
-    ],
-    jefe:"Cuatro hermanas de Millicent (si eliges ayudarla)",
-    recompensa:"Talismán Prótesis de Millicent, Cenizas del Aguijón de la Espada Alada Podrida",
-    es_opcional:true,
-    siguiente:"Completa el juego o continúa otras misiones"
-  },
-  {
-    id:"paso_39", numero:39, fase:"Misiones NPC",
-    titulo:"Misión de Alexander — El Jarro de Hierro",
-    area:"Necrolimbo → Caelid → Altus → Farum Azula",
-    descripcion:"Alexander es un jarro de guerra gigante que aparece en múltiples puntos del juego. Su misión da uno de los mejores talismanes del juego.",
-    detalle:[
-      "Paso 1: Encuentra a Alexander atascado en un hoyo en Necrolimbo, cerca de las Ruinas de Saintsbridge. Golpéale para liberarle.",
-      "Paso 2: Habla con él junto al festival de Radahn. Participa en el festival con él.",
-      "Paso 3: Tras el festival, encuentra a Alexander dañado al norte del campo de batalla. Usa un aceite en él.",
-      "Paso 4: Encuéntralo en Farum Azula — ha llegado para su batalla final.",
-      "Paso 5: En Farum Azula, él te reta a un duelo. Acéptalo.",
-      "Paso 6: Al derrotarle, obtienes el Fragmento de Alexander.",
-      "El Fragmento de Alexander (talismán) es uno de los mejores para builds de AoW."
-    ],
-    jefe:"Alexander, el Jarro de Hierro (duelo final)",
-    recompensa:"Fragmento de Alexander (talismán — aumenta daño de AoW en 15%)",
-    es_opcional:true,
-    siguiente:"Completa el juego o continúa otras misiones"
-  },
-  {
-    id:"paso_40", numero:40, fase:"Misiones NPC",
-    titulo:"Misión de Corhyn y Goldmask — La Verdad Dorada",
-    area:"Mesa Redonda → Altus → Leyndell → Montañas",
-    descripcion:"Goldmask busca la forma verdadera del Orden Áldano. Su misión es necesaria para el final del Lord Áldano del Orden.",
-    detalle:[
-      "Paso 1: Habla con Corhyn en la Mesa Redonda — él menciona a Goldmask.",
-      "Paso 2: Encuentra a Goldmask en el puente de Altus, mirando al horizonte. No habla.",
-      "Paso 3: Habla con Corhyn junto a Goldmask. Goldmask quiere 'la forma de los Dos Dedos'.",
-      "Paso 4: Para resolver el enigma, aprende la incantación Ley de la Regresión (en la Academia o comprándola).",
-      "Paso 5: Activa Ley de la Regresión frente a la estatua correcta en Leyndell — reveals a message.",
-      "Paso 6: Dile la respuesta a Corhyn — 'Lo mismo'.",
-      "Paso 7: Encuéntralos en las Montañas de los Gigantes para el desenlace.",
-      "RECOMPENSA: Incantación del Orden Áldano + posibilidad del final del Lord Áldano."
-    ],
-    jefe:null,
-    recompensa:"Incantación del Orden Áldano, desbloqueo del Final del Lord Áldano",
-    es_opcional:true,
-    siguiente:"Completa el juego eligiendo el Final del Lord Áldano del Orden"
-  }
+{
+  id: "paso_09",
+  numero: 9,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Evergaol de la Colina de la Tormenta",
+  area: "Evergaol de la Colina de la Tormenta",
+  descripcion: "Los Evergaoles son prisiones mágicas donde se enfrentan jefes especiales. Este contiene al Caballero del Crisol, uno de los más difíciles de Necrolimbo.",
+  detalle: [
+    "El Evergaol está en lo alto de la Colina de la Tormenta, al norte, cerca del camino al Castillo.",
+    "Interactúa con el círculo de runas en el suelo para entrar — no puedes invocar cenizas de espíritu aquí.",
+    "El Caballero del Crisol tiene ataques lentos pero potentes; aprende a esquivar hacia su lado izquierdo.",
+    "Puedes invocar a otro jugador mediante el signo de invocación fuera del Evergaol.",
+    "La recompensa es el Arte de Ceniza Incanto del Crisol: Alas, útil para personajes de magia.",
+    "Este enemigo reaparece en versiones más fuertes en otras zonas del juego.",
+  ],
+  jefe: "Caballero del Crisol",
+  recompensa: "Arte de Ceniza: Incanto del Crisol (Alas)",
+  es_opcional: true,
+  siguiente: "Regresa a la ruta principal hacia el Castillo de Velo Tormentoso."
+},
+
+{
+  id: "paso_10",
+  numero: 10,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Evergaol del Can Abandonado",
+  area: "Evergaol del Can Abandonado (sur de Necrolimbo)",
+  descripcion: "Este Evergaol al sur de Necrolimbo contiene al Héroe Antiguo de Zamor, un gigante de hielo con ataques de área.",
+  detalle: [
+    "Está al sur de Necrolimbo, en la orilla del lago.",
+    "El Héroe Antiguo de Zamor usa ataques de hielo en área y torbellinos.",
+    "Mantente cerca de sus pies para evitar la mayoría de sus ataques.",
+    "Esquiva hacia adentro cuando hace el torbellino de hielo para evitar el área de efecto.",
+    "La recompensa es el Arte de Ceniza Torbellino Antiguo — útil para armas de Destreza.",
+  ],
+  jefe: "Héroe Antiguo de Zamor",
+  recompensa: "Arte de Ceniza: Torbellino Antiguo",
+  es_opcional: true,
+  siguiente: "Continúa hacia la Península del Llanto o al Castillo."
+},
+
+{
+  id: "paso_11",
+  numero: 11,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Península del Llanto",
+  area: "Península del Llanto",
+  descripcion: "La gran península al sur de Necrolimbo tiene múltiples mazmorras, un castillo y la única mazmorra tutorial real del juego.",
+  detalle: [
+    "Cruza el puente al sur para llegar a la Península del Llanto.",
+    "La Cueva del Conocimiento (al norte de la península) actúa como tutorial extendido con texto instructivo en las paredes.",
+    "El Castillo Morne al sur contiene al jefe Leonine Misbegotten y la Gran Espada de Morne.",
+    "En la playa este hay una tumba con la invocación Latente Fantasma Imperial.",
+    "Visita la Torre del Faro al extremo sur para obtener un talisman útil.",
+    "Esta zona es opcional pero muy recomendada para principiantes por sus explicaciones en pantalla.",
+  ],
+  jefe: "Leonine Misbegotten (Castillo Morne)",
+  recompensa: "Gran Espada de Morne, Talisman de la Torre, runas",
+  es_opcional: true,
+  siguiente: "Regresa al norte y prepárate para el Castillo de Velo Tormentoso."
+},
+
+{
+  id: "paso_12",
+  numero: 12,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Mina de Limgrave",
+  area: "Mina de Limgrave",
+  descripcion: "La primera mina del juego, fuente de Gemas de Afilado para mejorar armas con escalado de Fuerza y Destreza.",
+  detalle: [
+    "Está al este de la Iglesia de la Elleh, busca la entrada en el acantilado.",
+    "Los mineros dentro son lentos pero tienen mucha vida; los ataques a la espalda son muy efectivos.",
+    "Recoge todas las Gemas de Afilado (6 caras) del suelo y los cristales brillantes en las paredes.",
+    "El minijefe al fondo es el Guardián de la Mina — derrótalo para el cofre con recompensa.",
+    "Las gemas se llevan al herrero Hewg en la Mesa Redonda para mejorar armas.",
+    "Hay una salida alternativa que lleva a un acantilado con vista a Necrolimbo.",
+  ],
+  jefe: "Guardián de la Mina",
+  recompensa: "Gemas de Afilado x3, runas",
+  es_opcional: true,
+  siguiente: "Continúa acumulando mejoras antes del Castillo."
+},
+
+{
+  id: "paso_13",
+  numero: 13,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Cueva Costera y Collar de Rya",
+  area: "Cueva Costera (costa oeste de Necrolimbo)",
+  descripcion: "Esta cueva en la costa oeste esconde un jefe dueto y el collar de Rya, necesario para iniciar su línea de misión que lleva al Castillo del Volcán.",
+  detalle: [
+    "Está en la costa oeste de Necrolimbo, accesible a pie o con Torrente bajando el acantilado.",
+    "Los jefes son dos Jefes Semi-Humanos — uno a la vez si usas el umbral de la puerta.",
+    "La recompensa principal es el Collar de Rya que aparece en el botín.",
+    "Lleva el collar a Rya (NPC en el Mirador de Liftside, Liurnia) para iniciar su misión.",
+    "La misión de Rya eventualmente lleva al Castillo del Volcán (Volcano Manor) en el Monte Gelmir.",
+    "Hay objetos adicionales en la cueva como carne curada y piedras de mejora.",
+  ],
+  jefe: "Jefes Semi-Humanos (dueto)",
+  recompensa: "Collar de Rya, runas",
+  es_opcional: true,
+  siguiente: "Guarda el collar para entregárselo a Rya en Liurnia."
+},
+
+{
+  id: "paso_14",
+  numero: 14,
+  fase: "Necrolimbo",
+  titulo: "OPCIONAL — Ruinas de la Puerta Fronteriza (Aspid del Árbol)",
+  area: "Ruinas de la Puerta Fronteriza",
+  descripcion: "Las ruinas al norte de Necrolimbo tienen un Aspid del Árbol Áldano como jefe de zona, dando una Semilla del Árbol muy valiosa.",
+  detalle: [
+    "Las ruinas están en la transición entre Necrolimbo y la Colina de la Tormenta.",
+    "El Aspid del Árbol (Ulcerated Tree Spirit) es un enemigo sinuoso con mucha vida — usa estocadas.",
+    "Puede embestir y retorcerse; mantén distancia y ataca cuando esté en el suelo.",
+    "La recompensa incluye una Semilla del Árbol Áldano (aumenta el número de usos de tu frasco).",
+    "Entrega la Semilla del Árbol en cualquier Lugar de Gracia Menor con frasco para aumentar sus usos.",
+    "Las ruinas tienen objetos adicionales repartidos por el área.",
+  ],
+  jefe: "Aspid del Árbol Áldano",
+  recompensa: "Semilla del Árbol Áldano, runas",
+  es_opcional: true,
+  siguiente: "Con una Semilla más, estarás mejor preparado para el Castillo."
+},
+
+{
+  id: "paso_15",
+  numero: 15,
+  fase: "Necrolimbo",
+  titulo: "Preparación para el Castillo de Velo Tormentoso",
+  area: "Necrolimbo general",
+  descripcion: "Antes de intentar el Castillo de Velo Tormentoso, es importante tener un nivel adecuado y el arma mejorada. Dedica tiempo a farmear runas.",
+  detalle: [
+    "El nivel recomendado para entrar al Castillo es entre 25-35, con el arma al menos en +3.",
+    "Farmea runas en el campamento de soldados al norte de la Iglesia de la Elleh (los jinetes a caballo dan muchas runas).",
+    "Usa las runas doradas encontradas en el mundo para subir varios niveles de golpe.",
+    "Lleva tus armas al herrero Hewg en la Mesa Redonda o usa las piedras de afilado con un kit de herrería portátil.",
+    "Elige qué estadísticas subir según tu arma principal: Fuerza para armas pesadas, Destreza para rápidas, Mente/Inteligencia para magia.",
+    "Asegúrate de tener varios usos del Frasco Polvo de Lágrimas configurados — tanto curación como mejora de FP según necesites.",
+  ],
+  jefe: null,
+  recompensa: "Mejor preparación, niveles y equipo mejorado",
+  es_opcional: false,
+  siguiente: "Avanza hacia el Castillo de Velo Tormentoso."
+},
+
+{
+  id: "paso_16",
+  numero: 16,
+  fase: "Necrolimbo",
+  titulo: "Castillo de Velo Tormentoso — Interior y camino a Margit",
+  area: "Castillo de Velo Tormentoso",
+  descripcion: "El primer gran castillo del juego. Lleno de soldados, caballeros y trampas que culminan con el jefe Margit, el Augurio Marchito.",
+  detalle: [
+    "El castillo está en la cima de la Colina de la Tormenta, al norte de Necrolimbo.",
+    "Activa todos los Lugares de Gracia dentro: Entrada del Castillo, Capilla del León, etc.",
+    "El camino principal sube por la muralla — cuidado con las catapultas y los arqueros.",
+    "Atajo importante: sube por la escalera de caracol a la derecha nada más entrar para llegar a la zona de la capilla.",
+    "Recoge la llave de la mazmorra para liberar al mago Rogier, que puede ser invocado contra Margit.",
+    "Antes del jefe, puedes comprar la Flor Pudiente que debilita a Margit.",
+  ],
+  jefe: null,
+  recompensa: "Exploración del castillo, objetos y runas",
+  es_opcional: false,
+  siguiente: "Enfrenta a Margit, el Augurio Marchito en la puerta del castillo."
+},
+
+{
+  id: "paso_17",
+  numero: 17,
+  fase: "Necrolimbo",
+  titulo: "Jefe — Margit, el Augurio Marchito",
+  area: "Castillo de Velo Tormentoso — Puerta Principal",
+  descripcion: "Margit es el primer gran jefe obligatorio del juego. Un guardián antiguo con ataques rápidos y combinaciones largas que testea tus habilidades de esquiva.",
+  detalle: [
+    "Invoca al espectro de Rogier (señal dorada frente a la puerta) si tienes la Campana de Espíritu activa.",
+    "Usa la Flor Pudiente para invocar a un NPC adicional que distrae a Margit.",
+    "Fase 1: Margit usa bastón y espada; esquiva hacia su lado izquierdo (tu derecha) en sus combos.",
+    "Fase 2 (mitad de vida): saca un martillo de luz y armas de luz — la combinación final tiene un retraso, no te adelantes al esquivar.",
+    "Aprovecha las ventanas de ataque después de sus combos largos — 2-3 golpes máximo y retrocede.",
+    "Si mueres, no pierdas las runas — recupéralas antes de intentarlo de nuevo.",
+  ],
+  jefe: "Margit, el Augurio Marchito",
+  recompensa: "8.000 Runas, Talismán de Margit (reduce el requisito de nivel para armas)",
+  es_opcional: false,
+  siguiente: "Avanza por el interior del castillo hacia Godrick."
+},
+
+{
+  id: "paso_18",
+  numero: 18,
+  fase: "Necrolimbo",
+  titulo: "Jefe — Godrick el Injertado",
+  area: "Castillo de Velo Tormentoso — Sala del Trono",
+  descripcion: "Godrick es el primer Semidios obligatorio del juego. Su derrota otorga la Runa Áldana y permite acceder a la Mesa Redonda y a Liurnia.",
+  detalle: [
+    "Hay una señal de invocación de Nepheli Loux frente a la puerta — úsala, es una excelente aliada.",
+    "Fase 1: Godrick lucha con sus múltiples brazos injertados; esquiva sus combos y ataca sus pies.",
+    "Fase 2: se injerta el cuello de un dragón en el brazo — ahora escupe fuego en área; corre lateralmente al ver la animación.",
+    "El ataque de agarre (cuando abre los brazos ampliamente) te mata de un golpe — esquiva hacia atrás.",
+    "Atacar la cabeza del dragón cuando está baja hace daño adicional.",
+    "Al vencerlo obtienes la Runa Áldana de Godrick y la Runa Mayor de Godrick (actívala en la Torre de los Dragones Gemelos).",
+  ],
+  jefe: "Godrick el Injertado",
+  recompensa: "20.000 Runas, Runa Mayor de Godrick, Runa Áldana de Godrick",
+  es_opcional: false,
+  siguiente: "Ve a la Mesa Redonda o avanza a Liurnia de los Lagos."
+},
+
+{
+  id: "paso_19",
+  numero: 19,
+  fase: "Necrolimbo",
+  titulo: "La Mesa Redonda — Hub del juego",
+  area: "Mesa Redonda",
+  descripcion: "La Mesa Redonda es el hub central donde están el herrero, la sacerdotisa de los dedos, varios NPCs con misiones y el acceso a mejoras de equipo.",
+  detalle: [
+    "Llegas automáticamente tras derrotar a Godrick o mediante la invitación de Melina al activar muchos Lugares de Gracia.",
+    "Hewg es el herrero — mejora tus armas y escudos aquí con las gemas y piedras encontradas.",
+    "Enia es la sacerdotisa de los dedos — intercambia Runas Áldanas por poderes especiales de los Semidioses.",
+    "Activa la Runa Mayor de Godrick en el punto de medianoche de la Mesa Redonda.",
+    "Habla con todos los NPCs: Diallos, Nepheli Loux, D el cazador, el mago Rogier — todos tienen misiones.",
+    "El recinto secreto tras la puerta sellada (requiere dos Runas Áldanas) contiene al Ancestro Putrefacto.",
+  ],
+  jefe: null,
+  recompensa: "Acceso a mejoras, NPCs con misiones, poderes de runas",
+  es_opcional: false,
+  siguiente: "Activa la Runa Mayor de Godrick en la Torre de los Dragones Gemelos en Necrolimbo."
+},
+
+{
+  id: "paso_20",
+  numero: 20,
+  fase: "Necrolimbo",
+  titulo: "Torre de los Dragones Gemelos — Activar Runa Mayor",
+  area: "Torre de los Dragones Gemelos, Necrolimbo este",
+  descripcion: "Para aprovechar la Runa Mayor de Godrick debes activarla en la torre específica ubicada al este de Necrolimbo, custodiada por dragones.",
+  detalle: [
+    "La torre está en el extremo este de Necrolimbo, accesible cruzando el puente largo al este.",
+    "Hay dos dragones custodios en el puente — puedes evitarlos montando a Torrente a máxima velocidad.",
+    "Sube la torre (sin enemigos dentro) hasta la cima para activar la Runa Mayor de Godrick.",
+    "Una vez activada, la Runa Mayor otorga +5 a todas las estadísticas mientras esté activa.",
+    "Para mantener la Runa Mayor activa al morir necesitarás un Arco de la Runa (consumible que se vende en tiendas).",
+    "Las runas mayores de otros Semidioses se activan en otras torres distribuidas por el mundo.",
+  ],
+  jefe: null,
+  recompensa: "Runa Mayor de Godrick activada (+5 a todas las estadísticas)",
+  es_opcional: false,
+  siguiente: "Con la Runa Mayor activa, avanza hacia Liurnia de los Lagos."
+},
+
+// ══════════════════════════════════════
+// FASE 2 — LIURNIA DE LOS LAGOS (Pasos 21-35)
+// ══════════════════════════════════════
+
+{
+  id: "paso_21",
+  numero: 21,
+  fase: "Liurnia de los Lagos",
+  titulo: "Llegada a Liurnia de los Lagos",
+  area: "Sur de Liurnia",
+  descripcion: "Liurnia es una vasta zona pantanosa dominada por un gran lago central. Al sur están las ruinas del ejército derrotado de Godrick y el primer pueblo con NPCs.",
+  detalle: [
+    "Cruza el paso de montaña al norte del Castillo de Velo Tormentoso (o usa el camino lateral que evita el castillo por completo).",
+    "El camino lateral está a la izquierda justo antes del castillo — una senda estrecha entre rocas.",
+    "Activa el Lugar de Gracia del Lago de Liurnia para anclar el punto de entrada.",
+    "Monta a Torrente para moverse por el lago — andar a pie por el agua es muy lento.",
+    "Los enemigos iniciales son soldados derrotados y cangrejos del lago — todos con buenas runas.",
+    "El pueblo de Liurnia Sur tiene un comerciante y varios NPCs con misiones.",
+  ],
+  jefe: null,
+  recompensa: "Acceso a Liurnia, nuevas zonas para explorar",
+  es_opcional: false,
+  siguiente: "Explora Liurnia en sentido horario comenzando por el oeste."
+},
+
+{
+  id: "paso_22",
+  numero: 22,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Iglesia de los Votos y Miriel",
+  area: "Iglesia de los Votos (noreste de Liurnia)",
+  descripcion: "La Iglesia de los Votos contiene a Miriel, una tortuga gigante sacerdote que puede enseñarte hechizos e incantos y tiene su propia historia.",
+  detalle: [
+    "La iglesia está al noreste de Liurnia, cerca del muro de piedra en la orilla del lago.",
+    "Miriel es un NPC inamovible que actúa como maestro de hechizos e incantos — tráele pergaminos.",
+    "Cualquier pergamino de hechizos que le des a Miriel expande su catálogo de enseñanzas.",
+    "Tráele los pergaminos de la Academia de Raya Lúcida para desbloquear hechizos avanzados.",
+    "Miriel también narra la historia del matrimonio entre Rennala y Radagon — importante para la lore.",
+    "No lo ataques — es un NPC inocente y matarlo sería un desperdicio.",
+  ],
+  jefe: null,
+  recompensa: "Acceso a hechizos e incantos adicionales",
+  es_opcional: true,
+  siguiente: "Visita la Academia de Raya Lúcida para obtener pergaminos que traerle."
+},
+
+{
+  id: "paso_23",
+  numero: 23,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Castillo de Caria y Loretta",
+  area: "Castillo de Caria (noroeste de Liurnia)",
+  descripcion: "El Castillo de Caria es el hogar abandonado de la familia de Ranni. Contiene excelentes recompensas y abre la misión de Ranni, una de las más importantes del juego.",
+  detalle: [
+    "Está al noroeste del lago — sigue la costa noroeste hasta ver el castillo en la elevación.",
+    "Los enemigos dentro son Mano-Araña (dedos gigantes que corren) — aléjate y usa ataques a distancia.",
+    "Recoge el Anillo de Hya y el Libro de Primus Glintstone en las torres laterales.",
+    "El jefe es la Caballera Real Loretta — usa hechizos y una lanza; esquiva las flechas de magia.",
+    "Al vencerla desbloqueas el Jardín de los Ojos Nocturnos donde vive Ranni.",
+    "Ve al Jardín INMEDIATAMENTE tras vencer a Loretta para iniciar la misión de Ranni.",
+  ],
+  jefe: "Caballera Real Loretta",
+  recompensa: "Gran Arco de Loretta, acceso al Jardín de los Ojos Nocturnos",
+  es_opcional: true,
+  siguiente: "Habla con Ranni en su torre para iniciar su línea de misión."
+},
+
+{
+  id: "paso_24",
+  numero: 24,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Inicio de la Misión de Ranni",
+  area: "Torre de Ranni (noroeste de Liurnia)",
+  descripcion: "Ranni la Bruja te encomienda encontrar el Cofre de Nokron. Su misión es la más larga del juego y conduce al mejor final alternativo.",
+  detalle: [
+    "Habla con Ranni en su torre — acepta servirla cuando te lo proponga.",
+    "Ella te presenta a sus sirvientes: Iji (herrero), Blaidd (guerrero lobo) y Seluvis (mago).",
+    "Habla con todos los sirvientes para obtener pistas sobre los siguientes pasos.",
+    "Blaidd te dice que busques en el Río Siofra pistas sobre Nokron.",
+    "Seluvis te da una poción para Nepheli Loux — NO se la des (arruina la misión de Nepheli); guárdala o dásela a Gideon.",
+    "La misión requiere derrotar a Radahn en Caélida para desbloquear Nokron — planifica tu ruta.",
+  ],
+  jefe: null,
+  recompensa: "Inicio de la misión de Ranni, acceso a sirvientes con misiones propias",
+  es_opcional: true,
+  siguiente: "Necesitarás derrotar a Radahn para continuar la misión de Ranni."
+},
+
+{
+  id: "paso_25",
+  numero: 25,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Río Siofra (zona subterránea)",
+  area: "Río Siofra (acceso desde Necrolimbo este)",
+  descripcion: "El Río Siofra es una zona subterránea bajo Necrolimbo accesible desde un pozo al este. Tiene su propia atmósfera y el NPC Blaidd.",
+  detalle: [
+    "El acceso está en el extremo este de Necrolimbo — busca el pozo con cadena en el suelo.",
+    "El río tiene una atmósfera azul etérea con animales gigantes y animatrices antiguas.",
+    "Encuentra a Blaidd al fondo del río — dice estar buscando algo para Ranni.",
+    "Hay un Ancestro Espíritu como minijefe — derrótalo para runas y para una misión colateral.",
+    "Los objetos flotantes de luz en el suelo son Semillas del Árbol Minor — úsalas para mejorar frascos.",
+    "Esta zona conecta con Nokron si derrotas a Radahn (meteorito cae y abre el camino).",
+  ],
+  jefe: "Ancestro Espíritu",
+  recompensa: "Semillas del Árbol Minor, runas, progreso misión de Ranni/Blaidd",
+  es_opcional: true,
+  siguiente: "Blaidd te indica que la clave está en derrotar a Radahn."
+},
+
+{
+  id: "paso_26",
+  numero: 26,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Túnel de Cristal Raya Lúcida",
+  area: "Túnel de Cristal de Raya Lúcida",
+  descripcion: "Una mina de cristal bajo el lago de Liurnia con abundantes Gemas de Magia para mejorar armas con escalado de Inteligencia.",
+  detalle: [
+    "El acceso está en las profundidades del lago, cerca del centro — busca el agujero en el suelo.",
+    "Los Cristalinos son los enemigos principales — muy resistentes a armas físicas, usa magia o armas mágicas.",
+    "Recoge tantas Gemas de Magia como puedas — son esenciales para builds de Inteligencia.",
+    "El jefe es el Cristalino de Raya Lúcida — un golem de cristal con ataques en área.",
+    "La recompensa incluye la Piedra de Cristal de Mallado, necesaria para ciertos hechizos.",
+    "Hay un cofre secreto detrás de una pared falsa en el pasillo central.",
+  ],
+  jefe: "Cristalino de Raya Lúcida",
+  recompensa: "Gemas de Magia x5, Piedra de Cristal Mallada",
+  es_opcional: true,
+  siguiente: "Dirígete a la Academia de Raya Lúcida."
+},
+
+{
+  id: "paso_27",
+  numero: 27,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Catacumbas de Raya Lúcida",
+  area: "Catacumbas de Raya Lúcida",
+  descripcion: "Catacumbas al suroeste de la Academia de Raya Lúcida con trampas de ventiladores giratorios y un buen jefe para invocación.",
+  detalle: [
+    "Están en el acantilado al suroeste de la Academia — busca la entrada en la roca.",
+    "El peligro principal son los ventiladores giratorios que te empujan al vacío — cronometra tu avance.",
+    "Hay palancas que detienen temporalmente los ventiladores — úsalas para avanzar.",
+    "El jefe es el Dueto de Criptoblooms — dos plantas gigantes que se coordinan.",
+    "La recompensa es la Ceniza de Espíritu del Jinete del Olvido, una de las mejores invocaciones.",
+    "Explorar completamente da acceso a un área secreta con runas adicionales.",
+  ],
+  jefe: "Dueto de Criptoblooms",
+  recompensa: "Ceniza del Jinete del Olvido",
+  es_opcional: true,
+  siguiente: "Continúa hacia la Academia de Raya Lúcida."
+},
+
+{
+  id: "paso_28",
+  numero: 28,
+  fase: "Liurnia de los Lagos",
+  titulo: "Academia de Raya Lúcida — Acceso y exploración",
+  area: "Academia de Raya Lúcida",
+  descripcion: "La gran Academia flotante en el centro del lago es el segundo gran dungeon obligatorio. Llena de magos, hechizos y secretos arquitectónicos.",
+  detalle: [
+    "Para entrar necesitas la Llave del Sello Áldano — se obtiene derrotando a un dragón al norte del lago o comprándola a un NPC.",
+    "Hay un duplicado de la llave en el cofre de las Ruinas Veladas al noreste del lago.",
+    "Activa todos los Lugares de Gracia: Puerta de la Academia, Sala del Debate, Biblioteca del Gran Estudio.",
+    "Los magos enemigos son muy peligrosos a distancia; acércate rápido o esquiva entre columnas.",
+    "Encuentra el Pergamino Primeval de Glintstone en la biblioteca para desbloquear los mejores hechizos.",
+    "La llave secreta de la Torre de las Ranas desbloquea la sala del cofre con el Hechizo Cometa de Azur.",
+  ],
+  jefe: null,
+  recompensa: "Hechizos de magia, Cometa de Azur, pergaminos",
+  es_opcional: false,
+  siguiente: "Encuentra y derrota a Rennala, Reina de la Luna Llena."
+},
+
+{
+  id: "paso_29",
+  numero: 29,
+  fase: "Liurnia de los Lagos",
+  titulo: "Jefe — Rennala, Reina de la Luna Llena",
+  area: "Academia de Raya Lúcida — Gran Biblioteca",
+  descripcion: "Rennala es la segunda Semidiosa obligatoria. Una batalla en dos fases radicalmente distintas: primero puzzle, luego combate épico.",
+  detalle: [
+    "Fase 1: Rennala está levitando mientras sus estudiantes cantan. Mata a los estudiantes con el escudo dorado (los que brillan más) para hacerla caer.",
+    "Cuando cae, golpéala rápidamente hasta que vuelva a levitar — repite 3 veces.",
+    "Fase 2: Rennala lucha directamente con magia y convoca criaturas — usa la Campana de Espíritu.",
+    "Esquiva el Rayo de Luna (haz lateral hacia la derecha) y los proyectiles de magia estándar.",
+    "Cuando convoca dragones o bestias, enfócate en esquivar y espera que desaparezcan.",
+    "Al vencerla obtienes la Runa Áldana de Rennala — ella no muere y puede reiniciar tus estadísticas.",
+  ],
+  jefe: "Rennala, Reina de la Luna Llena",
+  recompensa: "40.000 Runas, Runa Áldana de Rennala, capacidad de reiniciar estadísticas",
+  es_opcional: false,
+  siguiente: "Con dos Runas Áldanas, puedes acceder al cofre sellado de la Mesa Redonda."
+},
+
+{
+  id: "paso_30",
+  numero: 30,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Río Ainsel y Nokstella",
+  area: "Río Ainsel / Nokstella, Ciudad Eterna",
+  descripcion: "El Río Ainsel es una zona subterránea accesible desde un pozo en Liurnia. Conduce a Nokstella, una ciudad de las hormigas plateadas con excelentes objetos.",
+  detalle: [
+    "El acceso está en un pozo al este de Liurnia — busca la caja con cadena que baja.",
+    "El río tiene criaturas de río y las Hormigas Plateadas que sueltan Escamas Plateadas (mejoran armas de magia).",
+    "Encuentra el cuerpo pequeño de Miniatura de Ranni en esta zona — es parte de su misión.",
+    "Habla con la Miniatura de Ranni varias veces en un Lugar de Gracia para avanzar su misión.",
+    "Nokstella tiene cofres con la Campana Lunar y el Talisman de Escorpión de Magia.",
+    "Al fondo del río está el Gran Ascensor a la Luna Llena que lleva al Lago Podrido.",
+  ],
+  jefe: "Ancestro de las Hormigas Plateadas",
+  recompensa: "Campana Lunar, Talisman del Escorpión de Magia, Escamas Plateadas",
+  es_opcional: true,
+  siguiente: "Si sigues la misión de Ranni, avanza al Lago Podrido."
+},
+
+{
+  id: "paso_31",
+  numero: 31,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Rya y Volcano Manor (preparación)",
+  area: "Mirador de Liftside, Liurnia norte",
+  descripcion: "Rya es una NPC en Liurnia norte que inicia una misión que lleva al Volcano Manor en el Monte Gelmir. Requiere el collar recuperado en la Cueva Costera.",
+  detalle: [
+    "Rya está en el mirador cerca del Gran Ascensor Dectus, al norte de Liurnia.",
+    "Si tienes el collar de la Cueva Costera (paso 13), devuélveselo para completar su petición.",
+    "Ella te ofrece llevarla al Volcano Manor — acepta para iniciar su misión.",
+    "Más adelante, Rya aparece en el Volcano Manor con una identidad diferente (Zoraya la Serpiente).",
+    "Su misión tiene múltiples finales posibles — investiga bien antes de tomar decisiones.",
+    "Esta misión es necesaria para desbloquear ciertos contenidos del Monte Gelmir.",
+  ],
+  jefe: null,
+  recompensa: "Inicio de misión de Rya/Zoraya, acceso facilitado al Volcano Manor",
+  es_opcional: true,
+  siguiente: "Continúa hacia el norte para el Gran Ascensor Dectus."
+},
+
+{
+  id: "paso_32",
+  numero: 32,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Nokron, Ciudad Eterna (requiere Radahn)",
+  area: "Nokron, Ciudad Eterna",
+  descripcion: "Nokron es una ciudad subterránea accesible solo después de derrotar a Radahn en Caélida. Contiene la recompensa clave de la misión de Ranni.",
+  detalle: [
+    "Tras derrotar a Radahn, un meteorito cae en Necrolimbo sur — busca el nuevo agujero en el suelo.",
+    "Baja por el agujero para llegar a Nokron, Ciudad Eterna.",
+    "La ciudad tiene Fantasmas Guerreros y Jinetes Plateados como enemigos principales.",
+    "Encuentra el Cofre Sagrado de Nokron en el templo central — contiene la Parte de la Espada de Onyx.",
+    "La Parte de la Espada es la recompensa que Ranni necesita — entrégasela para avanzar su misión.",
+    "Hay también el Talisman del Gran Árbol y varios objetos de magia ocultos.",
+  ],
+  jefe: "Ancestro Espíritu Noblísimo",
+  recompensa: "Parte de la Espada de Onyx, Talisman del Gran Árbol",
+  es_opcional: true,
+  siguiente: "Entrega la Parte de la Espada a Ranni para avanzar su misión."
+},
+
+{
+  id: "paso_33",
+  numero: 33,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Cueva Templada de Liurnia",
+  area: "Cueva Templada (costa oeste de Liurnia)",
+  descripcion: "Una cueva con hechiceros enemigos y recompensas de hechizos útiles para builds de magia.",
+  detalle: [
+    "Está en la costa oeste de Liurnia, busca la entrada entre las rocas.",
+    "Los hechiceros dentro son élite — tienen mucha vida y lanzan poderosos hechizos.",
+    "Usa los pilares para cubrirte de los proyectiles de cristal.",
+    "El jefe es la Hechicera del Cristal — derrótala para la recompensa principal.",
+    "La recompensa es el Hechizo Cristal Torrencial — excelente para builds de mago.",
+    "Hay varios pergaminos adicionales en cofres dentro de la cueva.",
+  ],
+  jefe: "Hechicera del Cristal",
+  recompensa: "Hechizo Cristal Torrencial, pergaminos de magia",
+  es_opcional: true,
+  siguiente: "Con buenos hechizos, la Academia se vuelve más fácil."
+},
+
+{
+  id: "paso_34",
+  numero: 34,
+  fase: "Liurnia de los Lagos",
+  titulo: "OPCIONAL — Fondo de Raíz Profunda",
+  area: "Fondo de Raíz Profunda",
+  descripcion: "El Fondo de Raíz Profunda es una zona subterránea bajo las raíces del Árbol Áldano. La misión de Fia culmina aquí con el final de los Muertos que Descansan.",
+  detalle: [
+    "Accede desde las Alcantarillas de Leyndell (disponibles más tarde) o desde un pozo en el Río Siofra.",
+    "Fia es la NPC en la Mesa Redonda que te abraza — sigue su misión dándole el Puñal Bendecido.",
+    "En el Fondo de Raíz Profunda, encuentra a Fia con el cuerpo de Godwyn — habla con ella varias veces.",
+    "El jefe final es el Dragón Lichdragon Fortissax — invocable si tienes el medallón dorado de Fia.",
+    "Tras vencer al jefe, Fia completa su misión y te da objetos necesarios para el final alternativo.",
+    "Este es el requisito para el final alternativo de los Muertos que Descansan.",
+  ],
+  jefe: "Lichdragon Fortissax",
+  recompensa: "Incantación Muerte Antigua, medallón de Fia, progreso hacia final alternativo",
+  es_opcional: true,
+  siguiente: "Con la misión de Fia completada, avanza a las Montañas de los Gigantes."
+},
+
+{
+  id: "paso_35",
+  numero: 35,
+  fase: "Liurnia de los Lagos",
+  titulo: "Preparación para Caélida y Altus",
+  area: "Liurnia norte — Gran Ascensor Dectus",
+  descripcion: "Antes de avanzar, consolida tu progreso en Liurnia. Hay dos rutas para llegar a la Meseta de Altus: el Gran Ascensor Dectus o el paso secreto del Túnel de Raya Lúcida.",
+  detalle: [
+    "El Gran Ascensor Dectus requiere las dos mitades del Medallón de Dectus — una en Fuerte Haight (Necrolimbo este) y otra en Fuerte Faroth (Caélida norte).",
+    "La ruta alternativa es el Túnel de Gran Ladera de Raya Lúcida — no requiere medallón pero tiene enemigos difíciles.",
+    "Antes de subir a Altus, considera ir primero a Caélida para el Festival de Radahn (necesario para Nokron y la misión de Ranni).",
+    "Nivel recomendado para Caélida: 50-60; para Altus: 60-70.",
+    "Asegúrate de tener el arma principal al menos en +10 (no ceniza sagrada) o +4 (armas especiales).",
+    "Habla con todos los NPCs de la Mesa Redonda antes de avanzar para no perder pasos de misiones.",
+  ],
+  jefe: null,
+  recompensa: "Orientación para la ruta óptima",
+  es_opcional: false,
+  siguiente: "Dirígete a Caélida para el Festival de Radahn antes de subir a Altus."
+},
+
+// ══════════════════════════════════════
+// FASE 3 — CAÉLIDA (Pasos 36-43)
+// ══════════════════════════════════════
+
+{
+  id: "paso_36",
+  numero: 36,
+  fase: "Caélida",
+  titulo: "Llegada a Caélida",
+  area: "Sur de Caélida",
+  descripcion: "Caélida es una zona árida e infectada de putrefacción escarlata. Es peligrosa desde el principio — sus enemigos son más fuertes que en Liurnia.",
+  detalle: [
+    "La entrada principal a Caélida es por el este de Necrolimbo, cruzando el río y subiendo la ladera.",
+    "CUIDADO: hay un cofre trampa en las Ruinas de la Playa de Necrolimbo que teleporta directamente a Caélida — si caes ahí, escapa hacia el norte.",
+    "Los primeros enemigos son los Perros de la Putrefacción y los Soldados Caelidianos — aplican el estado Putrefacción Escarlata.",
+    "La Putrefacción Escarlata daña masivamente tu HP durante varios segundos — lleva ungüentos o hechizos de curación de estados.",
+    "Activa el Lugar de Gracia de Smoldering Wall al sur como punto de anclaje.",
+    "No te adentres demasiado sin equipo adecuado — el centro de Caélida tiene enemigos de nivel 80+.",
+  ],
+  jefe: null,
+  recompensa: "Acceso a Caélida, nuevas zonas",
+  es_opcional: false,
+  siguiente: "Explora el sur de Caélida y avanza hacia el Castillo Redmane."
+},
+
+{
+  id: "paso_37",
+  numero: 37,
+  fase: "Caélida",
+  titulo: "OPCIONAL — Gurranq y el Santuario de la Bestia",
+  area: "Santuario de la Bestia (norte de Caélida)",
+  descripcion: "Gurranq es un NPC bestia que come Huesos de los Muertos a cambio de armas y hechizos únicos. Vive en el Santuario de la Bestia al norte de Caélida.",
+  detalle: [
+    "El Santuario de la Bestia está al norte de Caélida — sigue el camino principal hacia el norte.",
+    "Gurranq quiere Huesos de los Muertos — recógelos de los cadáveres de muertos y en catacumbas.",
+    "Cada entrega desbloquea recompensas: incantaciones de Bestia, armas, talismanes.",
+    "Tras entregar varios huesos, Gurranq se vuelve hostil momentáneamente — derrótalo sin matarlo.",
+    "Eventualmente se calma y continúa como NPC — sus recompensas son las mejores incantaciones bestia del juego.",
+    "Las Catacumbas de la Bestia están cerca del santuario y tienen el jefe Bestia de los Huesos.",
+  ],
+  jefe: "Bestia de los Huesos (Catacumbas de la Bestia)",
+  recompensa: "Incantaciones de Bestia, Armas de Bestia, Talisman de la Bestia",
+  es_opcional: true,
+  siguiente: "Continúa hacia el Castillo Redmane para el Festival de Radahn."
+},
+
+{
+  id: "paso_38",
+  numero: 38,
+  fase: "Caélida",
+  titulo: "OPCIONAL — Sellia, Ciudad de Hechicería",
+  area: "Sellia, Ciudad de Hechicería",
+  descripcion: "Una ciudad fantasma llena de magos elfos y barreras mágicas. Contiene varios hechizos únicos y la misión de Millicent.",
+  detalle: [
+    "Sellia está al noreste de Caélida, en la niebla escarlata.",
+    "Las barreras de la ciudad se abren encendiendo las tres hogueras en lo alto de los tejados.",
+    "La NPC Millicent aparece en la Iglesia de la Plaga al este — dale el Unguento de la Aguja para curarla.",
+    "Millicent tiene una misión larga que culmina en el Campo Sacroníveo con Malenia.",
+    "Hay múltiples hechizos de putrefacción en cofres dentro de las casas.",
+    "El Árbol Fantasma en el centro de Sellia tiene una invocación y runas escarlata.",
+  ],
+  jefe: null,
+  recompensa: "Hechizos de putrefacción, inicio misión de Millicent",
+  es_opcional: true,
+  siguiente: "Inicia la misión de Millicent y avanza al Festival de Radahn."
+},
+
+{
+  id: "paso_39",
+  numero: 39,
+  fase: "Caélida",
+  titulo: "OPCIONAL — Cueva de los Camelios",
+  area: "Cueva de los Camelios (Caélida sur)",
+  descripcion: "Una cueva con los Dragonhum Camelios como enemigos principales y una jefa dual al final.",
+  detalle: [
+    "La entrada está en el sur de Caélida, cerca del campamento de las bestias reptiles.",
+    "Los Camelios escupen putrefacción escarlata — lleva mucha curación de estado.",
+    "El jefe es el Dueto de Reinas de los Camelios — dos hembras con bastones de fuego.",
+    "Enfócate en una a la vez, usa un pilar para dividirlas.",
+    "La recompensa es la Ceniza de Espíritu de los Reptiles de Batalla, buena distracción.",
+  ],
+  jefe: "Reinas de los Camelios (dueto)",
+  recompensa: "Ceniza de Reptiles de Batalla, runas",
+  es_opcional: true,
+  siguiente: "Avanza al Castillo Redmane."
+},
+
+{
+  id: "paso_40",
+  numero: 40,
+  fase: "Caélida",
+  titulo: "Festival de Radahn — Llegada al Castillo Redmane",
+  area: "Castillo Redmane (extremo sur de Caélida)",
+  descripcion: "El Castillo Redmane celebra el Festival de Radahn, un torneo para intentar derrotar al Semidios que retiene las estrellas. Aquí puedes invocar a múltiples aliados.",
+  detalle: [
+    "El Castillo Redmane está al extremo sureste de Caélida — sigue el camino costero.",
+    "Habla con Jerren dentro del castillo para activar el Festival de Radahn.",
+    "Si el festival no está activo, primero ve a conseguir las dos Runas Áldanas (Godrick y Rennala).",
+    "El portal al campo de batalla de Radahn está al fondo del castillo — es un teletransporte.",
+    "Activa el Lugar de Gracia dentro del castillo y prepárate con consumibles.",
+    "Puedes invocar a MÚLTIPLES NPCs para la batalla de Radahn — busca sus signos dorados en el campo.",
+  ],
+  jefe: null,
+  recompensa: "Preparación para la batalla de Radahn",
+  es_opcional: false,
+  siguiente: "Entra al campo de batalla y derrota a Radahn."
+},
+
+{
+  id: "paso_41",
+  numero: 41,
+  fase: "Caélida",
+  titulo: "Jefe — Radahn, Conquistador de las Estrellas",
+  area: "Campo de Batalla de Radahn (costa de Caélida)",
+  descripcion: "Radahn es uno de los jefes más épicos del juego. Una batalla a campo abierto donde puedes invocar múltiples aliados NPC.",
+  detalle: [
+    "Al entrar al campo de batalla, busca y activa TODOS los signos de invocación de NPCs en el suelo.",
+    "Fase 1: Radahn dispara flechas gigantes al inicio — monta a Torrente y zigzaguea para esquivarlas.",
+    "Los aliados sirven como distracción — enfócate en atacar las patas y la espalda de Radahn montado.",
+    "Cuando cae de su caballo, atácalo a pie con combos completos.",
+    "Fase 2 (mitad de vida): cae desde el cielo como un meteorito — CORRE lejos cuando desaparece del campo.",
+    "En fase 2 usa más ataques mágicos y añade un segundo combo antes de retroceder.",
+  ],
+  jefe: "Radahn, Conquistador de las Estrellas",
+  recompensa: "70.000 Runas, Runa Mayor de Radahn, Runa Áldana de Radahn, desbloqueo de Nokron",
+  es_opcional: false,
+  siguiente: "Con Radahn caído, un meteorito abre Nokron en Necrolimbo. Ve a explorar Nokron."
+},
+
+{
+  id: "paso_42",
+  numero: 42,
+  fase: "Caélida",
+  titulo: "OPCIONAL — Túmulo de los Héroes Sagrados",
+  area: "Túmulo de los Héroes Sagrados (norte de Caélida)",
+  descripcion: "Un gran túmulo-catacumbas con múltiples salas y el jefe Bestia del Clero Sagrado.",
+  detalle: [
+    "Está en la elevación norte de Caélida, cerca de la frontera con Altus.",
+    "El interior tiene trampas de suelo (espinas) y enemigos esqueleto-sacerdotes.",
+    "El jefe es la Bestia del Clero Sagrado — una criatura con ataques de fuego sagrado.",
+    "La recompensa incluye el Arte de Ceniza Incantación de la Bestia Sagrada.",
+    "Hay un cofre con un Amuleto de Resistencia a la Putrefacción muy útil en este juego.",
+  ],
+  jefe: "Bestia del Clero Sagrado",
+  recompensa: "Arte de Ceniza: Incantación de la Bestia Sagrada, Amuleto de Resistencia",
+  es_opcional: true,
+  siguiente: "Prepárate para subir a la Meseta de Altus."
+},
+
+{
+  id: "paso_43",
+  numero: 43,
+  fase: "Caélida",
+  titulo: "OPCIONAL — Torre de Radahn (Runa Mayor)",
+  area: "Torre de Radahn (noreste de Caélida)",
+  descripcion: "La Torre de Radahn al noreste de Caélida permite activar su Runa Mayor, una de las más poderosas del juego.",
+  detalle: [
+    "La Torre de Radahn está al noreste de Caélida, en el acantilado — sube sin enemigos.",
+    "Activa la Runa Mayor de Radahn en la cima para obtener +15% de HP máximo mientras esté activa.",
+    "Esta es una de las runas mayores más fuertes del juego para cualquier build.",
+    "Para mantenerla activa al morir necesitas consumir un Arco de la Runa.",
+    "Combina con la Runa Mayor de Godrick para obtener tanto HP extra como mejora de estadísticas.",
+  ],
+  jefe: null,
+  recompensa: "Runa Mayor de Radahn activada (+15% HP máximo)",
+  es_opcional: true,
+  siguiente: "Ahora sube a la Meseta de Altus."
+},
+
+// ══════════════════════════════════════
+// FASE 4 — MESETA DE ALTUS + MONTE GELMIR (Pasos 44-55)
+// ══════════════════════════════════════
+
+{
+  id: "paso_44",
+  numero: 44,
+  fase: "Meseta de Altus",
+  titulo: "Ascenso a la Meseta de Altus",
+  area: "Gran Ascensor Dectus / Túnel de Gran Ladera",
+  descripcion: "La Meseta de Altus es una tierra dorada y fértil que rodea Leyndell, la capital. Puedes subir por el Gran Ascensor Dectus o por el túnel secreto en Liurnia.",
+  detalle: [
+    "Ruta A — Gran Ascensor Dectus: necesitas las dos mitades del Medallón de Dectus. Media parte en el Fuerte Haight (Necrolimbo este, cofre en la torre) y la otra en el Fuerte Faroth (Caélida norte).",
+    "Ruta B — Túnel de Gran Ladera de Raya Lúcida: accesible desde el norte de Liurnia sin medallón; tiene el jefe Magma Wyrm Makar.",
+    "Si usas el Ascensor Dectus, activa el Lugar de Gracia de la cima inmediatamente.",
+    "La Meseta de Altus tiene enemigos de nivel 60-80 — prepárate con el arma en +15 o superior.",
+    "Explora la zona sur de Altus donde hay ruinas doradas con runas abundantes.",
+    "El camino a Leyndell está al este de la Meseta — pasa por el Puente de Erdtree.",
+  ],
+  jefe: "Magma Wyrm Makar (ruta del túnel, opcional)",
+  recompensa: "Acceso a la Meseta de Altus",
+  es_opcional: false,
+  siguiente: "Explora la Meseta de Altus y el Monte Gelmir antes de ir a Leyndell."
+},
+
+{
+  id: "paso_45",
+  numero: 45,
+  fase: "Meseta de Altus",
+  titulo: "OPCIONAL — Catacumbas del Crisol",
+  area: "Catacumbas del Crisol (Meseta de Altus)",
+  descripcion: "Catacumbas con los enemigos del Crisol y el jefe Dúo de Caballeros del Crisol, que recompensa con una de las mejores invocaciones del juego.",
+  detalle: [
+    "Están en el sur de Altus, en las laderas al este del Ascensor Dectus.",
+    "Los Caballeros del Crisol son resistentes y usan ataques del Crisol con colas y alas emergentes.",
+    "El jefe es el Dúo de Caballeros del Crisol — lucha primero contra el de cola, luego el de alas.",
+    "La recompensa es la Ceniza de Espíritu del Caballero del Crisol, una de las más útiles.",
+    "Hay incantos del Crisol adicionales en cofres laterales.",
+  ],
+  jefe: "Dúo de Caballeros del Crisol",
+  recompensa: "Ceniza del Caballero del Crisol, Incantos del Crisol",
+  es_opcional: true,
+  siguiente: "Continúa explorando Altus."
+},
+
+{
+  id: "paso_46",
+  numero: 46,
+  fase: "Meseta de Altus",
+  titulo: "OPCIONAL — Castillo del Sol de Medianoche",
+  area: "Castillo del Sol de Medianoche (este de Altus)",
+  descripcion: "Un castillo al este de la Meseta con la misión de Hyetta (dedos fantasma) y acceso a la misión del Frenzied Flame.",
+  detalle: [
+    "Está en el extremo este de Altus, en la elevación sobre el lago.",
+    "Hyetta es una NPC que aparece en varios puntos de Liurnia y Altus — dale uvas de faros para avanzar su misión.",
+    "El castillo tiene el NPC Shabriri que te habla de la Llama Frenética.",
+    "Hay el hechizo Espada de Noche y Llama en un cofre interior.",
+    "El jefe es el Rey Omen Fantasma — derrótalo para el acceso completo.",
+    "Esta zona conecta con la misión del final de la Llama Frenética.",
+  ],
+  jefe: "Rey Fantasma Omen",
+  recompensa: "Hechizo Espada de Noche y Llama, progreso misión Hyetta",
+  es_opcional: true,
+  siguiente: "Visita el Monte Gelmir y el Volcano Manor."
+},
+
+{
+  id: "paso_47",
+  numero: 47,
+  fase: "Monte Gelmir",
+  titulo: "OPCIONAL — Volcano Manor y misiones de Tanith",
+  area: "Monte Gelmir / Volcano Manor",
+  descripcion: "El Volcano Manor al noroeste de Altus es el hogar de la organización asesina de Tanith. Contiene misiones únicas y buenas recompensas.",
+  detalle: [
+    "El acceso principal al Monte Gelmir es por el camino al noroeste de Altus o con Rya desde Liurnia.",
+    "El Volcano Manor es la mansión de Tanith — habla con ella para unirte a los Asesinos del Credo.",
+    "Las misiones de asesinato de Tanith (3 en total) te llevan a invadir a NPCs en otros mundos.",
+    "Cada asesinato recompensa con armas o armaduras únicas.",
+    "La NPC Rya/Zoraya está aquí — su misión se resuelve aquí de múltiples maneras.",
+    "El jefe principal del Volcano Manor es Rykard, Señor de la Blasfemia — en la sala del volcán interior.",
+  ],
+  jefe: null,
+  recompensa: "Armas únicas de asesino, progreso misión de Rya/Zoraya",
+  es_opcional: true,
+  siguiente: "Completa las misiones de Tanith y enfréntate a Rykard."
+},
+
+{
+  id: "paso_48",
+  numero: 48,
+  fase: "Monte Gelmir",
+  titulo: "OPCIONAL — Rykard, Señor de la Blasfemia",
+  area: "Volcano Manor — Sala del Volcán",
+  descripcion: "Rykard es un Semidios opcional que fusionó su cuerpo con una serpiente gigante del volcán. Su batalla requiere una lanza especial.",
+  detalle: [
+    "Dentro de la sala del volcán encontrarás la Lanza Dios-Devorador en el suelo — equípala ANTES de la pelea.",
+    "Fase 1: Rykard está en forma de serpiente — usa el Arte de Ceniza de la Lanza Dios-Devorador (L2/LT) repetidamente.",
+    "Mantente a distancia media y usa el arte de ceniza cuando esté quieto.",
+    "Fase 2: emerge del magma en forma humana con una espada gigante — sigue usando el arte de ceniza.",
+    "Esquiva las lluvias de fuego alejándote rápidamente.",
+    "La recompensa incluye su Runa Áldana y la Runa Mayor de Rykard (+3% HP por kill).",
+  ],
+  jefe: "Rykard, Señor de la Blasfemia",
+  recompensa: "Runa Áldana de Rykard, Runa Mayor de Rykard, Lanza Dios-Devorador (si la recoges)",
+  es_opcional: true,
+  siguiente: "Con Rykard derrotado, avanza hacia Leyndell."
+},
+
+{
+  id: "paso_49",
+  numero: 49,
+  fase: "Meseta de Altus",
+  titulo: "OPCIONAL — Catacumbas de la Ciudad de Atlus",
+  area: "Catacumbas de la Ciudad de Atlus",
+  descripcion: "Catacumbas bajo la Meseta de Altus con el jefe Ancestro Putrefacto mejorado y buenas recompensas de invocación.",
+  detalle: [
+    "Están en el norte de Altus, busca la entrada en las laderas cerca de Leyndell.",
+    "El camino tiene trampas de dardos y muertos vivientes en grupos.",
+    "El jefe es el Ancestro Putrefacto — versión más fuerte que la de la Mesa Redonda.",
+    "La recompensa es la Ceniza de Espíritu de los Jinetes del Árbol, muy útil para distracción.",
+    "Hay un pasaje secreto que lleva a un cofre con una Semilla del Árbol.",
+  ],
+  jefe: "Ancestro Putrefacto",
+  recompensa: "Ceniza de los Jinetes del Árbol, Semilla del Árbol",
+  es_opcional: true,
+  siguiente: "Avanza hacia Leyndell."
+},
+
+{
+  id: "paso_50",
+  numero: 50,
+  fase: "Meseta de Altus",
+  titulo: "Leyndell, Capital Real — Entrada y exploración",
+  area: "Leyndell, Capital Real",
+  descripcion: "Leyndell es la gran ciudad capital custodiada por los caballeros del Árbol. Es una de las zonas más grandes y elaboradas del juego.",
+  detalle: [
+    "La entrada principal está por las Puertas Exteriores al este de la Meseta de Altus.",
+    "Para entrar necesitas al menos dos Runas Áldanas — las guardias lo exigen.",
+    "Activa todos los Lugares de Gracia: Puertas Exteriores, Avenida Capital, Palacio Este, etc.",
+    "Los Caballeros del Árbol Dorado son los enemigos estándar — resistentes y coordinados.",
+    "Hay múltiples NPCs con misiones en la ciudad: D hermano, Dung Eater, Goldmask, Corhyn.",
+    "La ciudad tiene múltiples niveles — explora cada rincón para no perderte objetos clave.",
+  ],
+  jefe: null,
+  recompensa: "Exploración de Leyndell, objetos únicos, progreso de misiones",
+  es_opcional: false,
+  siguiente: "Localiza al Godfrey Espectral y a Morgott."
+},
+
+{
+  id: "paso_51",
+  numero: 51,
+  fase: "Meseta de Altus",
+  titulo: "Jefe — Godfrey Espectral (Leyndell)",
+  area: "Leyndell — Sala del Trono Exterior",
+  descripcion: "La imagen espectral de Godfrey, el Primer Lord Áldano, custodia la entrada a la sala del trono. Es un jefe de habilidad, sin mecánicas complicadas.",
+  detalle: [
+    "Godfrey Espectral está en la gran sala ante el árbol — es una sombra dorada, no el jefe real.",
+    "Sus ataques son directos: hacha y pisotón; aprende el ritmo de sus combos.",
+    "El pisotón crea ondas de tierra — salta cuando el suelo ondula para evitar el daño.",
+    "No hay fase 2 especial — es un enemigo lineal pero con mucha vida.",
+    "Puedes usar la Campana de Espíritu aquí.",
+    "Al vencerlo se abre el paso a Morgott.",
+  ],
+  jefe: "Godfrey, Primer Lord Áldano (espectral)",
+  recompensa: "Acceso al interior del árbol y a Morgott",
+  es_opcional: false,
+  siguiente: "Avanza hasta la sala de Morgott."
+},
+
+{
+  id: "paso_52",
+  numero: 52,
+  fase: "Meseta de Altus",
+  titulo: "Jefe — Morgott, el Rey Augur",
+  area: "Leyndell — Sala del Trono",
+  descripcion: "Morgott es el Semidios que protege Leyndell. Es la versión completa de Margit y uno de los jefes más complejos de la historia principal.",
+  detalle: [
+    "Morgott recuerda a Margit pero con más ataques: añade espada sagrada, lanza de luz y lluvia de dagas.",
+    "Invoca al espectro de Melina si tienes la Campana de Espíritu — ella puede usarse aquí.",
+    "El ataque de la lanza de lluvia tiene un retraso grande — espera a que todas las lanzas caigan antes de moverte.",
+    "La espada sagrada aparece en fase 2 — tarda en materializarse, aprovecha ese tiempo para atacar.",
+    "Mantente cerca de él para evitar los ataques a distancia y aprovecha las ventanas de 2-3 golpes.",
+    "Al vencerlo, Melina te dice que hay que ir a las Montañas de los Gigantes para quemar el Árbol.",
+  ],
+  jefe: "Morgott, el Rey Augur",
+  recompensa: "80.000 Runas, Runa Mayor de Morgott, Runa Áldana de Morgott",
+  es_opcional: false,
+  siguiente: "Morgott caído — el camino hacia las Montañas de los Gigantes se abre. Pero antes, explora las zonas opcionales."
+},
+
+{
+  id: "paso_53",
+  numero: 53,
+  fase: "Meseta de Altus",
+  titulo: "OPCIONAL — Alcantarillas de Leyndell",
+  area: "Alcantarillas de Leyndell",
+  descripcion: "Bajo Leyndell hay un laberinto de alcantarillas con el acceso al Fondo de Raíz Profunda y la Llama Frenética.",
+  detalle: [
+    "Accede por el agujero en el suelo en el este de Leyndell, cerca del árbol gigante.",
+    "Las alcantarillas tienen los Tentáculos (Fingercreepers) y los Hombres de las Alcantarillas.",
+    "Encuentra el Lugar de Gracia de las Alcantarillas y explora los pasajes.",
+    "El cofre trampa de las alcantarillas teletransporta al Fondo de Raíz Profunda — importante para la misión de Fia.",
+    "Hay el hechizo Pest Threads en las alcantarillas.",
+    "El camino al final de la Llama Frenética pasa por las Catacumbas de la Llama más al fondo.",
+  ],
+  jefe: "Watchdog Doblado",
+  recompensa: "Hechizo Pest Threads, acceso al Fondo de Raíz Profunda y Llama Frenética",
+  es_opcional: true,
+  siguiente: "El Fondo de Raíz Profunda tiene la misión de Fia y el final de los Muertos."
+},
+
+{
+  id: "paso_54",
+  numero: 54,
+  fase: "Zonas Subterráneas",
+  titulo: "OPCIONAL — Palacio de Mohgwyn",
+  area: "Palacio de Mohgwyn",
+  descripcion: "El Palacio de Mohgwyn es una zona oculta de sangre eterna donde vive Mohg, Señor de la Sangre, el padre adoptivo de Miquella.",
+  detalle: [
+    "Acceso A: completar la misión de Varre (el NPC de la máscara blanca) — te teletransporta directamente.",
+    "Acceso B: encontrar el portal en el Campo Sacroníveo (requiere Haligtree abierto).",
+    "El palacio está bañado en sangre — los enemigos Albinauric son abundantes y fáciles de farmear runas.",
+    "El jefe es Mohg, Señor de la Sangre — tiene un ritual de sangre en fase 2 que reduce tu HP máximo.",
+    "Para contrarrestar el ritual, usa el Ungüento Purificador justo cuando dice '¡Nihil!' por tercera vez.",
+    "Mohg recompensa con la Runa Áldana de Mohg y su arma única, el Tridente de Mohg.",
+  ],
+  jefe: "Mohg, Señor de la Sangre",
+  recompensa: "Runa Áldana de Mohg, Tridente de Mohg, acceso al DLC Shadow of the Erdtree",
+  es_opcional: true,
+  siguiente: "Con Mohg derrotado, el camino al DLC Shadow of the Erdtree queda abierto."
+},
+
+{
+  id: "paso_55",
+  numero: 55,
+  fase: "Meseta de Altus",
+  titulo: "Recolectar el Medallón de Rold antes de avanzar",
+  area: "Leyndell, Capital Real",
+  descripcion: "Tras vencer a Morgott, obtén el Medallón de Rold de su cuerpo — es obligatorio para subir a las Montañas de los Gigantes.",
+  detalle: [
+    "El Medallón de Rold aparece en el inventario automáticamente tras derrotar a Morgott.",
+    "También puedes usar el Medallón Secreto dividido en dos mitades para ir al Campo Sacroníveo (ruta alternativa).",
+    "La mitad sur del Medallón Secreto está en las manos de Albus, un anciano disfrazado en el pueblo de Albinaurics en Liurnia.",
+    "La mitad norte está en el Castillo Sol en las Montañas de los Gigantes (paso 57).",
+    "Con ambas mitades combinadas, el Gran Ascensor Rold permite ir al Campo Sacroníveo en lugar de las Montañas.",
+    "Asegúrate de tener el arma en +20 o superior y el nivel 70+ antes de avanzar.",
+  ],
+  jefe: null,
+  recompensa: "Medallón de Rold, preparación completa",
+  es_opcional: false,
+  siguiente: "Ve al Gran Ascensor de Rold para subir a las Montañas de los Gigantes."
+},
+
+// ══════════════════════════════════════
+// FASE 5 — MONTAÑAS DE LOS GIGANTES (Pasos 56-62)
+// ══════════════════════════════════════
+
+{
+  id: "paso_56",
+  numero: 56,
+  fase: "Montañas de los Gigantes",
+  titulo: "Gran Ascensor de Rold — Subida a las Montañas",
+  area: "Gran Ascensor de Rold",
+  descripcion: "El Gran Ascensor de Rold lleva desde Leyndell hasta las heladas Montañas de los Gigantes. Para activarlo necesitas el Medallón de Rold que deja caer Morgott.",
+  detalle: [
+    "El ascensor está al este de Leyndell, pasando el puente del árbol — activa el Lugar de Gracia de Rold.",
+    "Usa el Medallón de Rold en el punto indicado del ascensor para subirlo.",
+    "Alternativamente, hay un medallón secreto dividido en dos mitades que abre una ruta diferente al Campo Sacroníveo.",
+    "Las Montañas de los Gigantes tienen una atmósfera nevada e inhóspita.",
+    "Los enemigos son los Gigantes de las Nieves, Perros de las Nieves y los Troll del Hielo.",
+    "Activa el Lugar de Gracia de Zamor Ruins nada más llegar.",
+  ],
+  jefe: null,
+  recompensa: "Acceso a las Montañas de los Gigantes",
+  es_opcional: false,
+  siguiente: "Explora las Montañas de los Gigantes hacia el norte y el Castillo Sol."
+},
+
+{
+  id: "paso_57",
+  numero: 57,
+  fase: "Montañas de los Gigantes",
+  titulo: "OPCIONAL — Castillo Sol",
+  area: "Castillo Sol (norte de las Montañas de los Gigantes)",
+  descripcion: "Un castillo en ruinas custodiado por soldados de las Montañas y el jefe Comandante Niall. Contiene la mitad norte del Medallón Secreto del Campo Sacroníveo.",
+  detalle: [
+    "El Castillo Sol está en el norte de las Montañas — sigue el camino nevado hacia el norte.",
+    "El interior tiene soldados de élite y trampas con los Caballeros Fantasma de Niall.",
+    "El jefe es el Comandante Niall — convoca dos caballeros fantasma que debes eliminar primero.",
+    "Elimina ambos caballeros fantasma antes de enfocarte en Niall.",
+    "En la torre detrás del jefe hay la mitad norte del Medallón Secreto del Campo Sacroníveo.",
+    "El medallón completo (combinado con la mitad sur de Liurnia) permite acceder al Campo Sacroníveo donde está Malenia.",
+  ],
+  jefe: "Comandante Niall",
+  recompensa: "Mitad norte del Medallón Secreto, acceso potencial al Campo Sacroníveo",
+  es_opcional: true,
+  siguiente: "Con el medallón completo, podrás acceder al Campo Sacroníveo desde el Ascensor Rold."
+},
+
+{
+  id: "paso_58",
+  numero: 58,
+  fase: "Montañas de los Gigantes",
+  titulo: "OPCIONAL — Campo Sacroníveo y Malenia",
+  area: "Campo Sacroníveo / Árbol Hierático de Miquella",
+  descripcion: "El Campo Sacroníveo es una zona oculta accesible con el Medallón Secreto. Contiene el Árbol Hierático de Miquella y la jefa más difícil del juego: Malenia.",
+  detalle: [
+    "Usa el Medallón Secreto completo en el Gran Ascensor Rold — selecciona la opción de 'elevar con el poder secreto'.",
+    "El Campo Sacroníveo está cubierto de flores doradas infectadas de putrefacción escarlata.",
+    "El Árbol Hierático de Miquella es una mazmorra de varios pisos con Caballeros de Miquella como enemigos.",
+    "El jefe es Malenia, Hoja de Miquella — la jefa más difícil del juego base.",
+    "Malenia SE CURA con cada golpe que aterriza en ti, incluso si bloqueas. No hay excepción.",
+    "Fase 2: se transforma en la Diosa de la Putrefacción y añade ataques de flores de putrefacción en área.",
+  ],
+  jefe: "Malenia, Hoja de Miquella / Diosa de la Putrefacción",
+  recompensa: "Runa Áldana de Malenia, Alma de Malenia (para crear su espada), Runa Mayor de Malenia",
+  es_opcional: true,
+  siguiente: "Con Malenia derrotada, regresa a las Montañas de los Gigantes para la Forja."
+},
+
+{
+  id: "paso_59",
+  numero: 59,
+  fase: "Montañas de los Gigantes",
+  titulo: "Lago de los Lamentos y camino a la Forja",
+  area: "Lago de los Lamentos / Cimas de los Gigantes",
+  descripcion: "El lago helado al norte de las Montañas tiene ruinas antiguas. Debes cruzarlo para llegar a la Forja de los Gigantes.",
+  detalle: [
+    "El lago tiene los Gigantes de Hielo — muy lentos pero enormes; rodéalos con Torrente.",
+    "Las Ruinas de las Cimas tienen el Incanto Rugido de los Dragones en un cofre.",
+    "La Iglesia de las Nieves en el norte tiene un Lugar de Gracia y un NPC con información sobre el fuego.",
+    "Hay una bestia-jefe de nivel avanzado en las cimas — opcional pero con buena recompensa.",
+    "Activa todos los Lugares de Gracia del área para facilitarte el regreso.",
+    "El camino a la Forja está en el extremo norte — sube por el camino helado.",
+  ],
+  jefe: null,
+  recompensa: "Incanto Rugido de Dragones, exploración de lore",
+  es_opcional: false,
+  siguiente: "Avanza hacia la Forja de los Gigantes."
+},
+
+{
+  id: "paso_60",
+  numero: 60,
+  fase: "Montañas de los Gigantes",
+  titulo: "La Forja de los Gigantes — Quemar el Árbol Áldano",
+  area: "Forja de los Gigantes",
+  descripcion: "La Forja de los Gigantes es el objetivo final de las Montañas. Aquí Melina pide que quemes el Árbol Áldano para abrir el camino a Farum Azula.",
+  detalle: [
+    "La Forja está en el extremo norte de las Montañas — pasa por los Gigantes dormidos en el camino.",
+    "En la Forja hay un Gigante de las Llamas dormido — para avanzar debes llegar a su cabeza.",
+    "Activa el Lugar de Gracia dentro de la Forja antes de cualquier decisión.",
+    "DECISIÓN IMPORTANTE: Si quieres el final de la Llama Frenética, aquí debes liberarla ANTES de quemar el árbol.",
+    "Si quemas el árbol normalmente, Melina se sacrifica para iniciar el fuego.",
+    "Al quemar el árbol, el tiempo salta y te despiertas en Farum Azula en Desmoronamiento.",
+  ],
+  jefe: null,
+  recompensa: "Acceso a Farum Azula, avance en la historia principal",
+  es_opcional: false,
+  siguiente: "Despertarás en Farum Azula en Desmoronamiento. La parte final del juego comienza."
+},
+
+// ══════════════════════════════════════
+// FASE 6 — FARUM AZULA EN DESMORONAMIENTO (Pasos 61-65)
+// ══════════════════════════════════════
+
+{
+  id: "paso_61",
+  numero: 61,
+  fase: "Farum Azula en Desmoronamiento",
+  titulo: "Llegada a Farum Azula",
+  area: "Farum Azula en Desmoronamiento",
+  descripcion: "Farum Azula es una ciudad ancestral que se desmorona en el vacío. Es la zona final antes de los jefes del endgame.",
+  detalle: [
+    "Despiertas en el Lugar de Gracia de Templo Mayor al inicio de Farum Azula.",
+    "La zona tiene Bestias-Caballero (Beastmen) como enemigos principales — son agresivos y rápidos.",
+    "Hay dragones volando por las plataformas — pueden escupir fuego en área desde el aire.",
+    "Activa todos los Lugares de Gracia en orden: Templo Mayor, Capilla del Dios-Bestia, Pasaje de los Sacerdotes.",
+    "El NPC Gurranq aparece al inicio con su historia final — habla con él.",
+    "Hay buenas armas de Bestia en cofres a lo largo de la zona.",
+  ],
+  jefe: null,
+  recompensa: "Exploración, armas de Bestia, preparación para jefes finales",
+  es_opcional: false,
+  siguiente: "Avanza hacia el jefe Bestia Ancestral y luego Maliketh."
+},
+
+{
+  id: "paso_62",
+  numero: 62,
+  fase: "Farum Azula en Desmoronamiento",
+  titulo: "OPCIONAL — Bestia Ancestral",
+  area: "Farum Azula — Arena de la Bestia Ancestral",
+  descripcion: "La Bestia Ancestral es el fin de la línea de misión de Gurranq y un jefe brutal con ataques de trueno.",
+  detalle: [
+    "La arena está en el sur de Farum Azula — accede por el puente de piedra flotante.",
+    "La Bestia Ancestral ataca con energía de trueno y golpes físicos masivos.",
+    "Sus ataques de trueno dejan marcas en el suelo — aléjate de ellas antes de que exploten.",
+    "El salto con aplastamiento es su ataque más poderoso — esquiva hacia los lados.",
+    "Esta es la conclusión de la misión de Gurranq/Marika.",
+    "La recompensa es el Incanto Rugido Ancestral, uno de los mejores del juego.",
+  ],
+  jefe: "Bestia Ancestral",
+  recompensa: "Incanto Rugido Ancestral",
+  es_opcional: true,
+  siguiente: "Avanza hacia Maliketh."
+},
+
+{
+  id: "paso_63",
+  numero: 63,
+  fase: "Farum Azula en Desmoronamiento",
+  titulo: "Jefe — Maliketh, la Bestia de la Noche",
+  area: "Farum Azula — Cúpula del Templo",
+  descripcion: "Maliketh es uno de los jefes más difíciles y espectaculares del juego. Guarda la Runa de la Muerte y su derrota transforma Leyndell en Capital de Cenizas.",
+  detalle: [
+    "Fase 1: Maliketh aparece como el Can Bestia — usa un hacha enorme y es muy agresivo.",
+    "En fase 1, usa los pilares de la arena para cubrirte y ataca después de sus grandes combos.",
+    "Fase 2 (mitad de vida): revela su forma real con espada negra — ataques más variados y rápidos.",
+    "Sus ataques de la espada negra aplican Muerte — el efecto te mata instantáneamente al llenarse la barra.",
+    "Esquiva HACIA DENTRO de sus combos largos para evitar los últimos golpes.",
+    "Al vencerlo, Leyndell se transforma en Capital de Cenizas — ya no podrás acceder a zonas previas de Leyndell.",
+  ],
+  jefe: "Maliketh, la Bestia de la Noche",
+  recompensa: "120.000 Runas, Runa de la Muerte, acceso a Capital de Cenizas",
+  es_opcional: false,
+  siguiente: "Regresa a Leyndell, ahora Capital de Cenizas, para los jefes finales."
+},
+
+// ══════════════════════════════════════
+// FASE 7 — CAPITAL DE CENIZAS + JEFES FINALES (Pasos 64-70)
+// ══════════════════════════════════════
+
+{
+  id: "paso_64",
+  numero: 64,
+  fase: "Capital de Cenizas",
+  titulo: "Leyndell, Capital de Cenizas — Nueva exploración",
+  area: "Leyndell, Capital de Cenizas",
+  descripcion: "Leyndell ha sido destruida por las cenizas tras la quema del Árbol. Los Caballeros del Árbol son sustituidos por los Guerreros de Cenizas.",
+  detalle: [
+    "Llegas a la Capital de Cenizas desde Farum Azula vía la Mesa Redonda o avanzando.",
+    "El ambiente es completamente diferente: cenizas, colores apagados y nuevos enemigos.",
+    "Los NPCs con misiones en Leyndell (Dung Eater, Goldmask) tienen sus etapas finales aquí.",
+    "Habla con todos los NPCs antes de avanzar — algunas misiones se completan definitivamente aquí.",
+    "La ruta a los jefes pasa por el árbol caído en el centro de la ciudad.",
+    "Activa el Lugar de Gracia del Árbol en la Capital de Cenizas.",
+  ],
+  jefe: null,
+  recompensa: "Objetos únicos de Capital de Cenizas, conclusión de misiones",
+  es_opcional: false,
+  siguiente: "Avanza hacia Sir Gideon Ofnir."
+},
+
+{
+  id: "paso_65",
+  numero: 65,
+  fase: "Capital de Cenizas",
+  titulo: "Jefe — Sir Gideon Ofnir, el Todovidente",
+  area: "Capital de Cenizas — Ante-sala del Elden Trono",
+  descripcion: "Gideon Ofnir, el líder de los Sin Muerte, te bloquea el paso al trono. Es un jefe de hechizos que refleja tus propios poderes.",
+  detalle: [
+    "Gideon usa todos los hechizos e incantos de los Semidioses que has derrotado — los conoce por su magia.",
+    "Si derrotaste a Malenia, usará la lluvia de flores de putrefacción — prepara curación de estado.",
+    "Si derrotaste a Mohg, usará el ritual de sangre — lleva el Ungüento Purificador.",
+    "El truco: es un humano con mucha vida pero sin mecánicas especiales de jefe. La agresividad directa funciona.",
+    "Sus hechizos tienen animaciones largas — cierra distancia mientras lanza.",
+    "Al vencerlo, da su discurso final y abre el acceso al Godfrey real.",
+  ],
+  jefe: "Sir Gideon Ofnir, el Todovidente",
+  recompensa: "Armadura de All-Knowing, progreso hacia el final",
+  es_opcional: false,
+  siguiente: "El Primer Lord Áldano, Godfrey, te espera."
+},
+
+{
+  id: "paso_66",
+  numero: 66,
+  fase: "Capital de Cenizas",
+  titulo: "Jefe — Godfrey, el Primer Lord Áldano (forma real)",
+  area: "Capital de Cenizas — Sala del Elden Trono",
+  descripcion: "Godfrey en su forma real es un guerrero colosal con su hacha legendaria. Completamente diferente a su versión espectral.",
+  detalle: [
+    "Godfrey real tiene más vida, más daño y patrones de ataque distintos al espectral.",
+    "Fase 1: Godfrey usa el hacha y pisotones con ondas sísmicas — salta las ondas o esquívalas.",
+    "Fase 2 (mitad de vida): abandona el hacha, se transforma en Hoarah Loux y lucha cuerpo a cuerpo.",
+    "Como Hoarah Loux es MUCHO más rápido y agresivo — es la fase más difícil.",
+    "Sus agarres en fase 2 hacen daño masivo — aprende la animación y esquiva a los lados.",
+    "Al vencerlo se abre el acceso al interior del Árbol Áldano donde está el jefe final.",
+  ],
+  jefe: "Godfrey, Primer Lord Áldano / Hoarah Loux, Guerrero",
+  recompensa: "Acceso al interior del Árbol Áldano, Hacha de Godfrey",
+  es_opcional: false,
+  siguiente: "Entra al interior del Árbol Áldano para el jefe final."
+},
+
+{
+  id: "paso_67",
+  numero: 67,
+  fase: "Interior del Árbol Áldano",
+  titulo: "Jefe Final — Radagon de la Luna Dorada",
+  area: "Interior del Árbol Áldano",
+  descripcion: "Radagon es la primera fase del jefe final. El marido de Marika en una forma que lucha con incantaciones y ataques sagrados de martillo.",
+  detalle: [
+    "NO puedes invocar cenizas de espíritu en esta batalla — es solo tú contra los jefes finales.",
+    "Radagon usa ataques sagrados (martillo, runas sagradas) — la resistencia sagrada ayuda mucho.",
+    "Sus combos son rápidos; esquiva hacia su izquierda (tu derecha) para evitar la mayoría.",
+    "El martillo grande con el que golpea el suelo crea ondas sísmicas — salta para evitarlas.",
+    "No hay descanso entre Radagon y la Bestia Áurea — son una sola batalla continua.",
+    "Gestiona tu vida y frascos durante Radagon para llegar con recursos a la Bestia.",
+  ],
+  jefe: "Radagon de la Luna Dorada",
+  recompensa: "(continúa con la Bestia Áurea sin interrupción)",
+  es_opcional: false,
+  siguiente: "Inmediatamente después de Radagon aparece la Bestia Áurea Áldana."
+},
+
+{
+  id: "paso_68",
+  numero: 68,
+  fase: "Interior del Árbol Áldano",
+  titulo: "Jefe Final — La Bestia Áurea Áldana",
+  area: "Interior del Árbol Áldano",
+  descripcion: "La Bestia Áurea Áldana es la encarnación del Elden Ring mismo. Un coloso de luz dorada que es el verdadero jefe final del juego.",
+  detalle: [
+    "La Bestia es enorme — sus pies y piernas son los puntos de ataque más accesibles.",
+    "Sus ataques principales: barrido de patas, espada de luz, impacto de cabeza y rayo dorado.",
+    "El rayo dorado crea una zona de daño persistente en el suelo — aléjate de las manchas brillantes.",
+    "La mejor estrategia es pegarse a sus patas traseras izquierdas y atacar constantemente.",
+    "Cuando se sienta, es una oportunidad de daño masivo — ataca la cabeza.",
+    "Al derrotarla, el juego termina y puedes elegir tu final.",
+  ],
+  jefe: "La Bestia Áurea Áldana",
+  recompensa: "Fin del juego, selección de final",
+  es_opcional: false,
+  siguiente: "Elige tu final. Puedes cargar el guardado para ver otros finales."
+},
+
+// ══════════════════════════════════════
+// FASE 8 — LOS FINALES (Pasos 69-74)
+// ══════════════════════════════════════
+
+{
+  id: "paso_69",
+  numero: 69,
+  fase: "Finales",
+  titulo: "Final 1 — La Restauración Áldana (final por defecto)",
+  area: "Interior del Árbol Áldano",
+  descripcion: "El final más sencillo: usa la Gracia Mayor para reparar el Elden Ring y restaurar el Árbol Áldano. El jugador se convierte en el nuevo Señor Áldano.",
+  detalle: [
+    "Tras derrotar a la Bestia Áurea, interactúa con el cuerpo de Marika/Radagon.",
+    "Elige 'Reparar el Elden Ring' para este final.",
+    "Tu personaje se convierte en el nuevo Lord Áldano junto a Marika.",
+    "Es el final neutral — no requiere ningún paso especial previo.",
+    "La cinemática muestra el árbol restaurado y el mundo en calma.",
+    "Este final es el más accesible para cualquier jugador.",
+  ],
+  jefe: null,
+  recompensa: "Final de la Restauración Áldana completado",
+  es_opcional: false,
+  siguiente: "Carga la partida para intentar otros finales."
+},
+
+{
+  id: "paso_70",
+  numero: 70,
+  fase: "Finales",
+  titulo: "Final 2 — El Señor de la Edad de las Estrellas (misión de Ranni)",
+  area: "Interior del Árbol Áldano",
+  descripcion: "Completar la misión de Ranni permite elegir este final donde ella y tu personaje juntos llevan el mundo a una nueva era de las estrellas.",
+  detalle: [
+    "Requiere completar TODA la misión de Ranni: Loretta → Ranni → Blaidd → Nokron → Cofre → Río Ainsel → Lago Podrido → Anillo de Oscuridad → Ranni en el Faro.",
+    "Tras derrotar a la Bestia Áurea, verás el dedal azul de Ranni en el suelo — recógelo.",
+    "El dedal invoca a Ranni para que complete el ritual.",
+    "Este es considerado el mejor final por la comunidad — un verdadero romance épico.",
+    "La cinemática muestra a Ranni y tu personaje partiendo hacia las estrellas.",
+    "Desbloquea el trofeo/logro del final de Ranni.",
+  ],
+  jefe: null,
+  recompensa: "Final del Señor de las Estrellas completado",
+  es_opcional: true,
+  siguiente: "Otros finales requieren condiciones específicas cumplidas antes del jefe final."
+},
+
+{
+  id: "paso_71",
+  numero: 71,
+  fase: "Finales",
+  titulo: "Final 3 — El Señor del Frenzied Flame (Llama Frenética)",
+  area: "Interior del Árbol Áldano / Catacumbas de la Llama Frenética",
+  descripcion: "El final más oscuro: el jugador se convierte en portador de la Llama Frenética y quema todo en una conflagración universal.",
+  detalle: [
+    "Requiere acceder a las Catacumbas de la Llama Frenética bajo las Alcantarillas de Leyndell.",
+    "Desvístete por completo (sin nada equipado) para pasar por la puerta estrecha.",
+    "El Dios de los Tres Dedos (Three Fingers) te marca con la Llama Frenética.",
+    "IMPORTANTE: este final es irreversible en esa partida salvo que uses el Unguento de Miquella.",
+    "En la Forja de los Gigantes, elige liberar la Llama Frenética en lugar del sacrificio normal.",
+    "La cinemática final muestra al personaje quemando literalmente todo el mundo.",
+  ],
+  jefe: null,
+  recompensa: "Final de la Llama Frenética completado",
+  es_opcional: true,
+  siguiente: "Puedes revertir con el Unguento de Miquella obtenido en el Campo Sacroníveo."
+},
+
+{
+  id: "paso_72",
+  numero: 72,
+  fase: "Finales",
+  titulo: "Final 4 — Señor del Árbol Desnudo (misión de Fia)",
+  area: "Interior del Árbol Áldano",
+  descripcion: "Completar la misión de Fia y obtener el medallón del Príncipe de la Muerte permite elegir un final donde el Árbol Áldano se convierte en árbol de los muertos.",
+  detalle: [
+    "Requiere completar la misión de Fia hasta obtener el Medallón del Príncipe de la Muerte.",
+    "Tras vencer a la Bestia Áurea, interactúa con Marika.",
+    "Elige la opción relacionada con el Medallón de la Muerte.",
+    "Este final libera la Runa de la Muerte al mundo, permitiendo que los mortales mueran de verdad.",
+    "La cinemática muestra un Árbol Áldano oscuro y el mundo cambiando radicalmente.",
+    "Es el final de Fia: un final alternativo menos conocido pero muy elaborado en lore.",
+  ],
+  jefe: null,
+  recompensa: "Final del Árbol Desnudo completado",
+  es_opcional: true,
+  siguiente: "Explora los otros dos finales alternativos con cargas de guardado anteriores."
+},
+
+{
+  id: "paso_73",
+  numero: 73,
+  fase: "Finales",
+  titulo: "Final 5 — Señor del Orden Perfecto (misión de Goldmask/Corhyn)",
+  area: "Interior del Árbol Áldano",
+  descripcion: "Completar la misión de Goldmask y Corhyn permite un final donde se restaura el Elden Ring con un Orden Perfecto sin ninguna impureza.",
+  detalle: [
+    "Requiere seguir la misión de Corhyn (incantador en la Mesa Redonda) y Goldmask (el filósofo mudo).",
+    "Encuentra a Goldmask en el Puente de las Inquisidoras en Altus y lleva los mensajes de Corhyn.",
+    "La misión culmina en las ruinas doradas de la Capital de Cenizas — necesitas descifrar la fórmula de Goldmask.",
+    "Para descifrar la fórmula necesitas el hechizo Runica — apréndeselo a Corhyn.",
+    "Tras completar la misión, el final de Orden Perfecto requiere elegir la opción correcta con Marika.",
+    "La cinemática muestra el Árbol Áldano restaurado en la forma más pura según la ley áldana.",
+  ],
+  jefe: null,
+  recompensa: "Final del Orden Perfecto completado",
+  es_opcional: true,
+  siguiente: "Todos los finales explorados — el juego ha sido completado al máximo."
+},
+
+{
+  id: "paso_74",
+  numero: 74,
+  fase: "Postgame",
+  titulo: "New Game+ y trofeos",
+  area: "Todo el mundo",
+  descripcion: "Tras cualquier final, puedes iniciar el New Game+ para repetir el juego con mejores estadísticas y runas. Varios trofeos/logros requieren múltiples partidas.",
+  detalle: [
+    "El New Game+ mantiene tu nivel, armas, objetos y hechizos; resetea jefes, NPCs y puertas.",
+    "Los enemigos son más fuertes en cada NG+ (hasta NG+7 como máximo en dificultad).",
+    "Algunos objetos únicos solo se obtienen una vez por partida — planifica qué coleccionar cada vez.",
+    "El trofeo de platino/100% requiere obtener las 6 terminaciones (finales) — usa cargas de guardado o múltiples NG+.",
+    "Las armas especiales de Semidioses (creadas con Runas Áldanas) solo pueden hacerse una por partida.",
+    "El trofeo del Elden Ring requiere coleccionar todas las Runas Mayores activas.",
+  ],
+  jefe: null,
+  recompensa: "Trofeo de platino, dominio completo del juego",
+  es_opcional: true,
+  siguiente: "Felicidades por completar Elden Ring."
+},
+
+{
+  id: "paso_75",
+  numero: 75,
+  fase: "DLC",
+  titulo: "DLC — Shadow of the Erdtree",
+  area: "Tierra de las Sombras",
+  descripcion: "El DLC Shadow of the Erdtree añade una zona enorme con nuevos jefes, armas, hechizos y la historia de Miquella. Accesible tras derrotar a Mohg.",
+  detalle: [
+    "Requisitos: derrotar a Mohg, Señor de la Sangre en el Palacio de Mohgwyn.",
+    "Interactúa con el cuerpo de Miquella en el altar del Palacio de Mohg para entrar al DLC.",
+    "La Tierra de las Sombras tiene su propio sistema de mejora: Bendiciones de Miquella para resistencia.",
+    "Hay nuevos tipos de armas, hechizos, incantos y mecánicas de combate exclusivas del DLC.",
+    "El jefe final del DLC es Radahn Consort of Miquella, una versión de Radahn con dos espadas enormes.",
+    "La historia explora la obsesión de Miquella y su manipulación emocional de todos a su alrededor.",
+  ],
+  jefe: "Messmer el Empalador, Radahn Consort of Miquella (jefe final DLC)",
+  recompensa: "Historia completa, armas únicas del DLC, hechizos exclusivos",
+  es_opcional: true,
+  siguiente: "Con el DLC completado, has experimentado la historia completa de Elden Ring."
+},
+
 ];
