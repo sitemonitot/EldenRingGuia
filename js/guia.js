@@ -641,7 +641,9 @@ function crearCardItem(item) {
 
   card.innerHTML = `
     <div class="item-cabeza" onclick="toggleItem(this)">
-      <div class="item-icono-cat">${meta.icono}</div>
+      ${item.imagen
+        ? `<img src="${item.imagen}" alt="${item.nombre}" class="item-img-icon" loading="lazy">`
+        : `<div class="item-icono-cat">${meta.icono}</div>`}
       <div class="item-info-head">
         <div class="item-nombre">${item.nombre}</div>
         ${item.nombre_en ? `<div class="item-nombre-en">${item.nombre_en}</div>` : ""}

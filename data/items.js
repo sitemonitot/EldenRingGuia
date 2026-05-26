@@ -10,6 +10,7 @@ var ITEMS = {
   armas: [
     {
       id: "arma_001",
+      imagen: "img/items/moonveil.png",
       nombre: "Velo de Luna",
       nombre_en: "Moonveil",
       tipo: "Katana",
@@ -21,6 +22,7 @@ var ITEMS = {
     },
     {
       id: "arma_002",
+      imagen: "img/items/rivers_of_blood.png",
       nombre: "Ríos de Sangre",
       nombre_en: "Rivers of Blood",
       tipo: "Katana",
@@ -32,6 +34,7 @@ var ITEMS = {
     },
     {
       id: "arma_003",
+      imagen: "img/items/dark_moon_greatsword.png",
       nombre: "Mandoble de la Luna Oscura",
       nombre_en: "Dark Moon Greatsword",
       tipo: "Gran Espada",
@@ -43,6 +46,7 @@ var ITEMS = {
     },
     {
       id: "arma_004",
+      imagen: "img/items/blasphemous_blade.png",
       nombre: "Hoja Blasfema",
       nombre_en: "Blasphemous Blade",
       tipo: "Gran Espada",
@@ -87,6 +91,7 @@ var ITEMS = {
     },
     {
       id: "arma_008",
+      imagen: "img/items/nagakiba.png",
       nombre: "Nagakiba",
       nombre_en: "Nagakiba",
       tipo: "Katana",
@@ -98,6 +103,7 @@ var ITEMS = {
     },
     {
       id: "arma_009",
+      imagen: "img/items/hand_of_malenia.png",
       nombre: "Mano de Malenia",
       nombre_en: "Hand of Malenia",
       tipo: "Katana",
@@ -109,6 +115,7 @@ var ITEMS = {
     },
     {
       id: "arma_010",
+      imagen: "img/items/wing_of_astel.png",
       nombre: "Ala de Astel",
       nombre_en: "Wing of Astel",
       tipo: "Espada Curva",
@@ -359,6 +366,7 @@ var ITEMS = {
     },
     {
       id: "tal_002",
+      imagen: "img/items/radagons_soreseal.png",
       nombre: "Sello Doloroso de Radagón",
       nombre_en: "Radagon's Soreseal",
       tipo: "Talisman",
@@ -368,6 +376,7 @@ var ITEMS = {
     },
     {
       id: "tal_003",
+      imagen: "img/items/shard_of_alexander.png",
       nombre: "Fragmento de Alexander",
       nombre_en: "Shard of Alexander",
       tipo: "Talisman",
@@ -377,6 +386,7 @@ var ITEMS = {
     },
     {
       id: "tal_004",
+      imagen: "img/items/millicents_prosthesis.png",
       nombre: "Ícono de Godfrey",
       nombre_en: "Godfrey Icon",
       tipo: "Talisman",
@@ -404,6 +414,7 @@ var ITEMS = {
     },
     {
       id: "tal_007",
+      imagen: "img/items/rotten_winged_sword_insignia.png",
       nombre: "Talismán de la Tortuga Verde",
       nombre_en: "Green Turtle Talisman",
       tipo: "Talisman",
@@ -413,6 +424,7 @@ var ITEMS = {
     },
     {
       id: "tal_008",
+      imagen: "img/items/godskin_swaddling_cloth.png",
       nombre: "Luna de Nokstella",
       nombre_en: "Moon of Nokstella",
       tipo: "Talisman",
@@ -422,6 +434,7 @@ var ITEMS = {
     },
     {
       id: "tal_009",
+      imagen: "img/items/two_fingers_heirloom.png",
       nombre: "Talismán del Gran Escudo Dracónico",
       nombre_en: "Dragoncrest Greatshield Talisman",
       tipo: "Talisman",
@@ -503,6 +516,7 @@ var ITEMS = {
     },
     {
       id: "tal_018",
+      imagen: "img/items/lance_talisman.png",
       nombre: "Talismán de la Masa Grabada",
       nombre_en: "Graven-Mass Talisman",
       tipo: "Talisman",

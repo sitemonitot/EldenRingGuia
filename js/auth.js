@@ -68,21 +68,35 @@ function actualizarUIAuth(usuario) {
   const btnPerfil = document.getElementById("btn-perfil");
   const userInfo = document.getElementById("user-info");
   const linkPerfil = document.getElementById("link-perfil");
+  const loginGate = document.getElementById("login-gate");
+  const app = document.getElementById("app");
 
   if (usuario) {
     const nombre = usuario.user_metadata?.nombre_usuario || usuario.email.split("@")[0];
-    if (btnLogin) btnLogin.style.display = "none";
     if (btnPerfil) btnPerfil.style.display = "inline-flex";
     if (userInfo) {
       userInfo.style.display = "flex";
       userInfo.querySelector(".user-nombre").textContent = nombre;
     }
     if (linkPerfil) linkPerfil.style.display = "flex";
+    // Mostrar contenido protegido
+    if (app) app.classList.add("sesion-activa");
+    if (loginGate) loginGate.classList.remove("visible");
   } else {
-    if (btnLogin) btnLogin.style.display = "inline-flex";
     if (btnPerfil) btnPerfil.style.display = "none";
     if (userInfo) userInfo.style.display = "none";
     if (linkPerfil) linkPerfil.style.display = "none";
+    // Bloquear contenido y mostrar gate
+    if (app) app.classList.remove("sesion-activa");
+    if (loginGate) loginGate.classList.add("visible");
+    // Redirigir a inicio si estaba en sección protegida
+    const seccionActualEl = document.querySelector(".seccion.activa");
+    if (seccionActualEl) {
+      const id = seccionActualEl.id;
+      if (["seccion-guia","seccion-items","seccion-builds","seccion-perfil"].includes(id)) {
+        navegarA("inicio");
+      }
+    }
   }
 }
 
