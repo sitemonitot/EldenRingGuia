@@ -26,7 +26,8 @@
     </div>
 
     <nav class="header-nav" id="nav-principal">
-      <a class="nav-btn nav-protegido" onclick="navegarA('guia')" href="#guia">📜 Guía</a>
+      <a class="nav-btn nav-protegido" onclick="navegarA('pasos')" href="#pasos">🗺 Guía Paso a Paso</a>
+      <a class="nav-btn nav-protegido" onclick="navegarA('guia')" href="#guia">📜 Objetivos</a>
       <a class="nav-btn nav-protegido" onclick="navegarA('items')" href="#items">🎒 Items</a>
       <a class="nav-btn nav-protegido" onclick="navegarA('builds')" href="#builds">⚔ Builds</a>
       <a class="nav-btn nav-protegido" onclick="navegarA('perfil')" href="#perfil">👤 Mi Perfil</a>
@@ -131,6 +132,28 @@
 
   <!-- ══ MAIN ══ -->
   <main>
+
+    <!-- ── GUÍA PASO A PASO ── -->
+    <section class="seccion" id="seccion-pasos">
+      <div class="seccion-header">
+        <h2>🗺 Guía Completa Paso a Paso</h2>
+        <p>Recorre Las Tierras Intermedias desde el principio hasta el final. Cada paso indica exactamente a dónde ir y qué hacer.</p>
+      </div>
+
+      <div class="pasos-filtros" id="pasos-filtros">
+        <button class="pasos-fase-btn activo" data-fase="todos" onclick="filtrarPasos('todos')">Todas las fases</button>
+      </div>
+
+      <div class="pasos-leyenda">
+        <span class="paso-badge-oblig">OBLIGATORIO</span>
+        <span class="paso-badge-opc">OPCIONAL</span>
+        <span style="color:var(--texto-suave);font-size:0.8rem">Los opcionales pueden saltarse pero contienen recompensas importantes.</span>
+      </div>
+
+      <div id="contenedor-pasos">
+        <div class="cargando"><div class="spinner"></div> Cargando guía...</div>
+      </div>
+    </section>
 
     <!-- ── LOGIN GATE (sin sesión) ── -->
     <div class="login-gate" id="login-gate">
@@ -391,6 +414,9 @@
 <!-- ══ SCRIPTS ══ -->
 <script src="js/config.js"></script>
 <script src="data/objetivos.js"></script>
+<script src="data/guia_pasos.js"></script>
+<script src="data/objetivos_extra.js"></script>
+<script src="data/items_extra3.js"></script>
 <script src="data/builds.js"></script>
 <script src="data/items.js"></script>
 <script src="data/items_extra.js"></script>
@@ -409,10 +435,9 @@ let filtroItemsActivo = "todos";
 
 // ─── Navegación ───
 
-const SECCIONES_PROTEGIDAS = ["guia", "items", "builds", "perfil"];
+const SECCIONES_PROTEGIDAS = ["pasos", "guia", "items", "builds", "perfil"];
 
 function navegarA(seccion) {
-  // Bloquear secciones protegidas si no hay sesión
   if (SECCIONES_PROTEGIDAS.includes(seccion) && !usuarioActual) {
     navegarA("login");
     return;
@@ -425,7 +450,9 @@ function navegarA(seccion) {
 
   seccionActual = seccion;
 
-  if (seccion === "guia") {
+  if (seccion === "pasos") {
+    setTimeout(() => renderizarPasos("todos"), 10);
+  } else if (seccion === "guia") {
     setTimeout(() => renderizarGuia(filtroActivo), 10);
   } else if (seccion === "builds") {
     renderizarBuilds();

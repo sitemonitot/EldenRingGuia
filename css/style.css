@@ -1687,3 +1687,218 @@ main {
   top: 64px;
   overflow-y: auto;
 }
+
+/* ══════════════════════════════════
+   GUÍA PASO A PASO
+   ══════════════════════════════════ */
+
+.pasos-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.pasos-fase-btn {
+  padding: 0.35rem 0.8rem;
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  color: var(--texto-suave);
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  white-space: nowrap;
+}
+
+.pasos-fase-btn:hover { border-color: var(--borde-oro-claro); color: var(--texto); }
+.pasos-fase-btn.activo {
+  background: var(--fondo-card3);
+  border-color: var(--oro);
+  color: var(--oro-claro);
+}
+
+.pasos-leyenda {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.paso-badge-oblig {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: rgba(200,60,40,0.2);
+  border: 1px solid rgba(200,60,40,0.4);
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-family: 'Cinzel', serif;
+  color: #e07060;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.paso-badge-opc {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: rgba(80,140,240,0.15);
+  border: 1px solid rgba(80,140,240,0.35);
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-family: 'Cinzel', serif;
+  color: #7aacf0;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.pasos-fase-sep {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--oro);
+  padding: 1.5rem 0 0.5rem;
+  border-bottom: 1px solid var(--borde-oro);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.paso-card {
+  background: var(--fondo-card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+  transition: var(--transicion);
+}
+
+.paso-oblig { border-left: 3px solid rgba(200,60,40,0.5); }
+.paso-opc   { border-left: 3px solid rgba(80,140,240,0.4); }
+
+.paso-card:hover { border-color: var(--borde-oro-claro); }
+.paso-card.expandido { border-color: var(--borde-oro); }
+.paso-card.expandido .paso-detalles { display: block; }
+.paso-card.expandido .paso-expandir { transform: rotate(180deg); }
+
+.paso-cabeza {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+}
+
+.paso-numero {
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--oro-oscuro), #2a1e05);
+  border: 1px solid var(--borde-oro);
+  border-radius: 50%;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--oro-claro);
+  flex-shrink: 0;
+}
+
+.paso-info { flex: 1; min-width: 0; }
+
+.paso-titulo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+
+.paso-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--texto-titulo);
+  font-weight: 600;
+}
+
+.paso-area {
+  font-size: 0.75rem;
+  color: var(--oro);
+  font-style: italic;
+  margin-bottom: 0.25rem;
+}
+
+.paso-desc {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  line-height: 1.4;
+}
+
+.paso-expandir {
+  color: var(--texto-suave);
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+}
+
+.paso-detalles {
+  display: none;
+  padding: 0 1rem 1rem 1rem;
+  border-top: 1px solid var(--borde);
+}
+
+.paso-lista {
+  list-style: none;
+  padding: 0.7rem 0 0;
+  margin: 0;
+}
+
+.paso-lista li {
+  padding: 0.35rem 0 0.35rem 1.2rem;
+  color: var(--texto);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.paso-lista li:last-child { border-bottom: none; }
+
+.paso-lista li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--oro);
+  font-weight: 700;
+}
+
+.paso-jefe-box {
+  margin-top: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(200,56,40,0.1);
+  border: 1px solid rgba(200,56,40,0.3);
+  border-radius: var(--radio);
+  font-size: 0.85rem;
+  color: #e07060;
+}
+
+.paso-recompensa-box {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(200,168,75,0.08);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio);
+  font-size: 0.85rem;
+  color: var(--oro-claro);
+}
+
+.paso-siguiente {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  font-style: italic;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--borde);
+}

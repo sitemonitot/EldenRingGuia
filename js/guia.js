@@ -687,3 +687,91 @@ function toggleItem(cabeza) {
   const card = cabeza.closest(".item-card");
   card.classList.toggle("expandido");
 }
+
+// ══════════════════════════════════
+// GUÍA PASO A PASO
+// ══════════════════════════════════
+
+let filtroFaseActivo = "todos";
+
+function filtrarPasos(fase) {
+  filtroFaseActivo = fase;
+  document.querySelectorAll(".pasos-fase-btn").forEach(b => {
+    b.classList.toggle("activo", b.dataset.fase === fase);
+  });
+  renderizarPasos(fase);
+}
+
+function renderizarPasos(fase = "todos") {
+  const contenedor = document.getElementById("contenedor-pasos");
+  if (!contenedor) return;
+
+  if (typeof GUIA_PASOS === "undefined" || !GUIA_PASOS.length) {
+    contenedor.innerHTML = `<div class="items-vacio">Guía paso a paso no disponible.</div>`;
+    return;
+  }
+
+  // Construir botones de fase si no existen
+  const filtrosEl = document.getElementById("pasos-filtros");
+  if (filtrosEl && filtrosEl.children.length <= 1) {
+    const fases = [...new Set(GUIA_PASOS.map(p => p.fase))];
+    fases.forEach(f => {
+      const btn = document.createElement("button");
+      btn.className = "pasos-fase-btn";
+      btn.dataset.fase = f;
+      btn.textContent = f;
+      btn.onclick = () => filtrarPasos(f);
+      filtrosEl.appendChild(btn);
+    });
+  }
+
+  const pasos = fase === "todos"
+    ? GUIA_PASOS
+    : GUIA_PASOS.filter(p => p.fase === fase);
+
+  contenedor.innerHTML = "";
+
+  let faseActual = "";
+  pasos.forEach(paso => {
+    if (paso.fase !== faseActual) {
+      faseActual = paso.fase;
+      const sep = document.createElement("div");
+      sep.className = "pasos-fase-sep";
+      sep.textContent = faseActual;
+      contenedor.appendChild(sep);
+    }
+    contenedor.appendChild(crearCardPaso(paso));
+  });
+}
+
+function crearCardPaso(paso) {
+  const card = document.createElement("div");
+  card.className = `paso-card ${paso.es_opcional ? "paso-opc" : "paso-oblig"}`;
+  card.id = `paso-${paso.id}`;
+
+  const detalleHtml = Array.isArray(paso.detalle)
+    ? paso.detalle.map(d => `<li>${d}</li>`).join("")
+    : "";
+
+  card.innerHTML = `
+    <div class="paso-cabeza" onclick="this.closest('.paso-card').classList.toggle('expandido')">
+      <div class="paso-numero">${paso.numero}</div>
+      <div class="paso-info">
+        <div class="paso-titulo-row">
+          <span class="paso-titulo">${paso.titulo}</span>
+          <span class="${paso.es_opcional ? "paso-badge-opc" : "paso-badge-oblig"}">${paso.es_opcional ? "OPCIONAL" : "OBLIGATORIO"}</span>
+        </div>
+        <div class="paso-area">${paso.area || paso.fase}</div>
+        <div class="paso-desc">${paso.descripcion}</div>
+      </div>
+      <div class="paso-expandir">▾</div>
+    </div>
+    <div class="paso-detalles">
+      ${detalleHtml ? `<ul class="paso-lista">${detalleHtml}</ul>` : ""}
+      ${paso.jefe ? `<div class="paso-jefe-box">⚔ <strong>Jefe:</strong> ${paso.jefe}</div>` : ""}
+      ${paso.recompensa ? `<div class="paso-recompensa-box">🏆 <strong>Recompensa:</strong> ${paso.recompensa}</div>` : ""}
+      ${paso.siguiente ? `<div class="paso-siguiente">→ A continuación: ${paso.siguiente}</div>` : ""}
+    </div>
+  `;
+  return card;
+}
