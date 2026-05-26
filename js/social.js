@@ -7,19 +7,13 @@ const SQL_SETUP = `-- =============================================
 -- Pega esto en Supabase > SQL Editor > New query
 -- =============================================
 
--- 1. Perfiles de usuario (búsqueda por nombre)
+-- PASO 1: Crear todas las tablas primero
 CREATE TABLE IF NOT EXISTS perfiles_usuario (
   user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   nombre_usuario TEXT UNIQUE NOT NULL,
   actualizado_en TIMESTAMPTZ DEFAULT NOW()
 );
-ALTER TABLE perfiles_usuario ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Perfiles visibles públicamente" ON perfiles_usuario
-  FOR SELECT USING (true);
-CREATE POLICY "Solo el usuario edita su perfil" ON perfiles_usuario
-  FOR ALL USING (auth.uid() = user_id);
 
--- 2. Amigos
 CREATE TABLE IF NOT EXISTS amigos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   solicitante_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -29,7 +23,37 @@ CREATE TABLE IF NOT EXISTS amigos (
   creado_en TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(solicitante_id, receptor_id)
 );
+
+CREATE TABLE IF NOT EXISTS grupos (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  nombre TEXT NOT NULL,
+  creador_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  codigo_invitacion TEXT UNIQUE
+    DEFAULT SUBSTRING(gen_random_uuid()::TEXT, 1, 8),
+  creado_en TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS grupo_miembros (
+  grupo_id UUID REFERENCES grupos(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  nombre_usuario TEXT,
+  unido_en TIMESTAMPTZ DEFAULT NOW(),
+  PRIMARY KEY (grupo_id, user_id)
+);
+
+-- PASO 2: Activar RLS en todas
+ALTER TABLE perfiles_usuario ENABLE ROW LEVEL SECURITY;
 ALTER TABLE amigos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE grupos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE grupo_miembros ENABLE ROW LEVEL SECURITY;
+
+-- PASO 3: Políticas de perfiles_usuario
+CREATE POLICY "Perfiles visibles públicamente" ON perfiles_usuario
+  FOR SELECT USING (true);
+CREATE POLICY "Solo el usuario edita su perfil" ON perfiles_usuario
+  FOR ALL USING (auth.uid() = user_id);
+
+-- PASO 4: Políticas de amigos
 CREATE POLICY "Ver amistades propias" ON amigos FOR SELECT
   USING (auth.uid() IN (solicitante_id, receptor_id));
 CREATE POLICY "Enviar solicitud" ON amigos FOR INSERT
@@ -39,16 +63,7 @@ CREATE POLICY "Responder solicitud" ON amigos FOR UPDATE
 CREATE POLICY "Eliminar amistad" ON amigos FOR DELETE
   USING (auth.uid() IN (solicitante_id, receptor_id));
 
--- 3. Grupos
-CREATE TABLE IF NOT EXISTS grupos (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  nombre TEXT NOT NULL,
-  creador_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
-  codigo_invitacion TEXT UNIQUE
-    DEFAULT SUBSTRING(gen_random_uuid()::TEXT, 1, 8),
-  creado_en TIMESTAMPTZ DEFAULT NOW()
-);
-ALTER TABLE grupos ENABLE ROW LEVEL SECURITY;
+-- PASO 5: Políticas de grupos (grupo_miembros ya existe)
 CREATE POLICY "Ver mis grupos" ON grupos FOR SELECT USING (
   auth.uid() = creador_id OR
   EXISTS (SELECT 1 FROM grupo_miembros
@@ -59,15 +74,7 @@ CREATE POLICY "Crear grupos" ON grupos FOR INSERT
 CREATE POLICY "Eliminar grupo" ON grupos FOR DELETE
   USING (auth.uid() = creador_id);
 
--- 4. Miembros de grupo
-CREATE TABLE IF NOT EXISTS grupo_miembros (
-  grupo_id UUID REFERENCES grupos(id) ON DELETE CASCADE,
-  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
-  nombre_usuario TEXT,
-  unido_en TIMESTAMPTZ DEFAULT NOW(),
-  PRIMARY KEY (grupo_id, user_id)
-);
-ALTER TABLE grupo_miembros ENABLE ROW LEVEL SECURITY;
+-- PASO 6: Políticas de grupo_miembros
 CREATE POLICY "Ver miembros de mis grupos" ON grupo_miembros FOR SELECT USING (
   EXISTS (SELECT 1 FROM grupo_miembros gm
           WHERE gm.grupo_id = grupo_miembros.grupo_id
@@ -78,7 +85,7 @@ CREATE POLICY "Unirse a grupo" ON grupo_miembros FOR INSERT
 CREATE POLICY "Salir de grupo" ON grupo_miembros FOR DELETE
   USING (auth.uid() = user_id);
 
--- 5. Permitir que amigos y grupos vean el progreso entre sí
+-- PASO 7: Compartir progreso entre amigos y grupos
 CREATE POLICY "Amigos y grupos pueden ver progreso"
   ON progreso_usuario FOR SELECT USING (
   auth.uid() = user_id OR
