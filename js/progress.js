@@ -82,17 +82,18 @@ function obtenerProgresoLocal() {
 
 async function aplicarProgresoUI() {
   const progreso = await cargarProgreso();
-  let completados = 0;
 
   document.querySelectorAll(".objetivo-check").forEach(check => {
     const id = check.dataset.id;
     if (progreso[id]) {
       check.classList.add("marcado");
-      check.closest(".objetivo-card").classList.add("completado");
-      completados++;
+      const card = check.closest(".objetivo-card") || check.closest(".paso-card");
+      if (card) card.classList.add("completado");
     }
   });
 
+  // Contar solo objetivos reales (sin prefijo PASO_)
+  const completados = Object.keys(progreso).filter(k => !k.startsWith("PASO_")).length;
   actualizarContadorProgreso(completados);
   return { progreso, completados };
 }
@@ -115,8 +116,9 @@ async function alternarObjetivo(id, checkElement) {
   // Guardar
   await guardarProgreso(id, nuevoEstado);
 
-  // Actualizar contador
-  const totalCompletados = document.querySelectorAll(".objetivo-check.marcado").length;
+  // Actualizar contador contando desde los datos guardados (no el DOM)
+  const progreso = await cargarProgreso();
+  const totalCompletados = Object.keys(progreso).filter(k => !k.startsWith("PASO_")).length;
   actualizarContadorProgreso(totalCompletados);
 
   // Toast
@@ -127,8 +129,20 @@ async function alternarObjetivo(id, checkElement) {
 
 // ─── Actualizar barra de progreso ───
 
+function contarTotalObjetivos() {
+  if (typeof OBJETIVOS === "undefined") return 0;
+  let total = 0;
+  total += (OBJETIVOS.principales || []).length;
+  total += (OBJETIVOS.semidioses || []).length;
+  Object.values(OBJETIVOS.opcionales || {}).forEach(arr => {
+    if (Array.isArray(arr)) total += arr.length;
+  });
+  total += (OBJETIVOS.finales || []).length;
+  return total;
+}
+
 function actualizarContadorProgreso(completados) {
-  const total = document.querySelectorAll(".objetivo-check").length;
+  const total = contarTotalObjetivos();
   const porcentaje = total > 0 ? Math.round((completados / total) * 100) : 0;
 
   const barra = document.getElementById("barra-relleno");
@@ -170,6 +184,62 @@ async function obtenerEstadisticas() {
     npcs: { completados: npcs, total: (OBJETIVOS.opcionales.misiones_npc || []).length },
     finales: { completados: finalesComp, total: OBJETIVOS.finales.length }
   };
+}
+
+// ─── Sistema de títulos por progreso ───
+
+function calcularTitulo(completados, total) {
+  if (total === 0) return "Empañado";
+  const pct = (completados / total) * 100;
+  if (pct >= 100) return "Elden Lord";
+  if (pct >= 90)  return "Señor de las Ruinas";
+  if (pct >= 75)  return "Heredero de la Gracia Mayor";
+  if (pct >= 50)  return "Guardián de la Gran Runa";
+  if (pct >= 25)  return "Caballero Áldano";
+  if (pct >= 10)  return "Peregrino de las Tierras Intermedias";
+  return "Empañado";
+}
+
+// ─── Foto de perfil (localStorage) ───
+
+const CLAVE_FOTO = "eldenguide_foto_perfil";
+
+function guardarFotoLocal(dataUrl) {
+  try { localStorage.setItem(CLAVE_FOTO, dataUrl); } catch(e) { console.warn("No se pudo guardar la foto:", e); }
+}
+
+function obtenerFotoLocal() {
+  try { return localStorage.getItem(CLAVE_FOTO); } catch { return null; }
+}
+
+// ─── Reiniciar todo el progreso ───
+
+async function reiniciarProgreso() {
+  // Borrar localStorage
+  localStorage.removeItem(CLAVE_LOCAL);
+
+  // Borrar en Supabase si hay sesión
+  if (usuarioActual && supabaseClient) {
+    await supabaseClient
+      .from("progreso_usuario")
+      .delete()
+      .eq("user_id", usuarioActual.id);
+  }
+
+  // Desmarcar todos los checkboxes en el DOM
+  document.querySelectorAll(".objetivo-check.marcado").forEach(el => {
+    el.classList.remove("marcado");
+    el.closest(".objetivo-card")?.classList.remove("completado");
+  });
+
+  // Desmarcar pasos
+  document.querySelectorAll(".paso-check.marcado").forEach(el => {
+    el.classList.remove("marcado");
+    el.closest(".paso-card")?.classList.remove("completado");
+  });
+
+  actualizarContadorProgreso(0);
+  mostrarToast("Progreso reiniciado", "exito");
 }
 
 // ─── Migrar progreso local a Supabase tras login ───

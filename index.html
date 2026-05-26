@@ -208,7 +208,7 @@
         <div class="inicio-card" onclick="navegarA('builds')">
           <span class="icono-grande">🛡</span>
           <h3>Guías de Builds</h3>
-          <p>8 builds completas con stats, armas, armaduras, talismanes y guía de progresión.</p>
+          <p>13 builds completas con stats, armas, armaduras, talismanes, guía de progresión y calculadora de nivel.</p>
         </div>
       </div>
 
@@ -229,7 +229,7 @@
           <div class="estadistica-label">Finales posibles</div>
         </div>
         <div class="estadistica-card">
-          <div class="estadistica-numero">8</div>
+          <div class="estadistica-numero" id="stat-builds">13</div>
           <div class="estadistica-label">Builds disponibles</div>
         </div>
         <div class="estadistica-card">
@@ -297,7 +297,7 @@
     <section class="seccion" id="seccion-builds">
       <div class="seccion-header">
         <h2>⚔ Guías de Builds</h2>
-        <p>Ocho builds completas con estadísticas, equipo recomendado y guía de progresión paso a paso.</p>
+        <p>Trece builds completas con estadísticas, equipo recomendado, guía de progresión y calculadora de stats por nivel.</p>
       </div>
 
       <div class="builds-grid" id="builds-grid">
@@ -408,6 +408,30 @@
   <div class="modal" id="modal-build-contenido"></div>
 </div>
 
+<!-- ══ MODAL DE RESET ══ -->
+<div class="modal-overlay" id="modal-reset" onclick="if(event.target===this)cerrarModalReset()">
+  <div class="modal modal-reset-contenido">
+    <div class="modal-header">
+      <div style="font-family:'Cinzel',serif;font-size:1.2rem;color:var(--rojo)">⚠ Reiniciar progreso</div>
+      <button class="modal-close" onclick="cerrarModalReset()">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:2rem 1.5rem">
+      <p style="color:var(--texto-suave);margin-bottom:1.5rem;line-height:1.6">
+        Esto eliminará <strong style="color:var(--texto)">todo tu progreso guardado</strong>: objetivos marcados, pasos completados y estadísticas.<br><br>
+        <em style="color:var(--rojo)">Esta acción no se puede deshacer.</em>
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn-submit" style="max-width:180px;background:transparent;border-color:var(--borde)" onclick="cerrarModalReset()">
+          Cancelar
+        </button>
+        <button class="btn-submit" style="max-width:180px;background:var(--rojo);border-color:#8b2020" onclick="confirmarReset()">
+          🗑 Sí, reiniciar todo
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══ TOAST ══ -->
 <div class="toast" id="toast-global"></div>
 
@@ -418,6 +442,7 @@
 <script src="data/objetivos_extra.js"></script>
 <script src="data/items_extra3.js"></script>
 <script src="data/builds.js"></script>
+<script src="data/builds_extra.js"></script>
 <script src="data/items.js"></script>
 <script src="data/items_extra.js"></script>
 <script src="data/items_extra2.js"></script>
@@ -588,6 +613,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const statTotal = document.getElementById("stat-total");
   if (statTotal) statTotal.textContent = total;
+
+  const statBuilds = document.getElementById("stat-builds");
+  if (statBuilds && typeof BUILDS !== "undefined") statBuilds.textContent = BUILDS.length;
 
   // Mostrar aviso de modo sin cuenta si Supabase no está configurado
   if (!SUPABASE_CONFIGURADO) {

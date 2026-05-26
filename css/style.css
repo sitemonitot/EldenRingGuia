@@ -1902,3 +1902,239 @@ main {
   padding-top: 0.5rem;
   border-top: 1px solid var(--borde);
 }
+
+/* ── Checkbox en paso-card ── */
+.paso-check {
+  min-width: 22px;
+  height: 22px;
+  border: 2px solid var(--borde);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: center;
+  transition: var(--transicion);
+  position: relative;
+  background: transparent;
+}
+
+.paso-check:hover { border-color: var(--oro); }
+
+.paso-check.marcado {
+  background: var(--oro-oscuro);
+  border-color: var(--oro);
+}
+
+.paso-check.marcado::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--oro-claro);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.paso-card.completado { opacity: 0.7; }
+.paso-card.completado .paso-titulo { text-decoration: line-through; color: var(--texto-suave); }
+
+/* ── Perfil: foto y título ── */
+.perfil-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.perfil-foto {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--borde-oro);
+}
+
+.perfil-foto-btn {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
+  background: var(--fondo-card3);
+  border: 1px solid var(--borde-oro);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: var(--transicion);
+}
+
+.perfil-foto-btn:hover { background: var(--oro-oscuro); }
+
+.perfil-titulo-badge {
+  display: inline-block;
+  margin-top: 0.3rem;
+  padding: 0.2rem 0.7rem;
+  background: linear-gradient(135deg, rgba(200,168,75,0.2), rgba(200,168,75,0.05));
+  border: 1px solid var(--borde-oro);
+  border-radius: 20px;
+  color: var(--oro-claro);
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.perfil-progreso-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.perfil-barra-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--fondo-card2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.perfil-barra-relleno {
+  height: 100%;
+  background: linear-gradient(90deg, var(--oro-oscuro), var(--oro));
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.perfil-progreso-pct {
+  font-size: 0.8rem;
+  color: var(--oro);
+  font-family: 'Cinzel', serif;
+  min-width: 36px;
+  text-align: right;
+}
+
+.perfil-acciones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.btn-reset-progreso {
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(180,60,40,0.5);
+  border-radius: var(--radio);
+  color: #e07060;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.btn-reset-progreso:hover {
+  background: rgba(180,60,40,0.15);
+  border-color: rgba(200,60,40,0.8);
+}
+
+/* ── Modal reset ── */
+.modal-reset-contenido {
+  max-width: 480px;
+}
+
+/* ── Calculadora de stats ── */
+.calc-stats-section { background: rgba(200,168,75,0.04); border: 1px solid var(--borde-oro); }
+
+.calc-stats-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.calc-stats-label {
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.calc-nivel-input {
+  width: 100px;
+  padding: 0.4rem 0.7rem;
+  background: var(--fondo-card2);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio);
+  color: var(--texto);
+  font-size: 0.95rem;
+  font-family: 'Crimson Text', serif;
+  text-align: center;
+}
+
+.calc-nivel-input:focus {
+  outline: none;
+  border-color: var(--oro);
+  box-shadow: 0 0 0 2px rgba(200,168,75,0.15);
+}
+
+.calc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.calc-stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.calc-stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.calc-stat-nombre {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  font-family: 'Cinzel', serif;
+}
+
+.calc-stat-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--oro-claro);
+}
+
+.calc-stat-barra-bg {
+  height: 5px;
+  background: var(--fondo-card2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.calc-stat-barra-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--oro-oscuro), var(--oro));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.calc-guia-fase {
+  margin-top: 0.8rem;
+  padding: 0.6rem 0.9rem;
+  background: rgba(200,168,75,0.08);
+  border: 1px solid var(--borde-oro);
+  border-radius: var(--radio);
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  line-height: 1.5;
+}
+
+.calc-completo {
+  margin-top: 0.6rem;
+  color: #88c088;
+  font-size: 0.85rem;
+  font-family: 'Cinzel', serif;
+  text-align: center;
+}

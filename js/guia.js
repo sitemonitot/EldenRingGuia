@@ -447,6 +447,22 @@ function abrirBuild(id) {
           </div>
         </div>
       ` : ""}
+
+      ${build.stats_objetivo ? `
+        <div class="modal-section calc-stats-section">
+          <div class="modal-section-title">🧮 Calculadora de stats por nivel</div>
+          <div class="calc-stats-wrap">
+            <label class="calc-stats-label">Tu nivel actual:</label>
+            <input type="number" class="calc-nivel-input" id="calc-nivel-${build.id}"
+              min="1" max="713" value="" placeholder="Ej: 80"
+              oninput="calcularStatsNivel('${build.id}', this.value)">
+          </div>
+          <div class="calc-stats-resultado" id="calc-resultado-${build.id}">
+            <p style="color:var(--texto-suave);font-size:0.85rem;font-style:italic">Introduce tu nivel para ver los stats recomendados a ese punto de progresión.</p>
+          </div>
+        </div>
+      ` : ""}
+
     </div>
   `;
 
@@ -517,21 +533,41 @@ async function renderizarPerfil() {
 
   const stats = await obtenerEstadisticas();
   const nombre = usuarioActual.user_metadata?.nombre_usuario || usuarioActual.email.split("@")[0];
+  const total = contarTotalObjetivos();
+  const titulo = calcularTitulo(stats.completados, total);
+  const porcentaje = total > 0 ? Math.round((stats.completados / total) * 100) : 0;
+  const fotoGuardada = obtenerFotoLocal();
+
+  const avatarHtml = fotoGuardada
+    ? `<img src="${fotoGuardada}" class="perfil-foto" alt="Foto de perfil">`
+    : `<div class="perfil-avatar">⚔</div>`;
 
   perfil.querySelector("#perfil-contenido").innerHTML = `
     <div class="perfil-header">
-      <div class="perfil-avatar">⚔</div>
+      <div class="perfil-avatar-wrap">
+        ${avatarHtml}
+        <label class="perfil-foto-btn" title="Cambiar foto">
+          📷
+          <input type="file" accept="image/*" style="display:none" onchange="cambiarFotoPerfil(this)">
+        </label>
+      </div>
       <div class="perfil-info">
         <h3>${nombre}</h3>
-        <p>${usuarioActual.email}</p>
-        <p style="margin-top:0.3rem;color:var(--oro);font-size:0.9rem">Empañado</p>
+        <p style="color:var(--texto-suave);font-size:0.85rem">${usuarioActual.email}</p>
+        <div class="perfil-titulo-badge">${titulo}</div>
+        <div class="perfil-progreso-row">
+          <div class="perfil-barra-wrap">
+            <div class="perfil-barra-relleno" style="width:${porcentaje}%"></div>
+          </div>
+          <span class="perfil-progreso-pct">${porcentaje}%</span>
+        </div>
       </div>
     </div>
 
     <div class="estadisticas-grid">
       <div class="estadistica-card">
-        <div class="estadistica-numero">${stats.completados}</div>
-        <div class="estadistica-label">Objetivos completados</div>
+        <div class="estadistica-numero">${stats.completados}/${total}</div>
+        <div class="estadistica-label">Objetivos totales</div>
       </div>
       <div class="estadistica-card">
         <div class="estadistica-numero">${stats.principales.completados}/${stats.principales.total}</div>
@@ -555,12 +591,43 @@ async function renderizarPerfil() {
       </div>
     </div>
 
-    <div style="margin-top:1rem;text-align:center">
-      <button class="btn-submit" style="max-width:200px;margin:0 auto;background:var(--rojo);border-color:#8b2020" onclick="cerrarSesion()">
+    <div class="perfil-acciones">
+      <button class="btn-submit" style="max-width:200px;background:var(--rojo);border-color:#8b2020" onclick="cerrarSesion()">
         Cerrar sesión
+      </button>
+      <button class="btn-reset-progreso" onclick="mostrarModalReset()">
+        🗑 Reiniciar progreso
       </button>
     </div>
   `;
+}
+
+function cambiarFotoPerfil(input) {
+  const archivo = input.files[0];
+  if (!archivo) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    guardarFotoLocal(e.target.result);
+    renderizarPerfil();
+    mostrarToast("Foto de perfil actualizada", "exito");
+  };
+  reader.readAsDataURL(archivo);
+}
+
+function mostrarModalReset() {
+  document.getElementById("modal-reset").classList.add("abierto");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarModalReset() {
+  document.getElementById("modal-reset").classList.remove("abierto");
+  document.body.style.overflow = "";
+}
+
+async function confirmarReset() {
+  cerrarModalReset();
+  await reiniciarProgreso();
+  renderizarPerfil();
 }
 
 // ══════════════════════════════════
@@ -745,6 +812,7 @@ function renderizarPasos(fase = "todos") {
 }
 
 function crearCardPaso(paso) {
+  const pasoId = "PASO_" + paso.id;
   const card = document.createElement("div");
   card.className = `paso-card ${paso.es_opcional ? "paso-opc" : "paso-oblig"}`;
   card.id = `paso-${paso.id}`;
@@ -754,9 +822,10 @@ function crearCardPaso(paso) {
     : "";
 
   card.innerHTML = `
-    <div class="paso-cabeza" onclick="this.closest('.paso-card').classList.toggle('expandido')">
-      <div class="paso-numero">${paso.numero}</div>
-      <div class="paso-info">
+    <div class="paso-cabeza">
+      <div class="paso-check objetivo-check" data-id="${pasoId}" onclick="event.stopPropagation();alternarObjetivoPaso('${pasoId}', this)"></div>
+      <div class="paso-numero" onclick="this.closest('.paso-card').classList.toggle('expandido')">${paso.numero}</div>
+      <div class="paso-info" onclick="this.closest('.paso-card').classList.toggle('expandido')">
         <div class="paso-titulo-row">
           <span class="paso-titulo">${paso.titulo}</span>
           <span class="${paso.es_opcional ? "paso-badge-opc" : "paso-badge-oblig"}">${paso.es_opcional ? "OPCIONAL" : "OBLIGATORIO"}</span>
@@ -764,7 +833,7 @@ function crearCardPaso(paso) {
         <div class="paso-area">${paso.area || paso.fase}</div>
         <div class="paso-desc">${paso.descripcion}</div>
       </div>
-      <div class="paso-expandir">▾</div>
+      <div class="paso-expandir" onclick="this.closest('.paso-card').classList.toggle('expandido')">▾</div>
     </div>
     <div class="paso-detalles">
       ${detalleHtml ? `<ul class="paso-lista">${detalleHtml}</ul>` : ""}
@@ -773,5 +842,94 @@ function crearCardPaso(paso) {
       ${paso.siguiente ? `<div class="paso-siguiente">→ A continuación: ${paso.siguiente}</div>` : ""}
     </div>
   `;
+
+  // Aplicar estado guardado
+  cargarProgreso().then(progreso => {
+    if (progreso[pasoId]) {
+      card.querySelector(".paso-check").classList.add("marcado");
+      card.classList.add("completado");
+    }
+  });
+
   return card;
+}
+
+async function alternarObjetivoPaso(id, checkElement) {
+  const estaCompleto = checkElement.classList.contains("marcado");
+  const nuevoEstado = !estaCompleto;
+
+  if (nuevoEstado) {
+    checkElement.classList.add("marcado");
+    checkElement.closest(".paso-card").classList.add("completado");
+  } else {
+    checkElement.classList.remove("marcado");
+    checkElement.closest(".paso-card").classList.remove("completado");
+  }
+
+  await guardarProgreso(id, nuevoEstado);
+
+  const progreso = await cargarProgreso();
+  const totalCompletados = Object.keys(progreso).filter(k => !k.startsWith("PASO_")).length;
+  actualizarContadorProgreso(totalCompletados);
+
+  if (nuevoEstado) mostrarToast("Paso completado ✓", "exito");
+}
+
+// ─── Calculadora de stats por nivel ───
+
+function calcularStatsNivel(buildId, nivelActualStr) {
+  const build = BUILDS.find(b => b.id === buildId);
+  const resultado = document.getElementById(`calc-resultado-${buildId}`);
+  if (!build || !resultado) return;
+
+  const nivelActual = parseInt(nivelActualStr, 10);
+  if (!nivelActual || nivelActual < 1) {
+    resultado.innerHTML = `<p style="color:var(--texto-suave);font-size:0.85rem;font-style:italic">Introduce tu nivel para ver los stats recomendados.</p>`;
+    return;
+  }
+
+  const nivelObj = build.stats_objetivo.nivel;
+  const stats = ["vigor","mente","resistencia","fuerza","destreza","inteligencia","fe","arcana"];
+  const BASE = 9;
+
+  let statsRec;
+  if (nivelActual >= nivelObj) {
+    statsRec = build.stats_objetivo;
+  } else {
+    const progreso = Math.max(0, (nivelActual - 1) / (nivelObj - 1));
+    statsRec = { nivel: nivelActual };
+    stats.forEach(s => {
+      statsRec[s] = Math.max(BASE, Math.round(BASE + (build.stats_objetivo[s] - BASE) * progreso));
+    });
+  }
+
+  const guiaFase = (build.guia_nivel || []).find(g => {
+    const partes = g.nivel.replace(/\s/g,"").split("-");
+    const min = parseInt(partes[0]);
+    const max = parseInt(partes[1]) || 9999;
+    return nivelActual >= min && nivelActual <= max;
+  });
+
+  resultado.innerHTML = `
+    <div class="calc-stats-grid">
+      ${stats.map(s => {
+        const val = statsRec[s];
+        const objetivo = build.stats_objetivo[s];
+        const pct = Math.min(100, Math.round((val / objetivo) * 100));
+        return `
+          <div class="calc-stat-item">
+            <div class="calc-stat-top">
+              <span class="calc-stat-nombre">${nombreStat(s)}</span>
+              <span class="calc-stat-val">${val}<span style="color:var(--texto-suave);font-size:0.75rem"> / ${objetivo}</span></span>
+            </div>
+            <div class="calc-stat-barra-bg">
+              <div class="calc-stat-barra-fill" style="width:${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+    ${guiaFase ? `<div class="calc-guia-fase"><strong>Guía para este nivel:</strong> ${guiaFase.descripcion}</div>` : ""}
+    ${nivelActual >= nivelObj ? `<div class="calc-completo">✓ Has alcanzado el nivel objetivo de esta build</div>` : ""}
+  `;
 }
